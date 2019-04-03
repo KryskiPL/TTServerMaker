@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TTServerMaker
+namespace TTServerMaker.CustomControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CustomListboxItem.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CustomListboxItem : ListBoxItem
     {
-        public MainWindow()
+        public CustomListboxItem()
         {
             InitializeComponent();
         }
