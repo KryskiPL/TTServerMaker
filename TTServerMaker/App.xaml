@@ -7,6 +7,10 @@
     <Application.Resources>
 
         <ResourceDictionary>
+
+            <Color x:Key="GradientPink">#F26492</Color>
+            <Color x:Key="GradientBlue">#1A05F1</Color>
+
             <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
             <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>
             <Style TargetType="FrameworkElement" x:Key="VisibleAnimation">

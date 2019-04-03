@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ServerEngine.ViewModels;
 using ServerEngine.Models.Servers;
+using MaterialDesignThemes.Wpf;
 
 namespace TTServerMaker.Windows
 {
@@ -36,5 +37,13 @@ namespace TTServerMaker.Windows
             AddLoadButton.IsChecked = !AddLoadButton.IsChecked;
         }
 
+        private void ServerListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private async void EditServerButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var result = await DialogHost.Show((sender as FrameworkElement).DataContext, "AddEditDialog");
+        }
     }
 }

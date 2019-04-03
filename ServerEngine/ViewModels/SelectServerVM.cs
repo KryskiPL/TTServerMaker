@@ -12,6 +12,8 @@ namespace ServerEngine.ViewModels
     public class SelectServerVM
     {
         public ObservableCollection<ServerBase> Servers { get; set; } = new ObservableCollection<ServerBase>();
+        public object SelectedServerItem { get;
+            set; } = null;
 
         public SelectServerVM()
         {

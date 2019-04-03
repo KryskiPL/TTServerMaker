@@ -83,19 +83,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviours\ListViewBehaviour.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\HasSelectedItemConverter.cs" />
-    <Compile Include="CustomControls\CustomListboxItem.xaml.cs">
-      <DependentUpon>CustomListboxItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListBoxSelectionBehavior.cs" />
     <Compile Include="Windows\FirstStart\FirstStartWindow.xaml.cs">
       <DependentUpon>FirstStartWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\CustomListboxItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CustomControls\NonManualToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

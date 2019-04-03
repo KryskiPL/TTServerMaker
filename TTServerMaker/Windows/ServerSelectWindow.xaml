@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:TTServerMaker"
         xmlns:converters="clr-namespace:TTServerMaker.Converters"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:CustomControls="clr-namespace:TTServerMaker.CustomControls" x:Class="TTServerMaker.Windows.ServerSelectWindow"
+        xmlns:CustomControls="clr-namespace:TTServerMaker.CustomControls" 
+        xmlns:Behaviours="clr-namespace:TTServerMaker.Behaviours" 
+        x:Class="TTServerMaker.Windows.ServerSelectWindow"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ServerEngine.ViewModels;assembly=ServerEngine"
         d:DataContext="{d:DesignInstance viewModels:SelectServerVM}"
@@ -15,70 +17,84 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="TT Server Maker" Height="640" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
 
-    <Grid>
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource GradientBlue}" Offset="1"/>
+            <GradientStop Color="{StaticResource GradientPink}"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+
+
+    <Grid Margin="30">
+
         
-        <Border
-            BorderThickness="20"
-            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-            MinWidth="256"
-            MinHeight="256"
-            ClipToBounds="True">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="81*" />
+            <RowDefinition Height="442*"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <ListView 
-                    SelectionMode="Single"
-                    ItemsSource="{Binding Servers}"
-                    x:Name="ServerListBox" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <materialDesign:DialogHost Identifier="AddEditDialog">
+            <Label>Wadup</Label>
+        </materialDesign:DialogHost>
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+        <ListView 
+            
+                Behaviours:ListViewBehaviour.AutoUnselectItem="True"
+                SelectionMode="Single"
+                ItemsSource="{Binding Servers}"
+                SelectedItem="{Binding SelectedServerItem}"
+                x:Name="ServerListBox" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.RowSpan="2" Margin="0,0,0,48">
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalAlignment="Stretch" Margin="14,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Background" Value="#88FFFFFF"/>
+                </Style>
+                </ListView.ItemContainerStyle>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" Margin="14,0,0,0">
 
-                                <TextBlock
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
                                     Style="{StaticResource MaterialDesignTitleTextBlock}" 
                                     VerticalAlignment="Center"><Run Text="{Binding BasicInfo.Name}"/></TextBlock>
-                                <TextBlock Grid.Row="1" Foreground="#FFA4A4A4" FontWeight="Medium"><Run Text="{Binding ServerTypeStr, Mode=OneWay}"/></TextBlock>
+                            <TextBlock Grid.Row="1" Foreground="#FFA4A4A4" FontWeight="Medium"><Run Text="{Binding ServerTypeStr, Mode=OneWay}"/></TextBlock>
 
 
-                                <StackPanel 
+                            <StackPanel 
                                     Orientation="Horizontal"
                                     Grid.Column="1" 
+                                    
                                     Grid.RowSpan="2"
                                     Style="{StaticResource VisibleAnimation}"
                                     Visibility="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource BooleanToHiddenConverter}}">
-                                    <materialDesign:PackIcon 
+                                <materialDesign:PackIcon 
                                         Kind="Edit" 
                                         Width="30" 
                                         Height="30" 
                                         VerticalAlignment="Center"
                                         HorizontalContentAlignment="Right" 
+                                        PreviewMouseUp="EditServerButton_MouseUp"
                                         Cursor="Hand"/>
-                                    <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                         Width="30" Height="30"
                                         Grid.RowSpan="2"
                                         Kind="DeleteSweep" 
@@ -86,36 +102,29 @@
                                         VerticalAlignment="Center" 
                                         Cursor="Hand"
                                         Margin="10,18" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-                </ListView>
-                <materialDesign:ColorZone
-                    Mode="PrimaryMid"
-                    Grid.Row="1">
-                    <TextBlock Margin="16"><Run Text="Fruit Bowl"/></TextBlock>
-                </materialDesign:ColorZone>
+            </ListView>
 
-                <CustomControls:NonManualToggleButton 
+            <CustomControls:NonManualToggleButton 
                     x:Name="AddLoadButton"
                     Style="{StaticResource MaterialDesignActionAccentToggleButton}"
                     ToolTip="MaterialDesignFloatingActionAccentButton"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Width="70"
                     Height="70"
                     IsChecked="{Binding ElementName=ServerListBox, Path=SelectedIndex, Converter={StaticResource HasSelectedItemConverter}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Margin="0,0,28,14" Grid.RowSpan="2">
-                    <materialDesign:ToggleButtonAssist.OnContent>
-                        <materialDesign:PackIcon Kind="OpenInNew" Height="30" Width="30" />
-                    </materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="Add" Height="30" Width="30" />
-                </CustomControls:NonManualToggleButton>
-            </Grid>
-        </Border>
-    </Grid>
+                    Margin="0,0,28,13" Grid.RowSpan="2">
+                <materialDesign:ToggleButtonAssist.OnContent>
+                    <materialDesign:PackIcon Kind="OpenInNew" Height="30" Width="30" />
+                </materialDesign:ToggleButtonAssist.OnContent>
+                <materialDesign:PackIcon Kind="Add" Height="30" Width="30" />
+            </CustomControls:NonManualToggleButton>
+        </Grid>
 </Window>
