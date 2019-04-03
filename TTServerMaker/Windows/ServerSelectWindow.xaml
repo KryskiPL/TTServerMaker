@@ -18,31 +18,97 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="TT Server Maker" Height="640" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    Background="{DynamicResource MaterialDesignPaper}"
+        Title="TT Server Maker" Height="661" Width="394.025" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-
+<!--
     <Window.Background>
         <LinearGradientBrush>
             <GradientStop Color="{StaticResource GradientBlue}" Offset="1"/>
             <GradientStop Color="{StaticResource GradientPink}"/>
         </LinearGradientBrush>
-    </Window.Background>
+    </Window.Background>-->
 
 
 
-    <Grid Margin="30">
+    <Grid Margin="30,10,30,30">
 
-        
         <Grid.RowDefinitions>
-            <RowDefinition Height="81*" />
-            <RowDefinition Height="442*"/>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <materialDesign:DialogHost Identifier="AddEditDialog">
-            <Label>Wadup</Label>
-        </materialDesign:DialogHost>
+        <TextBlock
+            HorizontalAlignment="Center"
+            
+            Margin="0,0,0,10"
+            Style="{StaticResource MaterialDesignDisplay1TextBlock}">
+            My Servers
+        </TextBlock>
 
+        <materialDesign:Card Grid.Row="1" Height="167" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Source="pack://application:,,,/TTServerMaker;component/Img/vanilla_preview.jpg"
+                    Stretch="UniformToFill"/>
+                <Button
+                    Grid.Row="0"
+                    ToolTip="Load up server"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,10,47" Grid.RowSpan="2" Grid.Column="1">
+                    <materialDesign:PackIcon Kind="Send" />
+                </Button>
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="8 18 8 0">
+                    <TextBlock
+                        FontWeight="Bold"><Run Text="My First Server"/></TextBlock>
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"><Run Text="Vanilla 1.12.1"/></TextBlock>
+                </StackPanel>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Margin="5,20,10,10">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        ToolTip="Edit Server"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Edit" />
+                    </Button>
+                    <Button
+                        ToolTip="Delete server"
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="DeleteForever" />
+                    </Button>
+                </StackPanel>
+
+
+            </Grid>
+        </materialDesign:Card>
+
+        <!--
         <ListView 
             
                 Behaviours:ListViewBehaviour.AutoUnselectItem="True"
@@ -107,9 +173,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
-            </ListView>
-
-            <CustomControls:NonManualToggleButton 
+            </ListView> 
+        
+        <CustomControls:NonManualToggleButton 
                     x:Name="AddLoadButton"
                     Style="{StaticResource MaterialDesignActionAccentToggleButton}"
                     ToolTip="MaterialDesignFloatingActionAccentButton"
@@ -120,11 +186,19 @@
                     Height="70"
                     IsChecked="{Binding ElementName=ServerListBox, Path=SelectedIndex, Converter={StaticResource HasSelectedItemConverter}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Margin="0,0,28,13" Grid.RowSpan="2">
-                <materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="OpenInNew" Height="30" Width="30" />
-                </materialDesign:ToggleButtonAssist.OnContent>
-                <materialDesign:PackIcon Kind="Add" Height="30" Width="30" />
-            </CustomControls:NonManualToggleButton>
-        </Grid>
+                    Margin="0,0,-15,-29">
+            <materialDesign:ToggleButtonAssist.OnContent>
+                <materialDesign:PackIcon Kind="OpenInNew" Height="30" Width="30" />
+            </materialDesign:ToggleButtonAssist.OnContent>
+            <materialDesign:PackIcon Kind="Add" Height="30" Width="30" />
+        </CustomControls:NonManualToggleButton>
+        
+        -->
+        <Button Grid.Row="2"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            >
+            + Add new server
+        </Button>
+
+    </Grid>
 </Window>

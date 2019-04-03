@@ -31,11 +31,11 @@ namespace TTServerMaker.Windows
 
             DataContext = SelectServerVM;
         }
-
+        /*
         private void ServerListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AddLoadButton.IsChecked = !AddLoadButton.IsChecked;
-        }
+        }*/
 
         private void ServerListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
