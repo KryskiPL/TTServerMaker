@@ -8,8 +8,9 @@
 
         <ResourceDictionary>
 
-            <Color x:Key="GradientPink">#F26492</Color>
-            <Color x:Key="GradientBlue">#1A05F1</Color>
+            <Color x:Key="GradientPink">#FF0A45</Color>
+            <Color x:Key="GradientBlue">#3E2AFF</Color>
+
 
             <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
             <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>

@@ -18,10 +18,10 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-    Background="{DynamicResource MaterialDesignPaper}"
-        Title="TT Server Maker" Height="661" Width="394.025" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    Background="White"
+        Title="TT Server Maker" Height="728.8" Width="410" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-<!--
+    <!--
     <Window.Background>
         <LinearGradientBrush>
             <GradientStop Color="{StaticResource GradientBlue}" Offset="1"/>
@@ -31,34 +31,50 @@
 
 
 
-    <Grid Margin="30,10,30,30">
+    <Grid Margin="24,10,30,24">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="354*"/>
+            <RowDefinition Height="227*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <Border Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="LightGray" Margin="0,0,0,10"/>
+        
+        
+        <Button Grid.Row="2"
+                FontSize="16"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="45" VerticalAlignment="Bottom">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
+                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
+                    <GradientStop Color="{StaticResource GradientPink}"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            + Add new server
+        </Button>
+
         <TextBlock
-            HorizontalAlignment="Center"
-            
-            Margin="0,0,0,10"
-            Style="{StaticResource MaterialDesignDisplay1TextBlock}">
+            FontSize="20"
+            Margin="0,10,0,23"
+            Style="{StaticResource MaterialDesignTitleTextBlock}">
             My Servers
         </TextBlock>
 
-        <materialDesign:Card Grid.Row="1" Height="167" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+        <materialDesign:Card Margin="0,20,0,0"  UniformCornerRadius="25" Grid.Row="1" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth3">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="131"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.ColumnSpan="2" VerticalAlignment="Center"
+
+                <Image Grid.ColumnSpan="3" VerticalAlignment="Center" Grid.Row="0"
                     Source="pack://application:,,,/TTServerMaker;component/Img/vanilla_preview.jpg"
                     Stretch="UniformToFill"/>
                 <Button
@@ -67,16 +83,28 @@
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0,0,10,47" Grid.RowSpan="2" Grid.Column="1">
-                    <materialDesign:PackIcon Kind="Send" />
+                    BorderBrush="Transparent"
+                    Width="46"
+                    Height="46"
+                    Margin="0,0,20,32" Grid.RowSpan="2" Grid.Column="1">
+                    <materialDesign:PackIcon Width="18" Height="18" Kind="Send" />
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0.9,0" EndPoint="0,1">
+                            <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
+                            <GradientStop Color="{StaticResource GradientPink}"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
                 </Button>
                 <StackPanel
                     Grid.Row="1"
-                    Margin="8 18 8 0">
-                    <TextBlock
-                        FontWeight="Bold"><Run Text="My First Server"/></TextBlock>
+                    Margin="10,10,0,0">
+                    <TextBlock FontSize="16"
+                        Margin="2"><Run Text="My First Server"/></TextBlock>
                     <TextBlock 
+                        Foreground="#B1B1B1"
                         TextWrapping="Wrap"
+                        Margin="2"
+                        FontSize="15"
                         VerticalAlignment="Center"><Run Text="Vanilla 1.12.1"/></TextBlock>
                 </StackPanel>
                 <StackPanel
@@ -85,7 +113,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Orientation="Horizontal"
-                    Margin="5,20,10,10">
+                    Margin="0,20,10,0">
                     <Button
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
@@ -194,11 +222,7 @@
         </CustomControls:NonManualToggleButton>
         
         -->
-        <Button Grid.Row="2"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-            >
-            + Add new server
-        </Button>
+
 
     </Grid>
 </Window>
