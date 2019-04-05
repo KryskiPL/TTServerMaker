@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ServerEngine.Models.Servers;
+using System.Reflection;
 
 namespace ServerEngine.Models
 {
@@ -27,9 +28,44 @@ namespace ServerEngine.Models
             }
         }
 
+        private string PropertiesFilePath
+        {
+            get
+            {
+                return Server.FolderPath + FILENAME;
+            }
+        }
+
         public Properties(ServerBase Server)
         {
             this.Server = Server;
+        }
+
+        /// <summary>
+        /// Reads the default server.properties file (from the resources folder), and sets the properties to default
+        /// </summary>
+        public async void SetToDefault()
+        {
+           var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "ServerEngine.Resources.defaultServerProperties.txt"; 
+
+            //string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("defaultServerProperties.txt"));
+
+            _properties = new Dictionary<string, string>();
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string row = await reader.ReadLineAsync();
+                    string[] spl = row.Split('=');
+
+                    if (spl.Length > 1)
+                        _properties.Add(spl[0], spl[1]);
+                }
+                reader.Close();
+            }
         }
 
         /// <summary>
@@ -38,9 +74,17 @@ namespace ServerEngine.Models
         /// <param name="Path"></param>
         public void LoadFromFile()
         {
+            // If the file does not yet exist, we load the default values to the properties, and save the file.
+            if (!File.Exists(PropertiesFilePath))
+            {
+                SetToDefault();
+                SaveToFile();
+                return;
+            }
+
             _properties = new Dictionary<string, string>();
 
-            using (StreamReader olv = new StreamReader(Server.FolderPath + FILENAME))
+            using (StreamReader olv = new StreamReader(PropertiesFilePath))
             {
                 while(!olv.EndOfStream)
                 {
@@ -52,6 +96,21 @@ namespace ServerEngine.Models
 
                 olv.Close();
             }
+        }
+
+        public async void SaveToFile()
+        {
+            StreamWriter writer = new StreamWriter(PropertiesFilePath);
+
+            foreach(KeyValuePair<string, string> property in _properties)
+            {
+                // Removing invalid characters from the property value
+                property.Value.Replace("=", "");
+
+                await writer.WriteLineAsync($"{property.Key}={property.Value}");
+            }
+
+            writer.Close();
         }
 
         /// <summary>

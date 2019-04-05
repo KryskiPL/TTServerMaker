@@ -45,5 +45,11 @@ namespace TTServerMaker.Windows
         {
             var result = await DialogHost.Show((sender as FrameworkElement).DataContext, "AddEditDialog");
         }
+
+        private void LoadUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServerBase SelectedServer = (ServerBase)(sender as FrameworkElement).DataContext;
+            SelectedServer.LoadUp();
+        }
     }
 }

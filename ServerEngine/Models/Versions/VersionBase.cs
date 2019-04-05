@@ -10,7 +10,7 @@ namespace ServerEngine.Models.Versions
     {
         public string VersionString { get; set; }
 
-        public string ServerTypeStr { get => this.ToString();  }
+        public string ServerTypeStr { get { return this.ToString(); }  }
 
         public abstract int CompareTo(VersionBase other);
 

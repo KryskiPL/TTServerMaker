@@ -75,7 +75,7 @@ namespace ServerEngine
         const string Filename = "app.settings";
 
         [JsonIgnore]
-        internal static string FileFullPath { get => Path.Combine(AppSettings.AppdataFolder, Filename); }
+        internal static string FileFullPath { get { return Path.Combine(AppSettings.AppdataFolder, Filename); } }
 
         [JsonIgnore]
         private const string DefaultServerFolderName = "My Servers";
@@ -84,7 +84,7 @@ namespace ServerEngine
         /// <summary>
         /// The path to the folder containing the servers with a trailing slash
         /// </summary>
-        public string ServerFoldersPath { get => _serverFoldersPath; set => _serverFoldersPath = AppSettings.EnforceTrailingBackslash(value); }
+        public string ServerFoldersPath { get { return _serverFoldersPath; } set { _serverFoldersPath = AppSettings.EnforceTrailingBackslash(value);  } }
 
         /// <summary>
         /// Returns the default server folder path (in the user's documents folder)

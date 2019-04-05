@@ -7,8 +7,8 @@
         xmlns:converters="clr-namespace:TTServerMaker.Converters"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:CustomControls="clr-namespace:TTServerMaker.CustomControls" 
-        xmlns:Behaviours="clr-namespace:TTServerMaker.Behaviours" 
         x:Class="TTServerMaker.Windows.ServerSelectWindow"
+    Icon="pack://application:,,,/TTServerMaker;component/Img/icon.ico"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ServerEngine.ViewModels;assembly=ServerEngine"
         d:DataContext="{d:DesignInstance viewModels:SelectServerVM}"
@@ -18,7 +18,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-    Background="White"
+        Background="White"
         Title="TT Server Maker" Height="728.8" Width="410" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <!--
@@ -31,7 +31,7 @@
 
 
 
-    <Grid Margin="24,10,30,24">
+    <Grid Margin="14,10,14,24">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,101 +40,134 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="LightGray" Margin="0,0,0,10"/>
-        
-        
-        <Button Grid.Row="2"
-                FontSize="16"
-                Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="45" VerticalAlignment="Bottom">
-            <Button.Background>
-                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
-                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                    <GradientStop Color="{StaticResource GradientPink}"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            + Add new server
-        </Button>
+        <Border Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="LightGray" Margin="10,0,10,0"/>
 
-        <TextBlock
+        <DockPanel>
+            <TextBlock
             FontSize="20"
-            Margin="0,10,0,23"
+            Margin="10,10,0,23"
             Style="{StaticResource MaterialDesignTitleTextBlock}">
             My Servers
-        </TextBlock>
+            </TextBlock>
 
-        <materialDesign:Card Margin="0,20,0,0"  UniformCornerRadius="25" Grid.Row="1" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth3">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="131"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <Button
+                Style="{StaticResource MaterialDesignToolButton}"
+                Width="30"
+                Padding="2 0 2 0"
+                ToolTip="Settings"
+                HorizontalAlignment="Right"
+                Margin="0,0,10,10"
+                materialDesign:RippleAssist.IsCentered="True">
+                <materialDesign:PackIcon Kind="Settings" Width="23" Height="23" />
+            </Button>
+        </DockPanel>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Image Grid.ColumnSpan="3" VerticalAlignment="Center" Grid.Row="0"
-                    Source="pack://application:,,,/TTServerMaker;component/Img/vanilla_preview.jpg"
-                    Stretch="UniformToFill"/>
-                <Button
-                    Grid.Row="0"
-                    ToolTip="Load up server"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    BorderBrush="Transparent"
-                    Width="46"
-                    Height="46"
-                    Margin="0,0,20,32" Grid.RowSpan="2" Grid.Column="1">
-                    <materialDesign:PackIcon Width="18" Height="18" Kind="Send" />
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0.9,0" EndPoint="0,1">
-                            <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                            <GradientStop Color="{StaticResource GradientPink}"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <StackPanel
-                    Grid.Row="1"
-                    Margin="10,10,0,0">
-                    <TextBlock FontSize="16"
-                        Margin="2"><Run Text="My First Server"/></TextBlock>
-                    <TextBlock 
-                        Foreground="#B1B1B1"
-                        TextWrapping="Wrap"
-                        Margin="2"
-                        FontSize="15"
-                        VerticalAlignment="Center"><Run Text="Vanilla 1.12.1"/></TextBlock>
-                </StackPanel>
-                <StackPanel
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    Margin="0,20,10,0">
-                    <Button
-                        Style="{StaticResource MaterialDesignToolButton}"
-                        Width="30"
-                        Padding="2 0 2 0"
-                        ToolTip="Edit Server"
-                        materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="Edit" />
-                    </Button>
-                    <Button
-                        ToolTip="Delete server"
-                        Style="{StaticResource MaterialDesignToolButton}"
-                        Width="30"
-                        Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="DeleteForever" />
-                    </Button>
-                </StackPanel>
+        <ScrollViewer Grid.Row="1" 
+                      Grid.RowSpan="2" 
+                      VerticalScrollBarVisibility="Hidden" Margin="0,0,0,50" >
 
 
-            </Grid>
-        </materialDesign:Card>
+            <ItemsControl Name="ServerList" ItemsSource="{Binding Servers}"  Padding="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Margin="0,0,0,20"  UniformCornerRadius="25"  Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="131"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.ColumnSpan="2" 
+                                       VerticalAlignment="Center" Grid.Row="0"
+                                       Source="{Binding BasicInfo.ServerImagePath}"
+                                       Stretch="UniformToFill"/>
+                                            <Button
+                                                Click="LoadUpButton_Click"
+                                                Grid.Row="0"
+                                                ToolTip="Load up server"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                BorderBrush="Transparent"
+                                                Width="46"
+                                                Height="46"
+                                                Margin="0,0,20,32" Grid.RowSpan="2" Grid.Column="1">
+                                    <materialDesign:PackIcon Width="18" Height="18" Kind="Send" />
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.9,0" EndPoint="0,1">
+                                            <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
+                                            <GradientStop Color="{StaticResource GradientPink}"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                <StackPanel
+                        Grid.Row="1"
+                        Margin="10,10,0,0">
+                                    <TextBlock FontSize="16"
+                            Margin="2"><Run Text="{Binding BasicInfo.Name}"/></TextBlock>
+                                    <TextBlock 
+                                        Foreground="#B1B1B1"
+                                        TextWrapping="Wrap"
+                                        Margin="2"
+                                        FontSize="15"
+                                        VerticalAlignment="Center"><Run Text="{Binding ServerTypeStr, Mode=OneWay}"/></TextBlock>
+                                </StackPanel>
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    Margin="0,20,10,0">
+                                    <Button
+                                        Style="{StaticResource MaterialDesignToolButton}"
+                                        Width="30"
+                                        Padding="2 0 2 0"
+                                        ToolTip="Edit Server"
+                                        materialDesign:RippleAssist.IsCentered="True">
+                                        <materialDesign:PackIcon Kind="Edit" />
+                                    </Button>
+                                    <Button
+                                        ToolTip="Delete server"
+                                        Style="{StaticResource MaterialDesignToolButton}"
+                                        Width="30"
+                                        Padding="2 0 2 0"
+                                        materialDesign:RippleAssist.IsCentered="True">
+                                        <materialDesign:PackIcon Kind="DeleteForever" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+
+        <Border BorderBrush="DarkGray" Grid.Row="2" Margin="0,100,0,0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Transparent"/>
+                    <GradientStop Color="White" Offset="0.526"/>
+                    <GradientStop Color="#D2FFFFFF" Offset="0.396"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Button Grid.Row="2"
+                FontSize="16"
+                Style="{StaticResource RoundPrimaryButton}" 
+                    Height="45"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Bottom">
+                + Add new server
+            </Button>
+        </Border>
+
 
         <!--
         <ListView 

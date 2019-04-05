@@ -18,6 +18,8 @@ namespace ServerEngine.ViewModels
         public SelectServerVM()
         {
             LoadServers();
+
+            Servers.Add(new VanillaServer(true, Servers.Count + ". szerverem"));
         }
 
         private void LoadServers()
@@ -27,9 +29,10 @@ namespace ServerEngine.ViewModels
                 .Where(x => File.Exists(x + "/" + Models.BasicServerInfo.BasicServerInfoFilename)).ToArray();
 
             foreach(string Dir in ServerDirectories)
-            {
                 Servers.Add(ServerBase.CreateNewServerInstance(Dir));
-            }
+
+            Servers = new ObservableCollection<ServerBase>(Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)));
         }
+
     }
 }

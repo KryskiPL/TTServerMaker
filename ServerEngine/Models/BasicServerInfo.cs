@@ -2,16 +2,19 @@
 using ServerEngine.Models.Servers;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace ServerEngine.Models
 {
     public class BasicServerInfo : BaseNotificationClass
     {
         public const string BasicServerInfoFilename = ".srvnfo.json";
+        public const string DefaultVanillaImageDirectory = "pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/";
         readonly private ServerBase ParentServer;
 
         private string _name;
         private string _serverType;
+        private string _serverImagePath;
 
 
         public string Name
@@ -46,8 +49,26 @@ namespace ServerEngine.Models
                 _serverType = value;
             }
         }
+        public string ServerImagePath
+        {
+            get
+            {
+                // Checking if the file still exists / it's a resource, and if not, getting a random image resource
+                if (!ServerBase.DeafultServerImages.Any(x => DefaultVanillaImageDirectory + x == _serverImagePath) && !File.Exists(_serverImagePath))
+                {
+                    _serverImagePath = DefaultVanillaImageDirectory +
+                        ServerBase.DeafultServerImages[(new Random()).Next(0, ServerBase.DeafultServerImages.Length)];
+                }
 
-        private string ParentServerType { get => ParentServer.GetType().Name; }
+                return _serverImagePath;
+            }
+            set
+            {
+                _serverImagePath = value;
+            }
+        }
+
+        private string ParentServerType { get { return ParentServer.GetType().Name; } }
 
 
         public BasicServerInfo(ServerBase parentServer = null)

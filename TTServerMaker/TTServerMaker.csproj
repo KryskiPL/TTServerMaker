@@ -83,9 +83,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviours\ListViewBehaviour.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\HasSelectedItemConverter.cs" />
+    <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="ListBoxSelectionBehavior.cs" />
     <Compile Include="Windows\FirstStart\FirstStartWindow.xaml.cs">
       <DependentUpon>FirstStartWindow.xaml</DependentUpon>
@@ -179,7 +179,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\vanilla_preview.jpg" />
+    <Resource Include="Img\DefaultServerImages\village.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\swamp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\swamp2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\jungle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\train.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\oldhub.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\oldgardens.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviours\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

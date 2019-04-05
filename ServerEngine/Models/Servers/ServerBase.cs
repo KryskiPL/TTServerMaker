@@ -13,6 +13,8 @@ namespace ServerEngine.Models.Servers
     {
         public const string ServerSettingsFilename = ".server-settings.json";
 
+        public static readonly string[] DeafultServerImages = { "village.jpg", "swamp.jpg", "swamp2.jpg", "jungle.jpg", "oldgardens.jpg", "oldhub.jpg", "train.jpg", "village.jpg" };
+
         #region Private Properties
         private Properties _properties;
         private string _folderPath;
@@ -23,7 +25,7 @@ namespace ServerEngine.Models.Servers
         {
             get
             {
-                if (!FullyLoadedUp)
+                if (!FullyLoadedUp && !IsLoadingUp)
                     throw new Exceptions.ServerNotLoadedException();
 
                 return _properties;
@@ -47,6 +49,8 @@ namespace ServerEngine.Models.Servers
         
         public bool FullyLoadedUp { get; set; } = false;
         public BasicServerInfo BasicInfo { get; set; }
+
+        public bool IsLoadingUp { get; set; }
         #endregion
 
         public abstract string ServerTypeStr { get; }
@@ -128,7 +132,9 @@ namespace ServerEngine.Models.Servers
             this.FolderPath = newDir;
 
             BasicInfo.DateCreated = DateTime.Now;
+            BasicInfo.ServerImagePath = BasicInfo.ServerImagePath;
             BasicInfo.SaveBasicServerInfo();
+
         }
 
         /// <summary>
@@ -137,11 +143,22 @@ namespace ServerEngine.Models.Servers
         /// </summary>
         public void LoadUp()
         {
+            // Preventing double loadup
+            if (FullyLoadedUp)
+                return;
+
+            IsLoadingUp = true;
+
+            Properties = new Properties(this);
             Properties.LoadFromFile();
 
             // TODO
 
+            // Updating last loadup time
+            BasicInfo.DateLastLoaded = DateTime.Now;
 
+
+            IsLoadingUp = false;
             FullyLoadedUp = true;
         }
 
