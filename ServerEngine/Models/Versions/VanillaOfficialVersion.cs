@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ServerEngine.Models.Versions
 {
     public class VanillaOfficialVersion : VersionBase
     {
-        public VanillaOfficialVersion(string SnapshotVersionString) : base (SnapshotVersionString) { }
+        [JsonConstructor]
+        public VanillaOfficialVersion(string VersionString) : base (VersionString) { }
 
         public override int CompareTo(VersionBase other)
         {
@@ -23,7 +20,7 @@ namespace ServerEngine.Models.Versions
             if (!(other is VanillaOfficialVersion))
                 return 0;
 
-            string[] thisSpl = this.VersionString.Split('.');
+            string[] thisSpl = VersionString.Split('.');
             string[] otherSpl = other.VersionString.Split('.');
 
             for(int i = 0; i < Math.Min(thisSpl.Length, otherSpl.Length); i++)
@@ -33,7 +30,7 @@ namespace ServerEngine.Models.Versions
 
                 if (thisNum < otherNum)
                     return -1;
-                else if (thisNum > otherNum)
+                if (thisNum > otherNum)
                     return 1;
             }
 
@@ -42,9 +39,9 @@ namespace ServerEngine.Models.Versions
 
             if (thisSpl.Length < otherSpl.Length)
                 return -1;
-            else if (thisSpl.Length > otherSpl.Length)
+            if (thisSpl.Length > otherSpl.Length)
                 return 1;
-            else return 0;
+            return 0;
         }
     }
 }

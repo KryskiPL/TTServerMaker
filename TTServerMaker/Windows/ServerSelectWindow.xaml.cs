@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ServerEngine.ViewModels;
 using ServerEngine.Models.Servers;
 using MaterialDesignThemes.Wpf;
+using ServerEngine.Models;
 
 namespace TTServerMaker.Windows
 {
@@ -25,31 +26,83 @@ namespace TTServerMaker.Windows
     {
         public SelectServerVM SelectServerVM { get; set; } = new SelectServerVM();
 
+        public ServerBase SelectedServer;
+
         public ServerSelectWindow()
         {
             InitializeComponent();
 
             DataContext = SelectServerVM;
         }
-        /*
-        private void ServerListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            AddLoadButton.IsChecked = !AddLoadButton.IsChecked;
-        }*/
 
-        private void ServerListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        private async void EditServerButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var result = await DialogHost.Show((sender as FrameworkElement).DataContext, "AddEditDialog");
-        }
 
         private void LoadUpButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerBase SelectedServer = (ServerBase)(sender as FrameworkElement).DataContext;
-            SelectedServer.LoadUp();
+            SelectedServer = (ServerBase)(sender as FrameworkElement)?.DataContext;
+
+            DialogResult = true;
+            Close();
+
+            /*
+            selectedServer?.LoadUp();
+            */
+        }
+
+        #region Dragscrolling
+        private Point _scrollMousePoint = new Point();
+        private double _vOff = 1;
+        private bool _dragScrolling = false;
+
+        private void scrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _scrollMousePoint = e.GetPosition(scrollViewer);
+            _vOff = scrollViewer.VerticalOffset;
+            _dragScrolling = true;
+        }
+
+        private void scrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_dragScrolling)
+                scrollViewer.ScrollToVerticalOffset(_vOff + (_scrollMousePoint.Y - e.GetPosition(scrollViewer).Y));
+        }
+
+        private void scrollViewer_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _dragScrolling = false;
+        }
+
+
+        #endregion
+
+        private async void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
+            EditDialogContent.DataContext = server;
+            
+            // Setting the server type combobox value
+            foreach (ComboBoxItem comboBoxItem in ServerTypeCombobox.Items)
+            {
+                string item = comboBoxItem?.Content.ToString();
+                if (server != null && item == server.ServerTypeStr)
+                    ServerTypeCombobox.SelectedItem = comboBoxItem;
+            }
+
+            await AddEditServerDialog.ShowDialog(EditDialogContent);
+        }
+
+        private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditDialogContent.DataContext = null;
+            await AddEditServerDialog.ShowDialog(EditDialogContent);
+            ServerTypeCombobox.SelectedIndex = -1;
+        }
+
+        private void AddEditDoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO validation
+            ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
+            server.BasicInfo.Name = ServerNameTextBox.Text;
+            server.BasicInfo.SaveBasicServerInfo();
         }
     }
 }

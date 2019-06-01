@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ServerEngine.Models.Versions
 {
+    [JsonObject(MemberSerialization.OptIn)]
     abstract public class VersionBase : IComparable<VersionBase>
     {
+        [JsonProperty]
         public string VersionString { get; set; }
-
-        public string ServerTypeStr { get { return this.ToString(); }  }
 
         public abstract int CompareTo(VersionBase other);
 

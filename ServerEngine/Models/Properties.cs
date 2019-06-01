@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.IO;
-using ServerEngine.Models.Servers;
 using System.Reflection;
+using ServerEngine.Models.Servers;
 
 namespace ServerEngine.Models
 {
     public class Properties
     {
-        const string FILENAME = "server.properties";
+        private const string Filename = "server.properties";
 
         private Dictionary<string, string> _properties;
         private readonly ServerBase Server;
 
-        public string this[string PropertyName]
+        public string this[string propertyName]
         {
             get
             {
-                return _properties[PropertyName];
+                return _properties[propertyName];
             }
             set
             {
-                _properties[PropertyName] = value;
+                _properties[propertyName] = value;
             }
         }
 
@@ -32,7 +28,7 @@ namespace ServerEngine.Models
         {
             get
             {
-                return Server.FolderPath + FILENAME;
+                return Server.FolderPath + Filename;
             }
         }
 
@@ -88,7 +84,7 @@ namespace ServerEngine.Models
             {
                 while(!olv.EndOfStream)
                 {
-                    string[] SplitLine = olv.ReadLine().Split(new char[] { '=' }, 1);
+                    string[] SplitLine = olv.ReadLine().Split(new[] { '=' }, 1);
 
                     if (SplitLine.Length > 1)
                         _properties.Add(SplitLine[0], SplitLine[1]);

@@ -1,37 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServerEngine.Models.Servers;
 using System.IO;
+using System.Linq;
+using ServerEngine.Factories;
+using ServerEngine.Models;
+using ServerEngine.Models.Servers;
 
 namespace ServerEngine.ViewModels
 {
     public class SelectServerVM
     {
         public ObservableCollection<ServerBase> Servers { get; set; } = new ObservableCollection<ServerBase>();
-        public object SelectedServerItem { get;
-            set; } = null;
+
 
         public SelectServerVM()
         {
+            //ServerFactory.CreateNewServerFromScratch("Szerverem", "VanillaServer");
             LoadServers();
-
-            Servers.Add(new VanillaServer(true, Servers.Count + ". szerverem"));
         }
 
         private void LoadServers()
         {
             // Getting directories where the server settings file exists
-            string[] ServerDirectories = Directory.GetDirectories(AppSettings.GeneralSettings.ServerFoldersPath)
-                .Where(x => File.Exists(x + "/" + Models.BasicServerInfo.BasicServerInfoFilename)).ToArray();
+            var serverDirectories = Directory.GetDirectories(AppSettings.GeneralSettings.ServerFoldersPath)
+                .Where(x => File.Exists(x + "/" + BasicServerInfo.BasicServerInfoFilename)).ToArray();
 
-            foreach(string Dir in ServerDirectories)
-                Servers.Add(ServerBase.CreateNewServerInstance(Dir));
+            foreach (string dir in serverDirectories)
+            {
+                try
+                {
+                    Servers.Add(ServerFactory.CreateNewServerInstance(dir));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to load server. " + ex.Message);
+                }
+            }
 
-            Servers = new ObservableCollection<ServerBase>(Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)));
+            Servers = new ObservableCollection<ServerBase>(Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)).ThenBy(x => x.BasicInfo.Name));
         }
 
     }

@@ -4,9 +4,543 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TTServerMaker.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FontSize="17"
+        WindowStyle="None"
+        xmlns:viewModels="clr-namespace:ServerEngine.ViewModels;assembly=ServerEngine"
+        d:DataContext="{d:DesignInstance viewModels:MainWindowVM}"
+        Icon="pack://application:,,,/TTServerMaker;component/Img/icon.ico"
+        Title="TT Server Maker" Height="596.75" Width="855"
+        WindowStartupLocation="CenterScreen">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            ResizeBorderThickness="5"
+            CaptionHeight="{StaticResource WindowHeaderHeightDouble}"
+            CornerRadius="{StaticResource WindowCornerRadius}"
+            GlassFrameThickness="0"
+            />
+    </WindowChrome.WindowChrome>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource WindowHeaderHeight}" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Title bar -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
+                    <GradientStop Color="#F80092" Offset="1.1"/>
+                    <GradientStop Color="#9267CF"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <materialDesign:PackIcon 
+                Grid.Column="1" 
+                Foreground="White"
+                VerticalAlignment="Center"
+                Cursor="Hand"
+                ForceCursor="True"
+                Margin="0 5 5 0"
+                Kind="WindowMinimize" />
+
+            <materialDesign:PackIcon 
+                Grid.Column="2" 
+                Foreground="White"
+                VerticalAlignment="Center"
+                Cursor="Hand"
+                Margin="0 0 5 0"
+                Kind="WindowMaximize" />
+
+            <materialDesign:PackIcon 
+                Grid.Column="3" 
+                Foreground="White"
+                VerticalAlignment="Center"
+                Cursor="Hand"
+                Margin="0 0 10 0"
+                Kind="Close" />
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Header -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1"/>
+                    <GradientStop Color="{StaticResource GradientPink}" Offset="-0.3"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+
+            <!-- Title -->
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Margin="15,0,0,0"
+                    Text="{Binding Server.BasicInfo.Name }"
+                    Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                </TextBlock>
+                <TextBlock
+                    
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Margin="10,0,0,0"
+                    Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                    - TT Server Maker
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel 
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Grid.Row="0"
+                Grid.Column="1">
+                <Button 
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Margin="0,0,0,0"
+                    Background="Transparent"
+                    Style="{StaticResource MaterialDesignFlatAccentButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontWeight="Normal" Foreground="White">torokt21@gmail.com</Label>
+                        <materialDesign:PackIcon
+                        Kind="AccountCircle" 
+                        Foreground="White" 
+                        Height="20" 
+                        Width="20" 
+                        VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                
+                <materialDesign:PackIcon 
+                    Kind="Settings" 
+                    Margin="10,0"
+                    Foreground="White" 
+                    Height="20" 
+                    Width="20" 
+                    VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <materialDesign:ColorZone
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Mode="PrimaryMid" 
+                Background="Transparent"
+                Height="60">
+                <StackPanel 
+                Orientation="Horizontal">
+                    <RadioButton
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                    Margin="4"
+                    IsChecked="True"
+                    x:Name="ServerTabButton"
+                    Content="SERVER" />
+                    <RadioButton
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                    Margin="4"
+                    IsChecked="False"
+                    x:Name="MapTabButton"
+                    Content="MAP" />
+                    <RadioButton
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                    Margin="4"
+                    IsChecked="False"
+                    x:Name="PlayerTabButton"
+                    Content="PLAYERS" />
+                </StackPanel>
+            </materialDesign:ColorZone>
+        </Grid>
+        <!--#endregion-->
+
+
+        <!--#region Content-->
+        <TabControl Grid.Row="2" x:Name="TabControl">
+            <!--#region Server tab -->
+            <TabItem Header="Server" IsSelected="{Binding IsChecked, ElementName=ServerTabButton}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                
+                    <!--#region IP + Port box -->
+                    <Border 
+                        BorderThickness="1"
+                        BorderBrush="LightGray"
+                        Padding="5 5 5 10"
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <materialDesign:PackIcon 
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="VideoInputComponent"/>
+
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="IP"/>
+
+                            <TextBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="192.168.1.10"/>
+
+                            <Label 
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Content=":"/>
+
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                VerticalAlignment="Center"
+                                Content="Port"/>
+
+                            <TextBox
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Text="25565"/>
+
+                            <Button
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                ToolTip="MaterialDesignFlatButton">
+                                OPEN PORT
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <!--#endregion -->
+
+                    <!--#region Custom ip -->
+                    <Border 
+                        Padding="5"
+                        Grid.Row="1" 
+                        Grid.Column="0" 
+                        Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
+                                Width="25"
+                                Height="25"
+                                VerticalAlignment="Center"
+                                Kind="FormatColourText"/>
+
+                            <Button
+                                Padding="20 10"
+                                Margin="10 0"
+                                Height="38"
+                                Style="{StaticResource RoundPrimaryButton}">
+                                Get a custom ip
+                            </Button>
+
+                            <Label
+                                VerticalAlignment="Center"
+                                Content="800 Ft"/>
+
+
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Foreground="Gray"
+                                >
+                                <TextBlock.TextDecorations>
+                                    <TextDecoration Location="Strikethrough">
+                                        <TextDecoration.Pen>
+                                            <Pen Brush="Gray" />
+                                        </TextDecoration.Pen>
+                                    </TextDecoration>
+                                </TextBlock.TextDecorations>
+                                1000 Ft
+                            </TextBlock>
+
+                            <Label
+                                FontWeight="Bold"
+                                Foreground="DeepPink"
+                                VerticalAlignment="Center"
+                                Content="-20%"/>
+
+
+                        </StackPanel>
+                    </Border>
+                    <!--#endregion -->
+
+                    <!--#region Server slogan + resource pack -->
+                    <Border 
+                        BorderThickness="1"
+                        BorderBrush="LightGray"
+                        Padding="5 5 5 10"
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        
+                        Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <materialDesign:PackIcon 
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="Message"/>
+
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Server slogan"/>
+
+                            <TextBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0 0 0 20"
+                                Text="A Minecraft Server"/>
+
+
+                            <materialDesign:PackIcon 
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="FormatPaint"/>
+
+                            <Label 
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Resource pack"/>
+
+                            <TextBox
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="http://resource.pack"/>
+                        </Grid>
+                    </Border>
+                    <!--#endregion -->
+
+                    <!--#region Right column -->
+                    <Border 
+                        BorderThickness="1"
+                        BorderBrush="LightGray"
+                        Padding="5"
+                        Grid.Row="0" 
+                        Grid.RowSpan="3"
+                        Grid.Column="1" 
+                        
+                        Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <materialDesign:PackIcon 
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="Eye"/>
+
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="View distance"/>
+                            
+                            
+
+                            <materialDesign:PackIcon 
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="Airplane"/>
+
+                            <Label 
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Allow flight"/>
+
+                            <ToggleButton 
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"/>
+
+                            <Image
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                Source="pack://application:,,,/TTServerMaker;component/Img/SettingIcons/commandblock.png"
+                                VerticalAlignment="Center"
+                                />
+
+                            <Label 
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Command blocks"/>
+
+                            <ToggleButton 
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"/>
+
+                            <materialDesign:PackIcon 
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="Signal"/>
+
+                            <Label 
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Online mode"/>
+
+                            <ToggleButton 
+                                IsChecked="True"
+                                HorizontalAlignment="Right"
+                                Grid.Row="3"
+                                Grid.Column="2"/>
+
+                            <materialDesign:PackIcon 
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Kind="Image"/>
+
+                            <Label 
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Server icon"/>
+
+                            <Border Grid.Row="4"
+                                    Grid.Column="2"
+                                    MinWidth="60"
+                                    BorderBrush="LightGray"
+                                    BorderThickness="1"
+                                    MinHeight="60">
+                                <Image></Image>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <!--#endregion -->
+                </Grid>
+
+            </TabItem>
+            <!--#endregion-->
+
+            <TabItem Header="Map"  IsSelected="{Binding IsChecked, ElementName=MapTabButton}">
+                <Label Content="Map"/>
+            </TabItem>
+
+            <TabItem Header="Players"  IsSelected="{Binding IsChecked, ElementName=PlayerTabButton}">
+                <Label Content="Players"/>
+            </TabItem>
+        </TabControl>
+
+        <!--#endregion-->
+
+        <!--#region Footer-->
+        <Grid Grid.Row="3" Grid.Column="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock VerticalAlignment="Center">
+                <Hyperlink NavigateUri="{StaticResource FaqLink}" RequestNavigate="Hyperlink_RequestNavigate">
+                    Need help?
+                </Hyperlink>
+            </TextBlock>
+                
+                <Button
+                Grid.Column="2"
+                Width="110"
+                Style="{StaticResource RoundPrimaryButton}">START</Button>
+
+        </Grid>
+        <!--#endregion-->
     </Grid>
 </Window>

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ServerEngine;
+using ServerEngine.Models.Servers;
+using ServerEngine.ViewModels;
 
 namespace TTServerMaker
 {
@@ -32,13 +34,22 @@ namespace TTServerMaker
 
             // Showing the server select dialog
             Windows.ServerSelectWindow serverSelectWindow = new Windows.ServerSelectWindow();
-            bool? ServerSelectDialogResult = serverSelectWindow.ShowDialog();
+            bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
-            if(!ServerSelectDialogResult.HasValue || !ServerSelectDialogResult.Value)
+            if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value ||
+                serverSelectWindow.SelectedServer == null)
+            {
                 base.Shutdown();
+                return;
+            }
 
 
+            MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectedServer);
 
+            // TODO nem tom itt kéne-e csinálni, lehet jobb lenne még a ServerSelectWindow-nál
+            mainWindowVM.Server.LoadUp();
+
+            MainWindow.DataContext = mainWindowVM;
             MainWindow.Show();
         }
     }

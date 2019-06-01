@@ -46,15 +46,19 @@
   <ItemGroup>
     <Compile Include="AppSettings\AppSettings.cs" />
     <Compile Include="BaseNotificationClass.cs" />
+    <Compile Include="Exceptions\FileCorruptedException.cs" />
     <Compile Include="Exceptions\ServerNotLoadedException.cs" />
+    <Compile Include="Factories\ServerFactory.cs" />
     <Compile Include="Models\BasicServerInfo.cs" />
     <Compile Include="Models\Properties.cs" />
+    <Compile Include="Models\Servers\ForgeServer.cs" />
     <Compile Include="Models\Servers\ServerBase.cs" />
     <Compile Include="Models\Servers\VanillaServer.cs" />
     <Compile Include="Models\Versions\VanillaOfficialVersion.cs" />
     <Compile Include="Models\Versions\VanillaSnapshotVersion.cs" />
     <Compile Include="Models\Versions\VersionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MainWindowVM.cs" />
     <Compile Include="ViewModels\SelectServerVM.cs" />
   </ItemGroup>
   <ItemGroup>

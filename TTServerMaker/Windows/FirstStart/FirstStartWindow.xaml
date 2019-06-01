@@ -5,7 +5,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource PrimaryHueMidBrush}"
+        Background="White"
         FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,9 +13,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TTServerMaker.Windows.FirstStart"
         mc:Ignorable="d"
-        Title="Welcome" Height="350" Width="680"
+        Icon="/TTServerMaker;component/Img/icon.ico"
+        Title="Welcome" Height="316" Width="680"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Icon="/TTServerMaker;component/Img/icon.ico">
+        ResizeMode="NoResize">
 
     <Grid>
         <materialDesign:Transitioner x:Name="Transitioner"  SelectedIndex="0">
@@ -40,7 +41,7 @@
                             <Image 
                             Height="128"
                             Width="128"
-                            Source="/TTServerMaker;component/Img/BlueLogo/border-150x150.png" 
+                            Source="/TTServerMaker;component/Img/Logo/logo_150x150.png" 
                             Grid.RowSpan="3" 
                             Stretch="UniformToFill"/>
 
@@ -53,17 +54,20 @@
 
                             <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
                             <AccessText TextWrapping="WrapWithOverflow">
-                                Thanks for downloading the program! You are just a few steps away from running your first Minecraft server!
+                                Thanks for downloading the program! Please remember, 
+                                that the program is currently in beta stage. Bugs are 
+                                to be expected. You are just a few steps away from 
+                                running your first Minecraft server!
                             </AccessText>
                             </TextBlock>
                         </Grid>
                     </materialDesign:Card>
 
                     <Button 
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                    Margin="20" 
+                    Style="{StaticResource RoundPrimaryButton}"
+                    Margin="0,20,20,20" 
                     HorizontalAlignment="Right" 
-                    Width="100" 
+                    Width="634" 
                     Grid.Row="1" 
                     Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
                     Content="Next"/>
@@ -118,11 +122,12 @@
                     </materialDesign:Card>
 
                     <Button 
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Style="{StaticResource RoundPrimaryButton}"
                         Click="ServerFolderNextButton_Click"
-                        Margin="20" 
-                        HorizontalAlignment="Right" 
-                        Width="100" 
+                        Margin="0,20,20,20" 
+                        HorizontalAlignment="Center" 
+                        Width="600" 
+                        Height="40"
                         Grid.Row="1" 
                         Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
                         Content="Next"/>

@@ -57,36 +57,8 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="MathConverter, Version=1.2.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathConverter.1.2.1.5\lib\net40-client\MathConverter.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\HasSelectedItemConverter.cs" />
     <Compile Include="Converters\MathConverter.cs" />
@@ -96,18 +68,6 @@
     <Compile Include="Windows\FirstStart\FirstStartWindow.xaml.cs">
       <DependentUpon>FirstStartWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\NonManualToggleButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ServerSelectWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -122,14 +82,6 @@
       <DependentUpon>ServerSelectWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\FirstStart\FirstStartWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -179,38 +131,56 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\village.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\swamp.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\swamp2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\jungle.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\train.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\oldhub.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\DefaultServerImages\oldgardens.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Behaviours\" />
     <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\Logo\logo_150x150.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\SettingIcons\commandblock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll" />
+    <ReferencePath Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll" />
+    <ReferencePath Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\packages\MathConverter.1.2.1.5\lib\net40-client\MathConverter.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\ServerEngine\bin\Debug\ServerEngine.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\CustomControls\NonManualToggleButton.g.cs" />
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\Windows\MainWindow.g.cs" />
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\Windows\ServerSelectWindow.g.cs" />
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\Windows\FirstStart\FirstStartWindow.g.cs" />
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\torokt21\OneDrive - Óbudai egyetem\PROJECTS\TTServerMaker\TTServerMaker\TTServerMaker\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
 </Project>
