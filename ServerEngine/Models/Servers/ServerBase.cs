@@ -51,7 +51,7 @@ namespace ServerEngine.Models.Servers
             }
             set
             {
-                BasicInfo.ServerFolderPath = value.EndsWith("/") ? value : value + "/";
+                BasicInfo.ServerFolderPath = value.EndsWith("\\") ? value : value + "\\";
             }
         }
         public bool FullyLoadedUp { get; set; }
@@ -100,6 +100,12 @@ namespace ServerEngine.Models.Servers
 
             IsLoadingUp = false;
             FullyLoadedUp = true;
+        }
+
+        // Deletes the server's folder
+        public void Delete()
+        {
+            Directory.Delete(BasicInfo.ServerFolderPath, true);
         }
 
         

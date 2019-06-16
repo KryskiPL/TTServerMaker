@@ -9,7 +9,7 @@ using ServerEngine.Models.Servers;
 
 namespace ServerEngine.Factories
 {
-    public class ServerFactory
+    internal class ServerFactory
     {
         /// <summary>
         /// Creates a new server instance with the appropriate server type by reading the basic server info file
@@ -27,7 +27,7 @@ namespace ServerEngine.Factories
             return newServer;
         }
 
-        public static ServerBase CreateNewServerFromScratch(string serverName, string typeString)
+        internal static ServerBase CreateNewServerFromScratch(string serverName, string typeString)
         {
             #region Generating server folder name from name
             string folderName = serverName;

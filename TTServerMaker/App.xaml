@@ -12,65 +12,9 @@
     <Application.Resources>
 
         <ResourceDictionary>
+            
 
-            <Color x:Key="GradientPink">#FF0A45</Color>
-            <Color x:Key="GradientBlue">#3E2AFF</Color>
-
-            <GridLength x:Key="WindowHeaderHeight">20</GridLength>
-            <system:Double x:Key="WindowHeaderHeightDouble">20</system:Double>
-            <CornerRadius x:Key="WindowCornerRadius">8</CornerRadius>
-
-            <math:MathConverter x:Key="Math" />
-            <system1:Uri x:Key="FaqLink">https://tthread.com/servermaker/get/?page=faq</system1:Uri>
-
-            <BitmapImage x:Key="DesignServerImage" UriSource="pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/oldhub.jpg"/>
-
-            <Style x:Key="RoundPrimaryButton" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                <Setter Property="Padding" Value="1"/>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <Grid>
-                                <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(wpf:ShadowAssist.CacheMode)}">
-                                    <Grid>
-                                        <Border CornerRadius="{TemplateBinding ActualHeight, Converter={StaticResource Math}, ConverterParameter=x/2}"
-                                        x:Name="border"
-                                        Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:ShadowAssist.ShadowDepth), Converter={x:Static wpfconverters:ShadowConverter.Instance}}" >
-                                            <Border.Background>
-                                                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
-                                                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                                                    <GradientStop Color="{StaticResource GradientPink}"/>
-                                                </LinearGradientBrush>
-                                            </Border.Background>
-                                        </Border>
-                                    </Grid>
-                                </AdornerDecorator>
-                                <wpf:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
-                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Padding="{TemplateBinding Padding}" 
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter TargetName="border" Property="wpf:ShadowAssist.Darken" Value="True" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter TargetName="border" Property="wpf:ShadowAssist.Darken" Value="True" />
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Opacity" Value="0.23"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
-            <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>
+            <!--
             <Style TargetType="FrameworkElement" x:Key="VisibleAnimation">
                 <Setter Property="Visibility" Value="Hidden"/>
                 <Setter Property="Opacity" Value="0"/>
@@ -86,13 +30,29 @@
                         </Trigger.EnterActions>
                     </Trigger>
                 </Style.Triggers>
-            </Style>
+            </Style>-->
+            
+            
             <ResourceDictionary.MergedDictionaries>
+                <!-- Material Design -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Pink.xaml" />
+
+                <!-- Custom resources -->
+                <ResourceDictionary Source="ResourceDictionaries/Constants.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Converters.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Colors.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Urls.xaml"/>
+                
+                <!-- Styles -->
+                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundPrimaryButton.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Styles/TransparentButton.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundedTextBox.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Styles/FlatGradientTextButton.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Styles/BlackToggleButtonSwitch.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServerEngine.Models.Versions;
 
-namespace Testing
+namespace Testing.ModelTesting
 {
     [TestClass]
     public class ServerVersionTesting

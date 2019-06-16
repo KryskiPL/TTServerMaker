@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace ServerEngine
@@ -30,8 +31,17 @@ namespace ServerEngine
             // but NOT generate the default settings file. That is done after the startup setting are filled in by the user
             FirstLaunch = !File.Exists(GeneralSettings.FileFullPath);
 
+
+
             if (!FirstLaunch)
                 LoadSettings();
+
+            if (!FirstLaunch && !Directory.Exists(GeneralSettings.ServerFoldersPath))
+            {
+                MessageBox.Show("Oh no, the server folder is missing. You will now be walked through the first steps of the program. " +
+                                "If you have moved the server folder, please select it again.", "Server folder missing", MessageBoxButton.OK, MessageBoxImage.Error);
+                FirstLaunch = true;
+            }
         }
 
         /// <summary>
@@ -95,11 +105,13 @@ namespace ServerEngine
 
         public void Save()
         {
-            StreamWriter writer = new StreamWriter(FileFullPath);
+            using (StreamWriter writer = new StreamWriter(FileFullPath))
+            {
+                writer.Write(JsonConvert.SerializeObject(this));
+                writer.Close();
+            }
 
-            writer.Write(JsonConvert.SerializeObject(this));
-
-            writer.Close();
+                
         }
     }
 

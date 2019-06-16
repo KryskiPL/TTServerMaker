@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ServerEngine.Models.Servers;
 using ServerEngine.Models.Versions;
@@ -41,6 +44,7 @@ namespace ServerEngine.Models
         public DateTime DateLastBackup { get; set; }
         public VersionBase Version { get; set; }
 
+
         [JsonIgnore]
         public string ServerFolderPath
         {
@@ -49,7 +53,7 @@ namespace ServerEngine.Models
         }
 
         /// <summary>
-        /// Returns the server type string
+        /// Gets the server type string
         /// </summary>
         public string ServerType
         {
@@ -101,6 +105,10 @@ namespace ServerEngine.Models
             return Type.GetType(typeof(ServerBase).Namespace + "." + ServerType);
         }
 
+        /// <summary>
+        /// Next time the Save() function is called, it will not save the real serverType string, it will save the given string instead
+        /// </summary>
+        /// <param name="typeString"></param>
         public void ChangeServerTypeForNextSave(string typeString)
         {
             changingServerType = true;
@@ -115,8 +123,6 @@ namespace ServerEngine.Models
         /// <returns>New BasicServerInfo object</returns>
         public static BasicServerInfo LoadBasicServerInfo(string folderPath)
         {
-
-
             try
             {
                 using (StreamReader reader =
@@ -138,14 +144,15 @@ namespace ServerEngine.Models
         /// <summary>
         /// Saves the server info to file
         /// </summary>
-        public void SaveBasicServerInfo()
+        public async Task SaveBasicServerInfo()
         {
+            Thread.Sleep(10000);
             try
             {
                 StreamWriter writer = new StreamWriter(AppSettings.EnforceTrailingBackslash(ServerFolderPath) + BasicServerInfoFilename);
                 var settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
-                writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
+                await writer.WriteAsync(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
                 writer.Close();
             }
             catch(Exception ex)

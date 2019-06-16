@@ -10,15 +10,31 @@ namespace TTServerMaker.Validators
 {
     public class TextLengthValidator : ValidationRule
     {
-        public int MinLength { get; set; }
-        public int MaxLength { get; set; }
+        public int MinLength { get; set; } = -1;
+        public int MaxLength { get; set; } = -1;
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string Text = (string)value;
 
-            if (Text.Length < MinLength || Text.Length > MaxLength)
-                return new ValidationResult(false, $"Text length should be between {MinLength} and {MaxLength}");
+            if (MinLength > -1 && MaxLength > -1)
+            {
+                if (Text.Length < MinLength || Text.Length > MaxLength)
+                    return new ValidationResult(false, $"Should be between {MinLength} and {MaxLength} characters");
+            }
+
+            if (MinLength > -1 && MinLength > Text.Length)
+            {
+                return new ValidationResult(false, $"Should be at least {MinLength} characters");
+            }
+
+            if (MaxLength > -1 && MaxLength < Text.Length)
+            {
+                return new ValidationResult(false, $"Should be shorter {MinLength} characters");
+            }
+
+
+
 
             return ValidationResult.ValidResult;
         }

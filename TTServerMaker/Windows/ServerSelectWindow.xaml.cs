@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -27,6 +28,8 @@ namespace TTServerMaker.Windows
         public SelectServerVM SelectServerVM { get; set; } = new SelectServerVM();
 
         public ServerBase SelectedServer;
+
+        private bool isEditing;
 
         public ServerSelectWindow()
         {
@@ -76,6 +79,8 @@ namespace TTServerMaker.Windows
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            
+            isEditing = true;
             ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
             EditDialogContent.DataContext = server;
             
@@ -87,22 +92,61 @@ namespace TTServerMaker.Windows
                     ServerTypeCombobox.SelectedItem = comboBoxItem;
             }
 
-            await AddEditServerDialog.ShowDialog(EditDialogContent);
+           EditDialogContent.BindingGroup.BeginEdit();
+            await EditServerDialog.ShowDialog(EditDialogContent);
         }
 
         private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
         {
+            isEditing = false;
             EditDialogContent.DataContext = null;
-            await AddEditServerDialog.ShowDialog(EditDialogContent);
+            await EditServerDialog.ShowDialog(EditDialogContent);
             ServerTypeCombobox.SelectedIndex = -1;
         }
 
-        private void AddEditDoneButton_Click(object sender, RoutedEventArgs e)
+        private bool editDialogValidated = false;
+
+        private async void EditDoneButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO validation
-            ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
-            server.BasicInfo.Name = ServerNameTextBox.Text;
-            server.BasicInfo.SaveBasicServerInfo();
+            editDialogValidated = EditDialogContent.BindingGroup.CommitEdit();
+
+            if (editDialogValidated)
+            {
+                // Saving changes to file
+                await (EditDialogContent.BindingGroup.Items[1] as BasicServerInfo)?.SaveBasicServerInfo();
+                EditDialogContent.BindingGroup.BeginEdit();
+            }
+
+        }
+
+        private void DeleteServerButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SelectServerVM.DeleteServer(((sender as FrameworkElement)?.DataContext as ServerBase));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Failed to delete server. " + exception.Message);
+            }
+            
+        }
+
+        private void EditDialogContent_OnError(object sender, ValidationErrorEventArgs e)
+        {
+            MessageBox.Show(e.Error.ErrorContent.ToString());
+        }
+
+        private void EditDialogCancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Cancel the pending changes and begin a new edit transaction.
+            EditDialogContent.BindingGroup.CancelEdit();
+            EditDialogContent.BindingGroup.BeginEdit();
+        }
+
+        private void EditServerDialog_OnDialogClosing(object sender, DialogClosingEventArgs eventargs)
+        {
+            throw new NotImplementedException();
         }
     }
 }

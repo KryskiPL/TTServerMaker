@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TTServerMaker.ResourceDictionaries.Styles">
+    <Style TargetType="ButtonBase" BasedOn="{StaticResource MaterialDesignFlatButton}" x:Key="FlatGradientTextButton">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1.5">
+                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
+                    <GradientStop Color="{StaticResource GradientPink}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+            
+        </Setter>
+    </Style>
+</ResourceDictionary>

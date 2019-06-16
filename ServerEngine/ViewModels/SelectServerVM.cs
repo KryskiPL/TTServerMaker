@@ -15,7 +15,6 @@ namespace ServerEngine.ViewModels
 
         public SelectServerVM()
         {
-            //ServerFactory.CreateNewServerFromScratch("Szerverem", "VanillaServer");
             LoadServers();
         }
 
@@ -37,7 +36,38 @@ namespace ServerEngine.ViewModels
                 }
             }
 
+            // Storing and ordering the servers
             Servers = new ObservableCollection<ServerBase>(Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)).ThenBy(x => x.BasicInfo.Name));
+        }
+
+        /// <summary>
+        /// Creates a new server
+        /// </summary>
+        /// <param name="serverName">Server name</param>
+        /// <param name="typeString"></param>
+        public void CreateNewServer(string serverName, string typeString = "VanillaServer")
+        {
+            ServerBase newServer = ServerFactory.CreateNewServerFromScratch(serverName, typeString);
+            Servers.Insert(0, newServer);
+        }
+
+        public void DeleteServer(ServerBase serverToDelete)
+        {
+            try
+            {
+                serverToDelete.Delete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                Servers.Remove(serverToDelete);
+            }
+            
+            
         }
 
     }
