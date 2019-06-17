@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="TTServerMaker.CustomControls.Dialogs.SelectServerWindow.EditServerDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             Background="White"
+             xmlns:local="clr-namespace:TTServerMaker.CustomControls.Dialogs.SelectServerWindow"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validators="clr-namespace:TTServerMaker.Validators"
+             xmlns:converters="clr-namespace:TTServerMaker.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="295.957" d:DesignWidth="329">
+
+    <UserControl.Resources>
+        <converters:StringStripWhitespaceConverter x:Key="StringStripWhitespaceConverter" />
+    </UserControl.Resources>
+    <StackPanel 
+                Margin="30" 
+                x:Name="editStackPanel">
+        <StackPanel.BindingGroup>
+            <BindingGroup NotifyOnValidationError="True">
+                <BindingGroup.ValidationRules>
+                </BindingGroup.ValidationRules>
+            </BindingGroup>
+        </StackPanel.BindingGroup>
+
+        <TextBlock Margin="0,0,0,25"
+                        Style="{StaticResource MaterialDesignTitleTextBlock}">
+                      Change server name
+        </TextBlock>
+        <TextBox
+                        x:Name="ServerNameTextBox"
+                        materialDesign:HintAssist.Hint="Server name"
+                        FontSize="14"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            <TextBox.Text>
+                <Binding Path="BasicInfo.Name" Mode="TwoWay" Converter="{StaticResource StringStripWhitespaceConverter}">
+                    <Binding.ValidationRules>
+                        <validators:TextLengthValidator MinLength="3"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+
+        </TextBox>
+
+
+        <Button
+            Margin="0 20"
+            Style="{StaticResource FlatGradientTextButton}"
+            IsCancel="True"
+            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+            x:Name="EditDialogCancelButton"
+            Click="EditDialogCancelButton_OnClick"
+            HorizontalAlignment="Center" Width="250">
+            Cancel
+        </Button>
+        <Button 
+                IsDefault="True"
+                Click="EditDoneButton_Click"
+                Margin="20,0,20,0"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                Style="{StaticResource RoundPrimaryButton}">
+            Done
+        </Button>
+    </StackPanel>
+</UserControl>

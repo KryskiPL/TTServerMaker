@@ -15,7 +15,7 @@ namespace TTServerMaker.Validators
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string Text = (string)value;
+            string Text = value.ToString().Trim();
 
             if (MinLength > -1 && MaxLength > -1)
             {

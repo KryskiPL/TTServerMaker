@@ -91,11 +91,22 @@
     <Compile Include="Converters\HasSelectedItemConverter.cs" />
     <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="Converters\NullToBoolConverter.cs" />
+    <Compile Include="Converters\StringStripWhitespaceConverter.cs" />
+    <Compile Include="Converters\StringToBooleanConverter.cs" />
     <Compile Include="CustomControls\Dialogs\HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\Dialogs\SelectServerWindow\AddServerDialog.xaml.cs">
+      <DependentUpon>AddServerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Dialogs\SelectServerWindow\EditServerDialog.xaml.cs">
+      <DependentUpon>EditServerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\HelpIcon.xaml.cs">
       <DependentUpon>HelpIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\WindowHeader.xaml.cs">
+      <DependentUpon>WindowHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListBoxSelectionBehavior.cs" />
     <Compile Include="Validators\AllowedCharactersValidator.cs" />
@@ -109,11 +120,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\Dialogs\SelectServerWindow\AddServerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\Dialogs\SelectServerWindow\EditServerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\HelpIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\NonManualToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\WindowHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

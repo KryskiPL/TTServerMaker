@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using ServerEngine.Models;
 
 namespace TTServerMaker.CustomControls
@@ -23,6 +24,13 @@ namespace TTServerMaker.CustomControls
     /// </summary>
     public partial class HelpIcon : Button, INotifyPropertyChanged
     {
+        public static readonly RoutedUICommand PropertyIconClicked = new RoutedUICommand
+        (
+            "Help icon clicked",
+            "HelpIconClicked",
+            typeof(HelpIcon)
+        );
+
         private string _iconType;
 
         /// <summary>
@@ -64,11 +72,32 @@ namespace TTServerMaker.CustomControls
             return msg;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        /*
+          This was a fail
+        private async void PropertyIconClicked_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string message = (e.Source as HelpIcon)?.GetMessage();
+            helpDialog.HelpText = message;
+
+            await DialogHost.Show(helpDialog, "MainDialogHost");
+        }
+
+        private void PropertyIconClicked_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon).GetMessage());
+        }
+
+        
+
+
+        */
+
     }
 }

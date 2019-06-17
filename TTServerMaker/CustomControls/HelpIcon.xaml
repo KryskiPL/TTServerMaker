@@ -9,17 +9,27 @@
              Padding="0"
              Foreground="Black"
              BorderThickness="0"
+             Command="local:HelpIcon.PropertyIconClicked"
              HorizontalContentAlignment="Stretch"
              Style="{StaticResource TransparentButton}"
              VerticalContentAlignment="Stretch"
              ToolTip="{Binding ServerPropertyName}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450" d:DesignWidth="32.439" Cursor="Help">
+
+    <!--
+    <Button.CommandBindings>
+        <CommandBinding Command="local:HelpIcon.PropertyIconClicked" Executed="PropertyIconClicked_Executed" CanExecute="PropertyIconClicked_CanExecute" />
+    </Button.CommandBindings>
+    
+    -->
+
     <materialDesign:PackIcon 
         Width="20"
         Height="20"
         Margin="4"
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch"
+        
         Kind="{Binding IconType, FallbackValue='Help'}"/>
 </Button>

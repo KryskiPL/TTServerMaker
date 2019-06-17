@@ -46,9 +46,6 @@ namespace TTServerMaker
 
             MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectedServer);
 
-            // TODO nem tom itt kéne-e csinálni, lehet jobb lenne még a ServerSelectWindow-nál
-            mainWindowVM.Server.LoadUp();
-
             MainWindow.DataContext = mainWindowVM;
             MainWindow.Show();
         }

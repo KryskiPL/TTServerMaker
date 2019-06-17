@@ -5,11 +5,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:TTServerMaker"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:validators="clr-namespace:TTServerMaker.Validators" 
     x:Class="TTServerMaker.Windows.ServerSelectWindow"
     Icon="pack://application:,,,/TTServerMaker;component/Img/icon.ico"
     mc:Ignorable="d"
     xmlns:viewModels="clr-namespace:ServerEngine.ViewModels;assembly=ServerEngine"
+    xmlns:customControls="clr-namespace:TTServerMaker.CustomControls"
     d:DataContext="{d:DesignInstance viewModels:SelectServerVM}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
@@ -17,98 +17,42 @@
     TextElement.FontSize="13"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
-    
-    Background="White"
     Title="TT Server Maker" 
     Height="728.8" Width="410" 
     WindowStartupLocation="CenterScreen" 
-    
+    WindowStyle="None"
     ResizeMode="NoResize"
     PreviewMouseUp="scrollViewer_PreviewMouseLeftButtonUp">
-
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            ResizeBorderThickness="5"
+            CaptionHeight="{StaticResource WindowHeaderHeightDouble}"
+            CornerRadius="{StaticResource WindowCornerRadius}"
+            GlassFrameThickness="0"
+        />
+    </WindowChrome.WindowChrome>
 
     <!--#region Dialogs -->
     <materialDesign:DialogHost 
-            x:Name="EditServerDialog"
+            x:Name="dialogHost"
+            Identifier="dialogHost"
             IsOpen="False" 
             CloseOnClickAway="True" 
             MaxWidth="400"
             Padding="30">
-        <materialDesign:DialogHost.DialogContent>
-            <StackPanel 
-                Margin="30" 
-                Width="300" 
-                x:Name="EditDialogContent" 
-                Validation.Error="EditDialogContent_OnError">
-                <StackPanel.BindingGroup>
-                    <BindingGroup NotifyOnValidationError="True">
-                        <BindingGroup.ValidationRules>
-                        </BindingGroup.ValidationRules>
-                    </BindingGroup>
-                </StackPanel.BindingGroup>
 
-                <TextBlock Margin="0,0,0,25"
-                        Style="{StaticResource MaterialDesignTitleTextBlock}">
-                      Set up server
-                </TextBlock>
-                <TextBox
-                        x:Name="ServerNameTextBox"
-                        materialDesign:HintAssist.Hint="Server name"
-                        FontSize="14"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
-                    <TextBox.Text>
-                        <Binding Path="BasicInfo.Name"
-                                     Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validators:TextLengthValidator MinLength="3"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-
-                </TextBox>
-
-                <ComboBox 
-                        x:Name="ServerTypeCombobox"
-                        Margin="0,20" 
-                        FontSize="14"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                        materialDesign:HintAssist.Hint="Server type">
-
-                    <ComboBoxItem>
-                        Vanilla
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        Forge
-                    </ComboBoxItem>
-                </ComboBox>
-
-                <Button
-                        Style="{StaticResource FlatGradientTextButton}"
-                        IsCancel="True"
-                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                        x:Name="EditDialogCancelButton"
-                        Click="EditDialogCancelButton_OnClick"
-                        HorizontalAlignment="Center" Width="250">
-                    
-                    Cancel
-                </Button>
-                <Button 
-                        IsDefault="True"
-                        Click="EditDoneButton_Click"
-                        Margin="20,10,20,0"
-                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                        Style="{StaticResource RoundPrimaryButton}">
-                    Done
-                </Button>
-            </StackPanel>
-        </materialDesign:DialogHost.DialogContent>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <customControls:WindowHeader IsMaximizable="False" Margin="-6 0"></customControls:WindowHeader>
 
 
             <!--#endregion-->
 
-            <Grid Margin="14,10,14,24">
+            <Grid Grid.Row="2" Margin="14,10,14,24">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="354*"/>
@@ -180,6 +124,9 @@
                                                 VerticalAlignment="Bottom"
                                                 BorderBrush="Transparent"
                                                 Width="46"
+                                                materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsLoadingUp, Mode=TwoWay}"
+                                                materialDesign:ButtonProgressAssist.Value="-1"
+                                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                                                 Height="46"
                                                 Margin="0,0,20,38" Grid.RowSpan="2" Grid.Column="1">
                                             <materialDesign:PackIcon Width="18" Height="18" Kind="Send" />
@@ -274,39 +221,27 @@
                                                         </TextBlock>
                                                         <Button
                                                             Grid.Row="2"
-                                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                                            Style="{StaticResource FlatGradientTextButton}"
                                                             Click="DeleteServerButton_Clicked"
                                                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                                             HorizontalAlignment="Right">
-                                                            <Button.Foreground>
-                                                                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
-                                                                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                                                                    <GradientStop Color="{StaticResource GradientPink}"/>
-                                                                </LinearGradientBrush>
-                                                            </Button.Foreground>
                                                             Yes
                                                         </Button>
 
                                                         <Button
                                                             Grid.Row="2"
                                                             Grid.Column="1"
-                                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                                            Style="{StaticResource FlatGradientTextButton}"
                                                             IsCancel="True"
                                                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                                             HorizontalAlignment="Left" >
-                                                            <Button.Foreground>
-                                                                <LinearGradientBrush StartPoint="1,-3" EndPoint="0,2">
-                                                                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                                                                    <GradientStop Color="{StaticResource GradientPink}"/>
-                                                                </LinearGradientBrush>
-                                                            </Button.Foreground>
                                                             No
                                                         </Button>
 
                                                     </Grid>
-                                                        
 
-                                                        
+
+
                                                     <!--#endregion-->
                                                 </Button.CommandParameter>
                                                 <materialDesign:PackIcon Kind="DeleteForever" />

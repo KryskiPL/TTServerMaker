@@ -136,6 +136,8 @@ namespace ServerEngine.Models
                         "this has no effect.";
                 case "allow-nether":
                     return "Allows players to travel to the Nether.";
+                case "difficulty":
+                    return "Defines the difficulty (such as damage dealt by mobs and the way hunger and poison affects players) of the server.";
                 case "enable-command-block":
                     return "Enables command blocks. Duh";
                 case "enable-query":

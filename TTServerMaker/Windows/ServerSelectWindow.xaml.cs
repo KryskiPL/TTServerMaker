@@ -17,6 +17,7 @@ using ServerEngine.ViewModels;
 using ServerEngine.Models.Servers;
 using MaterialDesignThemes.Wpf;
 using ServerEngine.Models;
+using TTServerMaker.CustomControls.Dialogs.SelectServerWindow;
 
 namespace TTServerMaker.Windows
 {
@@ -25,11 +26,12 @@ namespace TTServerMaker.Windows
     /// </summary>
     public partial class ServerSelectWindow : Window
     {
+        private EditServerDialog editDialogContent = new EditServerDialog();
+
         public SelectServerVM SelectServerVM { get; set; } = new SelectServerVM();
 
         public ServerBase SelectedServer;
 
-        private bool isEditing;
 
         public ServerSelectWindow()
         {
@@ -39,16 +41,16 @@ namespace TTServerMaker.Windows
         }
 
 
-        private void LoadUpButton_Click(object sender, RoutedEventArgs e)
+        private async void LoadUpButton_Click(object sender, RoutedEventArgs e)
         {
             SelectedServer = (ServerBase)(sender as FrameworkElement)?.DataContext;
 
+            // Loading up the server
+            await Task.Run(() => SelectedServer.LoadUp());
+
+
             DialogResult = true;
             Close();
-
-            /*
-            selectedServer?.LoadUp();
-            */
         }
 
         #region Dragscrolling
@@ -79,45 +81,22 @@ namespace TTServerMaker.Windows
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            isEditing = true;
             ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
-            EditDialogContent.DataContext = server;
-            
-            // Setting the server type combobox value
-            foreach (ComboBoxItem comboBoxItem in ServerTypeCombobox.Items)
-            {
-                string item = comboBoxItem?.Content.ToString();
-                if (server != null && item == server.ServerTypeStr)
-                    ServerTypeCombobox.SelectedItem = comboBoxItem;
-            }
 
-           EditDialogContent.BindingGroup.BeginEdit();
-            await EditServerDialog.ShowDialog(EditDialogContent);
+            editDialogContent.NewEdit(server);
+            
+            await DialogHost.Show(editDialogContent, dialogHost.Identifier);
         }
 
-        private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
+        private void AddNewServerButton_Click(object sender, RoutedEventArgs e)
         {
-            isEditing = false;
+            /* TODO
             EditDialogContent.DataContext = null;
             await EditServerDialog.ShowDialog(EditDialogContent);
             ServerTypeCombobox.SelectedIndex = -1;
+            */
         }
 
-        private bool editDialogValidated = false;
-
-        private async void EditDoneButton_Click(object sender, RoutedEventArgs e)
-        {
-            editDialogValidated = EditDialogContent.BindingGroup.CommitEdit();
-
-            if (editDialogValidated)
-            {
-                // Saving changes to file
-                await (EditDialogContent.BindingGroup.Items[1] as BasicServerInfo)?.SaveBasicServerInfo();
-                EditDialogContent.BindingGroup.BeginEdit();
-            }
-
-        }
 
         private void DeleteServerButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -131,22 +110,6 @@ namespace TTServerMaker.Windows
             }
             
         }
-
-        private void EditDialogContent_OnError(object sender, ValidationErrorEventArgs e)
-        {
-            MessageBox.Show(e.Error.ErrorContent.ToString());
-        }
-
-        private void EditDialogCancelButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            // Cancel the pending changes and begin a new edit transaction.
-            EditDialogContent.BindingGroup.CancelEdit();
-            EditDialogContent.BindingGroup.BeginEdit();
-        }
-
-        private void EditServerDialog_OnDialogClosing(object sender, DialogClosingEventArgs eventargs)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

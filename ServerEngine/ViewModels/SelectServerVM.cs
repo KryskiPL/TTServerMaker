@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using ServerEngine.Factories;
 using ServerEngine.Models;
 using ServerEngine.Models.Servers;
@@ -60,6 +62,7 @@ namespace ServerEngine.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                
                 throw;
             }
             finally

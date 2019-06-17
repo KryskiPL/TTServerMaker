@@ -144,15 +144,14 @@ namespace ServerEngine.Models
         /// <summary>
         /// Saves the server info to file
         /// </summary>
-        public async Task SaveBasicServerInfo()
+        public void SaveBasicServerInfo()
         {
-            Thread.Sleep(10000);
             try
             {
                 StreamWriter writer = new StreamWriter(AppSettings.EnforceTrailingBackslash(ServerFolderPath) + BasicServerInfoFilename);
                 var settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
-                await writer.WriteAsync(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
+                writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
                 writer.Close();
             }
             catch(Exception ex)

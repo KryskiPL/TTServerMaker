@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using ServerEngine.Exceptions;
 using ServerEngine.Models.Versions;
 
@@ -24,6 +25,8 @@ namespace ServerEngine.Models.Servers
 
         #region Private Properties
         private Properties _properties;
+        private bool _isLoadingUp;
+
         #endregion
 
         #region Properties
@@ -56,7 +59,17 @@ namespace ServerEngine.Models.Servers
         }
         public bool FullyLoadedUp { get; set; }
         public BasicServerInfo BasicInfo { get; set; }
-        public bool IsLoadingUp { get; set; }
+
+        public bool IsLoadingUp
+        {
+            get { return _isLoadingUp; }
+            set
+            {
+                _isLoadingUp = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public abstract string ServerTypeStr { get; }
@@ -95,6 +108,7 @@ namespace ServerEngine.Models.Servers
 
             // Updating last loadup time
             BasicInfo.DateLastLoaded = DateTime.Now;
+
             BasicInfo.SaveBasicServerInfo();
 
 
@@ -102,7 +116,9 @@ namespace ServerEngine.Models.Servers
             FullyLoadedUp = true;
         }
 
-        // Deletes the server's folder
+        /// <summary>
+        /// Deletes the server's folder
+        /// </summary>
         public void Delete()
         {
             Directory.Delete(BasicInfo.ServerFolderPath, true);
