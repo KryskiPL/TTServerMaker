@@ -17,5 +17,6 @@ namespace ServerEngine.ViewModels
         {
             this.Server = loadedServer;
         }
+
     }
 }

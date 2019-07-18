@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ServerEngine.API.Purchase;
 using ServerEngine.Factories;
 using ServerEngine.Models;
 using ServerEngine.Models.Servers;
@@ -18,13 +19,17 @@ namespace ServerEngine.ViewModels
         public SelectServerVM()
         {
             LoadServers();
+
+            API.Purchase.CurrencyExchange ce = new CurrencyExchange();
+            
+            API.APIClient.LoadPricing();
         }
 
         private void LoadServers()
         {
             // Getting directories where the server settings file exists
             var serverDirectories = Directory.GetDirectories(AppSettings.GeneralSettings.ServerFoldersPath)
-                .Where(x => File.Exists(x + "/" + BasicServerInfo.BasicServerInfoFilename)).ToArray();
+                .Where(x => File.Exists(Path.Combine(x, BasicServerInfo.BasicServerInfoFilename))).ToArray();
 
             foreach (string dir in serverDirectories)
             {

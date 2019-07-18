@@ -23,12 +23,13 @@ namespace TTServerMaker.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private HelpDialog helpDialog = new HelpDialog();
+        private readonly HelpDialog helpDialog = new HelpDialog();
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Hiding the tab item headers
             foreach(TabItem item in TabControl.Items.OfType<TabItem>())
             {
                 item.Visibility = Visibility.Collapsed;
@@ -42,28 +43,6 @@ namespace TTServerMaker.Windows
         }
 
 
-        #region Header
-        private void MinimizeButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            SystemCommands.MinimizeWindow(this);
-        }
-
-        private void MaximizeButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (this.WindowState == WindowState.Maximized)
-                SystemCommands.RestoreWindow(this);
-            else
-                SystemCommands.MaximizeWindow(this);
-        }
-
-        private void CloseButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            SystemCommands.CloseWindow(this);
-        }
-
-        #endregion
-
-
         private async void PropertyIconClicked_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string message = (e.Source as HelpIcon)?.GetMessage();
@@ -74,7 +53,7 @@ namespace TTServerMaker.Windows
 
         private void PropertyIconClicked_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon).GetMessage());
+            e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon)?.GetMessage());
         }
     }
 

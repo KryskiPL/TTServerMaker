@@ -25,10 +25,10 @@
                       Set up server
         </TextBlock>
         <TextBox
-                        x:Name="ServerNameTextBox"
-                        materialDesign:HintAssist.Hint="Server name"
-                        FontSize="14"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            x:Name="ServerNameTextBox"
+            materialDesign:HintAssist.Hint="Server name"
+            FontSize="14"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
             <TextBox.Text>
                 <Binding Path="BasicInfo.Name"
                                      Mode="TwoWay">
@@ -64,10 +64,10 @@
             Cancel
         </Button>
         <Button 
-                        IsDefault="True"
-                        Margin="20,10,20,0"
-                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                        Style="{StaticResource RoundPrimaryButton}">
+            IsDefault="True"
+            Margin="20,10,20,0"
+            Click="AddButton_Click"
+            Style="{StaticResource RoundPrimaryButton}">
             Done
         </Button>
     </StackPanel>

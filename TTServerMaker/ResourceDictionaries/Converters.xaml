@@ -6,6 +6,5 @@
     <math:MathConverter x:Key="Math" />
     <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
     <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>
-    
     <converters:StringToBooleanConverter x:Key="StringToBooleanConverter"/>
 </ResourceDictionary>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServerEngine.ViewModels;
 
 namespace TTServerMaker.CustomControls.Dialogs.SelectServerWindow
 {
@@ -20,9 +21,20 @@ namespace TTServerMaker.CustomControls.Dialogs.SelectServerWindow
     /// </summary>
     public partial class AddServerDialog : UserControl
     {
-        public AddServerDialog()
+        private readonly SelectServerVM selectServerVM;
+
+        public AddServerDialog(SelectServerVM ssVM)
         {
             InitializeComponent();
+
+            selectServerVM = ssVM;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO Validation
+
+            selectServerVM.CreateNewServer(ServerNameTextBox.Text); // TODO Server type
         }
     }
 }

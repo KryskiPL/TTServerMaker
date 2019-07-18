@@ -26,9 +26,13 @@ namespace TTServerMaker.Windows
     /// </summary>
     public partial class ServerSelectWindow : Window
     {
-        private EditServerDialog editDialogContent = new EditServerDialog();
+
 
         public SelectServerVM SelectServerVM { get; set; } = new SelectServerVM();
+
+        private readonly EditServerDialog editDialogContent = new EditServerDialog();
+        private readonly AddServerDialog addDialogContent;
+
 
         public ServerBase SelectedServer;
 
@@ -38,6 +42,7 @@ namespace TTServerMaker.Windows
             InitializeComponent();
 
             DataContext = SelectServerVM;
+            addDialogContent = new AddServerDialog(SelectServerVM);
         }
 
 
@@ -85,11 +90,14 @@ namespace TTServerMaker.Windows
 
             editDialogContent.NewEdit(server);
             
-            await DialogHost.Show(editDialogContent, dialogHost.Identifier);
+            await DialogHost.Show(editDialogContent, DialogHost.Identifier);
         }
 
-        private void AddNewServerButton_Click(object sender, RoutedEventArgs e)
+        private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show((await DialogHost.Show(addDialogContent, DialogHost.Identifier))?.ToString());
+
+
             /* TODO
             EditDialogContent.DataContext = null;
             await EditServerDialog.ShowDialog(EditDialogContent);
