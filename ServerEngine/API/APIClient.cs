@@ -25,7 +25,7 @@ namespace ServerEngine.API
             RestRequest request = new RestRequest("purchase/get-pricing.php");
             IRestResponse response = client.Post(request);
 
-            MessageBox.Show(response.Content);
+            //MessageBox.Show(response.Content);
         }
     }
 }
