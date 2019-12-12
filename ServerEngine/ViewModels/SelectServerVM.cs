@@ -1,27 +1,32 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using ServerEngine.API.Purchase;
-using ServerEngine.Factories;
-using ServerEngine.Models;
-using ServerEngine.Models.Servers;
+﻿// <copyright file="SelectServerVM.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace ServerEngine.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using ServerEngine.API.Purchase;
+    using ServerEngine.Factories;
+    using ServerEngine.Models;
+    using ServerEngine.Models.Servers;
+
     public class SelectServerVM
     {
+        /// <summary>
+        /// Gets or sets the list of the servers.
+        /// </summary>
         public ObservableCollection<ServerBase> Servers { get; set; } = new ObservableCollection<ServerBase>();
-
 
         public SelectServerVM()
         {
-            LoadServers();
+            this.LoadServers();
 
             API.Purchase.CurrencyExchange ce = new CurrencyExchange();
-            
             API.APIClient.LoadPricing();
         }
 
@@ -35,7 +40,7 @@ namespace ServerEngine.ViewModels
             {
                 try
                 {
-                    Servers.Add(ServerFactory.CreateNewServerInstance(dir));
+                    this.Servers.Add(ServerFactory.CreateNewServerInstance(dir));
                 }
                 catch (Exception ex)
                 {
@@ -44,7 +49,7 @@ namespace ServerEngine.ViewModels
             }
 
             // Storing and ordering the servers
-            Servers = new ObservableCollection<ServerBase>(Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)).ThenBy(x => x.BasicInfo.Name));
+            Servers = new ObservableCollection<ServerBase>(this.Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)).ThenBy(x => x.BasicInfo.Name));
         }
 
         /// <summary>

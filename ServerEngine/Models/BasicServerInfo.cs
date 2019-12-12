@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using ServerEngine.Models.Servers;
-using ServerEngine.Models.Versions;
+﻿// <copyright file="BasicServerInfo.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace ServerEngine.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using ServerEngine.Models.Servers;
+    using ServerEngine.Models.Versions;
+
+    /// <summary>
+    /// The basic information of the server.
+    /// </summary>
     public class BasicServerInfo : BaseNotificationClass
     {
         public const string BasicServerInfoFilename = ".srvnfo.json";
@@ -25,43 +32,58 @@ namespace ServerEngine.Models
 
         private bool changingServerType = false;
 
-
+        /// <summary>
+        /// Gets or sets the user defined name of the server.
+        /// </summary>
         public string Name
         {
             get
             {
-                return _name;
+                return this._name;
             }
             set
             {
-                _name = value;
-                OnPropertyChanged();
+                this._name = value;
+                this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the date and time when the server was created.
+        /// </summary>
         public DateTime DateCreated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time the server was loaded last.
+        /// </summary>
         public DateTime DateLastLoaded { get; set; }
         public DateTime DateLastRun { get; set; }
         public DateTime DateLastBackup { get; set; }
         public VersionBase Version { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the folder where the server files are located.
+        /// </summary>
         [JsonIgnore]
         public string ServerFolderPath
         {
-            get { return _serverFolderPath; }
-            set { _serverFolderPath = value.EndsWith("/") ? value : value + "/"; }
+            get { return this._serverFolderPath; }
+            set { this._serverFolderPath = value.EndsWith("/") ? value : value + "/"; }
         }
 
         /// <summary>
-        /// Gets the server type string
+        /// Gets or sets the server type string
         /// </summary>
         public string ServerType
         {
             // Returns the parent servers server type, if that is not null
             // or if 'changingServerType' variable is set to true
-            get { return (ParentServer != null && !changingServerType) ? 
-                GetParentServerType() : _serverType; }
-            set { _serverType = value; }
+            get
+            {
+                return (this.ParentServer != null && !this.changingServerType) ? this.ParentServerType : this._serverType;
+            }
+
+            set { this._serverType = value; }
         }
 
         public string ServerImagePath
@@ -69,40 +91,38 @@ namespace ServerEngine.Models
             get
             {
                 // Checking if the file still exists / it's a resource, and if not, getting a random image resource
-                if (ServerBase.DefaultServerImages.All(x => DefaultVanillaImageDirectory + x != _serverImagePath) && !File.Exists(_serverImagePath))
+                if (ServerBase.DefaultServerImages.All(x => DefaultVanillaImageDirectory + x != this._serverImagePath) && !File.Exists(this._serverImagePath))
                 {
-                    _serverImagePath = DefaultVanillaImageDirectory +
-                        ServerBase.DefaultServerImages[(new Random()).Next(0, ServerBase.DefaultServerImages.Length)];
+                    this._serverImagePath = DefaultVanillaImageDirectory +
+                        ServerBase.DefaultServerImages[new Random().Next(0, ServerBase.DefaultServerImages.Length)];
                 }
 
-                return _serverImagePath;
+                return this._serverImagePath;
             }
             set
             {
-                
-                _serverImagePath = value;
-                OnPropertyChanged();
+                this._serverImagePath = value;
+                this.OnPropertyChanged();
             }
         }
 
-        private string GetParentServerType()
-        {
-            return ParentServer.GetType().Name;
-        } 
-
+        /// <summary>
+        /// Gets the type of the server.
+        /// </summary>
+        private string ParentServerType => this.ParentServer.GetType().Name;
 
         public BasicServerInfo(ServerBase parentServer = null)
         {
-            ParentServer = parentServer;
+            this.ParentServer = parentServer;
         }
 
         /// <summary>
-        /// Returns the Type of the server
+        /// Returns the Type of the server.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The type of the server.</returns>
         public Type GetServerTypeClassType()
         {
-            return Type.GetType(typeof(ServerBase).Namespace + "." + ServerType);
+            return Type.GetType(typeof(ServerBase).Namespace + "." + this.ServerType);
         }
 
         /// <summary>
@@ -111,7 +131,7 @@ namespace ServerEngine.Models
         /// <param name="typeString"></param>
         public void ChangeServerTypeForNextSave(string typeString)
         {
-            changingServerType = true;
+            this.changingServerType = true;
             this.ServerType = typeString;
         }
 
@@ -119,8 +139,8 @@ namespace ServerEngine.Models
         /// Loads the basic server info from the given folder. It's static, because this will determine what type of server
         /// needs to be created (vanilla/etc...).
         /// </summary>
-        /// <param name="folderPath"></param>
-        /// <returns>New BasicServerInfo object</returns>
+        /// <param name="folderPath">The full path of the server folder.</param>
+        /// <returns>New BasicServerInfo object.</returns>
         public static BasicServerInfo LoadBasicServerInfo(string folderPath)
         {
             try
@@ -135,7 +155,7 @@ namespace ServerEngine.Models
                     return basicServerInfo;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
             }

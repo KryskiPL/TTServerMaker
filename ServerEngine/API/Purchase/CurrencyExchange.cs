@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
+﻿// <copyright file="CurrencyExchange.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace ServerEngine.API.Purchase
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using RestSharp;
+
     class CurrencyExchange
     {
         private const string ExchangeApi = "https://api.exchangeratesapi.io/latest";
@@ -34,9 +38,9 @@ namespace ServerEngine.API.Purchase
             var rates = JObject.Parse(response.Content).GetValue("rates");
 
             // Serializing response
-            ExchangeRates =  JsonConvert.DeserializeObject<Dictionary<string, double>>(rates.ToString());
+            this.ExchangeRates = JsonConvert.DeserializeObject<Dictionary<string, double>>(rates.ToString());
 
-            return ExchangeRates;
+            return this.ExchangeRates;
         }
     
 

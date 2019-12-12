@@ -1,4 +1,8 @@
-﻿namespace ServerEngine.Models.Servers
+﻿// <copyright file="ForgeServer.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
+
+namespace ServerEngine.Models.Servers
 {
     public class ForgeServer : ServerBase
     {

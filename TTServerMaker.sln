@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker", "TTServerMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEngine", "ServerEngine\ServerEngine.csproj", "{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{F1EE79E9-7541-43D4-B10F-A9434715817D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Tests", "Testing\TTServerMaker.Tests.csproj", "{F1EE79E9-7541-43D4-B10F-A9434715817D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

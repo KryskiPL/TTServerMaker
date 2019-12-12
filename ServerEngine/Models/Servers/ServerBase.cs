@@ -1,35 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using ServerEngine.Exceptions;
-using ServerEngine.Models.Versions;
+﻿// <copyright file="ServerBase.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace ServerEngine.Models.Servers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using ServerEngine.Exceptions;
+    using ServerEngine.Models.Versions;
+
     public abstract class ServerBase : BaseNotificationClass
     {
         public const string ServerSettingsFilename = ".server-settings.json";
 
-        public static readonly string[] DefaultServerImages = 
-            { "village.jpg",
+        /// <summary>
+        /// The list of the 
+        /// </summary>
+        public static readonly string[] DefaultServerImages =
+            {
+                "village.jpg",
                 "swamp.jpg",
                 "swamp2.jpg",
                 "jungle.jpg",
                 "oldgardens.jpg",
                 "oldhub.jpg",
                 "train.jpg",
-                "village.jpg" };
+                "village.jpg",
+            };
 
-        #region Private Properties
-        private Properties _properties;
-        private bool _isLoadingUp;
+        private Properties properties;
+        private bool isLoadingUp;
 
-        #endregion
-
-        #region Properties
         public string VersionType { get { return typeof(Version).Name; } }
         public VersionBase Version { get { return BasicInfo.Version; } set { BasicInfo.Version = value; } }
         public Properties Properties
@@ -39,11 +44,11 @@ namespace ServerEngine.Models.Servers
                 if (!FullyLoadedUp && !IsLoadingUp)
                     throw new ServerNotLoadedException();
 
-                return _properties;
+                return properties;
             }
             private set
             {
-                _properties = value;
+                properties = value;
             }
         }
         public string FolderPath
@@ -62,15 +67,14 @@ namespace ServerEngine.Models.Servers
 
         public bool IsLoadingUp
         {
-            get { return _isLoadingUp; }
+            get { return isLoadingUp; }
             set
             {
-                _isLoadingUp = value;
+                isLoadingUp = value;
                 OnPropertyChanged();
             }
         }
 
-        #endregion
 
         public abstract string ServerTypeStr { get; }
 
