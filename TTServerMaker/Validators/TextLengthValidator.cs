@@ -1,40 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿// <copyright file="TextLengthValidator.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.Validators
 {
+    using System.Globalization;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// Validates the length of a string.
+    /// </summary>
     public class TextLengthValidator : ValidationRule
     {
+        /// <summary>
+        /// Gets or sets the minimum string length. Ignored if set to -1.
+        /// </summary>
         public int MinLength { get; set; } = -1;
+
+        /// <summary>
+        /// Gets or sets the maximum string length. Ignored if set to -1.
+        /// </summary>
         public int MaxLength { get; set; } = -1;
 
+        /// <inheritdoc/>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string Text = value.ToString().Trim();
+            string text = value.ToString().Trim();
 
-            if (MinLength > -1 && MaxLength > -1)
+            if (this.MinLength > -1 && this.MaxLength > -1)
             {
-                if (Text.Length < MinLength || Text.Length > MaxLength)
-                    return new ValidationResult(false, $"Should be between {MinLength} and {MaxLength} characters");
+                if (text.Length < this.MinLength || text.Length > this.MaxLength)
+                {
+                    return new ValidationResult(false, $"Should be between {this.MinLength} and {this.MaxLength} characters");
+                }
             }
 
-            if (MinLength > -1 && MinLength > Text.Length)
+            if (this.MinLength > -1 && this.MinLength > text.Length)
             {
-                return new ValidationResult(false, $"Should be at least {MinLength} characters");
+                return new ValidationResult(false, $"Should be at least {this.MinLength} characters");
             }
 
-            if (MaxLength > -1 && MaxLength < Text.Length)
+            if (this.MaxLength > -1 && this.MaxLength < text.Length)
             {
-                return new ValidationResult(false, $"Should be shorter {MinLength} characters");
+                return new ValidationResult(false, $"Should be shorter {this.MinLength} characters");
             }
-
-
-
 
             return ValidationResult.ValidResult;
         }

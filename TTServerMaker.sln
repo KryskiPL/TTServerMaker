@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker", "TTServerMaker\TTServerMaker.csproj", "{B4B30B3F-C566-4F1D-9B70-757339ED0769}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A} = {6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEngine", "ServerEngine\ServerEngine.csproj", "{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.ServerEngine", "ServerEngine\TTServerMaker.ServerEngine.csproj", "{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Tests", "Testing\TTServerMaker.Tests.csproj", "{F1EE79E9-7541-43D4-B10F-A9434715817D}"
 EndProject

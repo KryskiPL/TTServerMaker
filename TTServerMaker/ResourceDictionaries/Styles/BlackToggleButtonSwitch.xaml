@@ -3,11 +3,11 @@
                     xmlns:local="clr-namespace:TTServerMaker.ResourceDictionaries.Styles"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style x:Key="BlackToggleButtonSwitch" TargetType="{x:Type ToggleButton}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="0 1 0 0"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0 1 0 0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -18,10 +18,10 @@
                                     <VisualTransition From="*" To="Checked">
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ThumbHolder">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
                                                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18">
                                                     <EasingDoubleKeyFrame.EasingFunction>
-                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                        <QuadraticEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
@@ -30,10 +30,10 @@
                                     <VisualTransition From="Checked" To="Unchecked">
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ThumbHolder">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="18"/>
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="18" />
                                                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
-                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                        <QuadraticEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
@@ -56,9 +56,9 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid>
                             <Rectangle x:Name="Track"
-                                       Fill="Black" 
-                                       HorizontalAlignment="Left" Height="20" Margin=".211,5,4.211,0" 
-                                       Stroke="{x:Null}" VerticalAlignment="Top" Width="40" RadiusY="10" RadiusX="10"/>
+                                       Fill="Black"
+                                       HorizontalAlignment="Left" Height="20" Margin=".211,5,4.211,0"
+                                       Stroke="{x:Null}" VerticalAlignment="Top" Width="40" RadiusY="10" RadiusX="10" />
 
                             <Grid x:Name="ThumbHolder"
                                   HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -70,12 +70,12 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center"
                                          RenderTransformOrigin="0.5,0.5">
                                     <Ellipse.RenderTransform>
-                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="1" />
                                     </Ellipse.RenderTransform>
                                 </Ellipse>
                                 <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ShadowAssist.CacheMode)}">
                                     <Ellipse x:Name="Thumb"
-                                             Fill="White" Stroke="{x:Null}" 
+                                             Fill="White" Stroke="{x:Null}"
                                              HorizontalAlignment="Center" VerticalAlignment="Center"
                                              Width="16" Height="16"
                                              Margin="0,0,0,0"
@@ -86,10 +86,10 @@
                                 <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
                                                   Margin="{TemplateBinding Padding}"
                                                   x:Name="ContentPresenter"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                                  FlowDirection="LeftToRight"/>
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  FlowDirection="LeftToRight" />
                                 <Grid.RenderTransform>
-                                    <TranslateTransform X="0" Y="3.59"/>
+                                    <TranslateTransform X="0" Y="3.59" />
                                 </Grid.RenderTransform>
                             </Grid>
                         </Grid>
@@ -98,7 +98,7 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Thumb" Property="Fill" Value="White" />
                             <Setter TargetName="Track" Property="Fill" Value="Blue" />
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Foreground" Value="Black" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -109,12 +109,12 @@
                             <Setter TargetName="ContentPresenter" Property="ContentTemplate" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ToggleButtonAssist.OnContentTemplate)}" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
                             <!-- Need to set Foreground to Background here instead of hardcoded PrimaryHueMidBrush -->
                         </Trigger>
-                        <Trigger Property="Button.IsDefaulted" Value="true"/>
-                        <Trigger Property="IsMouseOver" Value="true"/>
-                        
+                        <Trigger Property="Button.IsDefaulted" Value="true" />
+                        <Trigger Property="IsMouseOver" Value="true" />
+
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="Thumb" Property="Fill" Value="#BDBDBD" />
                             <Setter TargetName="Track" Property="Fill">

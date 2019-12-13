@@ -1,26 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿// <copyright file="IPAddressValidator.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.Validators
 {
-    class IPAddressValidator : ValidationRule
+    using System.Globalization;
+    using System.Net;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// Validates an IP address.
+    /// </summary>
+    internal class IPAddressValidator : ValidationRule
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether the validation returns with true even when the given ip address is empty.
+        /// </summary>
         public bool CanBeEmpty { get; set; } = false;
 
+        /// <inheritdoc/>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string input = (string) value;
+            string input = (string)value;
 
-            if((string.IsNullOrEmpty(input) && CanBeEmpty) || IPAddress.TryParse(input, out IPAddress _))
+            if ((string.IsNullOrEmpty(input) && this.CanBeEmpty) || IPAddress.TryParse(input, out IPAddress _))
+            {
                 return ValidationResult.ValidResult;
+            }
             else
-                return  new ValidationResult(false, "Invalid IP address");
+            {
+                return new ValidationResult(false, "Invalid IP address");
+            }
         }
     }
 }

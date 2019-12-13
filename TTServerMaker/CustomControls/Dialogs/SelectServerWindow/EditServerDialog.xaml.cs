@@ -1,50 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ServerEngine.Models;
-using ServerEngine.Models.Servers;
+﻿// <copyright file="EditServerDialog.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.CustomControls.Dialogs.SelectServerWindow
 {
+    using System.Windows;
+    using System.Windows.Controls;
+    using TTServerMaker.ServerEngine.Models;
+    using TTServerMaker.ServerEngine.Models.Servers;
+
     /// <summary>
-    /// Interaction logic for EditServerDialog.xaml
+    /// Interaction logic for EditServerDialog.xaml.
     /// </summary>
     public partial class EditServerDialog : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditServerDialog"/> class.
+        /// </summary>
         public EditServerDialog()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Starts a new server edit.
+        /// </summary>
+        /// <param name="server">The server that is being edited.</param>
         public void NewEdit(ServerBase server)
         {
-            editStackPanel.BindingGroup.BeginEdit();
+            this.editStackPanel.BindingGroup.BeginEdit();
             this.DataContext = server;
         }
 
         private void EditDialogCancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            editStackPanel.BindingGroup.CancelEdit();
+            this.editStackPanel.BindingGroup.CancelEdit();
         }
 
         private void EditDoneButton_Click(object sender, RoutedEventArgs e)
         {
-            if (editStackPanel.BindingGroup.CommitEdit())
+            if (this.editStackPanel.BindingGroup.CommitEdit())
             {
                 // Saving changes to file
-                (editStackPanel.BindingGroup.Items[1] as BasicServerInfo)?.SaveBasicServerInfo();
-                editStackPanel.BindingGroup.BeginEdit();
+                (this.editStackPanel.BindingGroup.Items[1] as BasicServerInfo)?.SaveBasicServerInfo();
+                this.editStackPanel.BindingGroup.BeginEdit();
             }
         }
     }

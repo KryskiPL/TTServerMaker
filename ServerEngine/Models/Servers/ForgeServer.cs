@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine.Models.Servers
+namespace TTServerMaker.ServerEngine.Models.Servers
 {
     public class ForgeServer : ServerBase
     {

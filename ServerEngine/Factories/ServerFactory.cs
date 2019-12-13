@@ -1,36 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using ServerEngine.Exceptions;
-using ServerEngine.Models;
-using ServerEngine.Models.Servers;
+﻿// <copyright file="ServerFactory.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
-namespace ServerEngine.Factories
+namespace TTServerMaker.ServerEngine.Factories
 {
+    using TTServerMaker.ServerEngine.Exceptions;
+    using TTServerMaker.ServerEngine.Models;
+    using TTServerMaker.ServerEngine.Models.Servers;
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Text.RegularExpressions;
+
+    /// <summary>
+    /// Creates server objects.
+    /// </summary>
     internal class ServerFactory
     {
         /// <summary>
-        /// Creates a new server instance with the appropriate server type by reading the basic server info file
+        /// Creates a new server instance with the appropriate server type by reading the basic server info file.
         /// </summary>
-        /// <param name="serverPath">The path to the server folder</param>
+        /// <param name="serverPath">The path to the server folder.</param>
         /// <returns>New server instance</returns>
         public static ServerBase CreateNewServerInstance(string serverPath)
         {
             BasicServerInfo basicServerInfo = BasicServerInfo.LoadBasicServerInfo(serverPath);
 
             if (basicServerInfo == null)
+            {
                 throw new FileCorruptedException("Corrupted server info file", serverPath);
+            }
 
-            ServerBase newServer = (Activator.CreateInstance(basicServerInfo.GetServerTypeClassType(), basicServerInfo) as ServerBase);
+            ServerBase newServer = Activator.CreateInstance(basicServerInfo.GetServerTypeClassType(), basicServerInfo) as ServerBase;
             return newServer;
         }
 
+        /// <summary>
+        /// Creates a brand new server.
+        /// </summary>
+        /// <param name="serverName">The name of the server.</param>
+        /// <param name="typeString">The string representation of the server type.</param>
+        /// <returns></returns>
         internal static ServerBase CreateNewServerFromScratch(string serverName, string typeString)
         {
-            #region Generating server folder name from name
             string folderName = serverName;
 
             // Capitalizing letters after spaces, for better readability
@@ -44,7 +57,7 @@ namespace ServerEngine.Factories
 
             foreach (char c in forbiddenCharacters)
             {
-                folderName = folderName.Replace(c.ToString(), "");
+                folderName = folderName.Replace(c.ToString(), string.Empty);
             }
 
             // Credit goes to Julien Roncaglia
@@ -74,13 +87,13 @@ namespace ServerEngine.Factories
             folderName = Regex.Replace(folderName, "[œ]", "oe");
             folderName = Regex.Replace(folderName, "[Œ]", "Oe");
 
-            #endregion
-            
             // Making sure the folder doesn't exist yet
             string newDir = AppSettings.GeneralSettings.ServerFoldersPath + folderName;
 
             while (Directory.Exists(newDir))
+            {
                 newDir += "v2";
+            }
 
             newDir = AppSettings.EnforceTrailingBackslash(newDir);
 
@@ -92,7 +105,7 @@ namespace ServerEngine.Factories
                 ServerFolderPath = newDir,
                 Name = serverName,
                 DateCreated = DateTime.Now,
-                DateLastLoaded = DateTime.Now
+                DateLastLoaded = DateTime.Now,
             };
 
             basicInfo.ServerImagePath = basicInfo.ServerImagePath;

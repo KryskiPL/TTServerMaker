@@ -4,12 +4,10 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- Design time server image-->
-    <BitmapImage x:Key="DesignServerImage" UriSource="pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/oldhub.jpg"/>
-
+    <BitmapImage x:Key="DesignServerImage" UriSource="pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/oldhub.jpg" />
 
     <GridLength x:Key="WindowHeaderHeight">25</GridLength>
     <system:Double x:Key="WindowHeaderHeightDouble">25</system:Double>
 
     <CornerRadius x:Key="WindowCornerRadius">8</CornerRadius>
-
 </ResourceDictionary>

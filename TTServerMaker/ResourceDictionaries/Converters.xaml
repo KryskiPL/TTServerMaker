@@ -5,6 +5,6 @@
                     xmlns:converters="clr-namespace:TTServerMaker.Converters">
     <math:MathConverter x:Key="Math" />
     <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
-    <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>
-    <converters:StringToBooleanConverter x:Key="StringToBooleanConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden" />
+    <converters:StringToBooleanConverter x:Key="StringToBooleanConverter" />
 </ResourceDictionary>

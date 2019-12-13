@@ -8,7 +8,7 @@
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="ToolTip"
                         Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                        Path=(Validation.Errors)/ErrorContent}"/>
+                        Path=(Validation.Errors)/ErrorContent}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBoxBase}">
@@ -36,7 +36,7 @@
                                                 </ColorAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                        <VisualState x:Name="ReadOnly"/>
+                                        <VisualState x:Name="ReadOnly" />
                                         <VisualState x:Name="MouseOver" />
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
@@ -47,7 +47,6 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
-
         </Style.Triggers>
         <Setter Property="SnapsToDevicePixels"
           Value="True" />
@@ -90,7 +89,7 @@
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="ReadOnly"/>
+                                <VisualState x:Name="ReadOnly" />
                                 <VisualState x:Name="MouseOver" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
@@ -100,30 +99,22 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        
-
-
-
     </Style>
-
 
     <!--
     <Style x:Key="RoundedTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Padding" Value="1" />
 
-        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Background" Value="LightGray" />
 
 <
         <Setter Property="Border">
             <Setter.Value>
                 <Border CornerRadius="20" BorderThickness="0">
-
                 </Border>
             </Setter.Value>
         </Setter>
-        
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -146,7 +137,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
     </Style>
     -->
 </ResourceDictionary>

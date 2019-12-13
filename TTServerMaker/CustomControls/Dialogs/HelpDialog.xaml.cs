@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿// <copyright file="HelpDialog.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.CustomControls.Dialogs
 {
+    using System.Windows.Controls;
+
     /// <summary>
-    /// Interaction logic for HelpDialog.xaml
+    /// Interaction logic for HelpDialog.xaml.
     /// </summary>
     public partial class HelpDialog : UserControl
     {
-        public string HelpText
-        {
-            get { return helpTextBlock.Text; }
-            set { helpTextBlock.Text = value; }
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HelpDialog"/> class.
+        /// </summary>
         public HelpDialog()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
 
-            
+        /// <summary>
+        /// Gets or sets the help text.
+        /// </summary>
+        public string HelpText
+        {
+            get { return this.helpTextBlock.Text; }
+            set { this.helpTextBlock.Text = value; }
         }
     }
 }

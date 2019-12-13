@@ -2,35 +2,51 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine.Models
+namespace TTServerMaker.ServerEngine.Models
 {
+    using Newtonsoft.Json;
+    using TTServerMaker.ServerEngine.Models.Servers;
+    using TTServerMaker.ServerEngine.Models.Versions;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using ServerEngine.Models.Servers;
-    using ServerEngine.Models.Versions;
 
     /// <summary>
     /// The basic information of the server.
     /// </summary>
     public class BasicServerInfo : BaseNotificationClass
     {
+        /// <summary>
+        /// The name of the file the basic server info is stored in.
+        /// </summary>
         public const string BasicServerInfoFilename = ".srvnfo.json";
+
+        /// <summary>
+        /// The path of the default images.
+        /// </summary>
         public const string DefaultVanillaImageDirectory = "pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/";
 
         [JsonIgnore]
-        public ServerBase ParentServer;
+        public ServerBase parentServer;
 
-        private string _name;
-        private string _serverType;
-        private string _serverImagePath;
-        private string _serverFolderPath;
+        private string name;
+        private string serverType;
+        private string serverImagePath;
+        private string serverFolderPath;
 
         private bool changingServerType = false;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BasicServerInfo"/> class.
+        /// </summary>
+        /// <param name="parentServer"></param>
+        public BasicServerInfo(ServerBase parentServer = null)
+        {
+            this.parentServer = parentServer;
+        }
 
         /// <summary>
         /// Gets or sets the user defined name of the server.
@@ -39,11 +55,12 @@ namespace ServerEngine.Models
         {
             get
             {
-                return this._name;
+                return this.name;
             }
+
             set
             {
-                this._name = value;
+                this.name = value;
                 this.OnPropertyChanged();
             }
         }
@@ -57,9 +74,21 @@ namespace ServerEngine.Models
         /// Gets or sets the date and time the server was loaded last.
         /// </summary>
         public DateTime DateLastLoaded { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time the server was last ran.
+        /// </summary>
         public DateTime DateLastRun { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time of the last server backup.
+        /// </summary>
         public DateTime DateLastBackup { get; set; }
-        public VersionBase Version { get; set; }
+
+        /// <summary>
+        /// Gets or sets the version of the server.
+        /// </summary>
+        public ServerVersion Version { get; set; }
 
         /// <summary>
         /// Gets or sets the folder where the server files are located.
@@ -67,8 +96,8 @@ namespace ServerEngine.Models
         [JsonIgnore]
         public string ServerFolderPath
         {
-            get { return this._serverFolderPath; }
-            set { this._serverFolderPath = value.EndsWith("/") ? value : value + "/"; }
+            get { return this.serverFolderPath; }
+            set { this.serverFolderPath = value.EndsWith("/") ? value : value + "/"; }
         }
 
         /// <summary>
@@ -80,28 +109,31 @@ namespace ServerEngine.Models
             // or if 'changingServerType' variable is set to true
             get
             {
-                return (this.ParentServer != null && !this.changingServerType) ? this.ParentServerType : this._serverType;
+                return (this.parentServer != null && !this.changingServerType) ? this.ParentServerType : this.serverType;
             }
 
-            set { this._serverType = value; }
+            set { this.serverType = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the path to the server's preview image.
+        /// </summary>
         public string ServerImagePath
         {
             get
             {
                 // Checking if the file still exists / it's a resource, and if not, getting a random image resource
-                if (ServerBase.DefaultServerImages.All(x => DefaultVanillaImageDirectory + x != this._serverImagePath) && !File.Exists(this._serverImagePath))
+                if (ServerBase.DefaultServerImages.All(x => DefaultVanillaImageDirectory + x != this.serverImagePath) && !File.Exists(this.serverImagePath))
                 {
-                    this._serverImagePath = DefaultVanillaImageDirectory +
+                    this.serverImagePath = DefaultVanillaImageDirectory +
                         ServerBase.DefaultServerImages[new Random().Next(0, ServerBase.DefaultServerImages.Length)];
                 }
 
-                return this._serverImagePath;
+                return this.serverImagePath;
             }
             set
             {
-                this._serverImagePath = value;
+                this.serverImagePath = value;
                 this.OnPropertyChanged();
             }
         }
@@ -109,12 +141,7 @@ namespace ServerEngine.Models
         /// <summary>
         /// Gets the type of the server.
         /// </summary>
-        private string ParentServerType => this.ParentServer.GetType().Name;
-
-        public BasicServerInfo(ServerBase parentServer = null)
-        {
-            this.ParentServer = parentServer;
-        }
+        private string ParentServerType => this.parentServer.GetType().Name;
 
         /// <summary>
         /// Returns the Type of the server.
@@ -149,9 +176,8 @@ namespace ServerEngine.Models
                     new StreamReader(AppSettings.EnforceTrailingBackslash(folderPath) + BasicServerInfoFilename))
                 {
                     BasicServerInfo basicServerInfo = JsonConvert.DeserializeObject<BasicServerInfo>(reader.ReadToEnd(),
-                        new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.Objects});
+                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects });
                     basicServerInfo.ServerFolderPath = folderPath;
-                    reader.Close();
                     return basicServerInfo;
                 }
             }
@@ -168,13 +194,13 @@ namespace ServerEngine.Models
         {
             try
             {
-                StreamWriter writer = new StreamWriter(AppSettings.EnforceTrailingBackslash(ServerFolderPath) + BasicServerInfoFilename);
+                StreamWriter writer = new StreamWriter(AppSettings.EnforceTrailingBackslash(this.ServerFolderPath) + BasicServerInfoFilename);
                 var settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
                 writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
                 writer.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
             }

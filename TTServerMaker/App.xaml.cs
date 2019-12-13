@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using ServerEngine;
-using ServerEngine.Models.Servers;
-using ServerEngine.ViewModels;
+﻿// <copyright file="App.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker
 {
+    using System.Windows;
+    using TTServerMaker.ServerEngine;
+    using TTServerMaker.ServerEngine.ViewModels;
+
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for App.xaml.
     /// </summary>
     public partial class App : Application
     {
-
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            Windows.MainWindow MainWindow = new Windows.MainWindow();
-            this.MainWindow = MainWindow;
+            Windows.MainWindow mainWindow = new Windows.MainWindow();
+            this.MainWindow = mainWindow;
 
             // Showing the greeting screen (with folder selection) on first startup
             if (AppSettings.FirstLaunch)
@@ -29,7 +25,9 @@ namespace TTServerMaker
 
                 bool? dialogResult = firstStartWindow.ShowDialog();
                 if (!dialogResult.HasValue || !dialogResult.Value)
-                    base.Shutdown();
+                {
+                    this.Shutdown();
+                }
             }
 
             // Showing the server select dialog
@@ -39,15 +37,14 @@ namespace TTServerMaker
             if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value ||
                 serverSelectWindow.SelectedServer == null)
             {
-                base.Shutdown();
+                this.Shutdown();
                 return;
             }
 
-
             MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectedServer);
 
-            MainWindow.DataContext = mainWindowVM;
-            MainWindow.Show();
+            mainWindow.DataContext = mainWindowVM;
+            mainWindow.Show();
         }
     }
 }

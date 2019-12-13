@@ -1,48 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Controls.Primitives;
+﻿// <copyright file="NonManualToggleButton.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.CustomControls
 {
+    using System.Windows;
+    using System.Windows.Controls.Primitives;
+
     /// <summary>
-    /// Interaction logic for NonManualToggleButton.xaml
+    /// Interaction logic for NonManualToggleButton.xaml.
     /// </summary>
     public partial class NonManualToggleButton : ToggleButton
     {
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for LockToggle. This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty LockToggleProperty =
+            DependencyProperty.Register("LockToggle", typeof(bool), typeof(NonManualToggleButton), new UIPropertyMetadata(false));
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the button can be toggled by the user.
+        /// </summary>
+        public bool LockToggle
+        {
+            get { return (bool)this.GetValue(LockToggleProperty); }
+            set { this.SetValue(LockToggleProperty, value); }
+        }
+
+        /// <inheritdoc/>
         protected override void OnToggle()
         {
-            if (!LockToggle)
+            if (!this.LockToggle)
             {
                 base.OnToggle();
             }
         }
-
-        public bool LockToggle
-        {
-            get { return (bool)GetValue(LockToggleProperty); }
-            set { base.SetValue(LockToggleProperty, value); }
-        }
-
-        protected override void OnClick()
-        {
-            //LockToggle = true;
-            //base.OnClick();
-        }
-
-        // Using a DependencyProperty as the backing store for LockToggle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LockToggleProperty =
-            DependencyProperty.Register("LockToggle", typeof(bool), typeof(NonManualToggleButton), new UIPropertyMetadata(false));
     }
 }

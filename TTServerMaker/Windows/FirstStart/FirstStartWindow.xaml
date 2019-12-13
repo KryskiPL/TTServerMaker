@@ -24,28 +24,28 @@
             <materialDesign:TransitionerSlide>
                 <Grid VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <materialDesign:Card Padding="1 32 32 32" Margin="20,20,20,0">
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <Image 
+                            <Image
                             Height="128"
                             Width="128"
-                            Source="/TTServerMaker;component/Img/Logo/logo_150x150.png" 
-                            Grid.RowSpan="3" 
-                            Stretch="UniformToFill"/>
+                            Source="/TTServerMaker;component/Img/Logo/logo_150x150.png"
+                            Grid.RowSpan="3"
+                            Stretch="UniformToFill" />
 
-                            <TextBlock 
+                            <TextBlock
                             VerticalAlignment="Center"
                             Grid.Column="1"
                             Style="{StaticResource MaterialDesignDisplay1TextBlock}">
@@ -54,23 +54,23 @@
 
                             <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
                             <AccessText TextWrapping="WrapWithOverflow">
-                                Thanks for downloading the program! Please remember, 
-                                that the program is currently in beta stage. Bugs are 
-                                to be expected. You are just a few steps away from 
+                                Thanks for downloading the program! Please remember,
+                                that the program is currently in beta stage. Bugs are
+                                to be expected. You are just a few steps away from
                                 running your first Minecraft server!
                             </AccessText>
                             </TextBlock>
                         </Grid>
                     </materialDesign:Card>
 
-                    <Button 
+                    <Button
                     Style="{StaticResource RoundPrimaryButton}"
-                    Margin="0,20,20,20" 
-                    HorizontalAlignment="Right" 
-                    Width="634" 
-                    Grid.Row="1" 
+                    Margin="0,20,20,20"
+                    HorizontalAlignment="Right"
+                    Width="634"
+                    Grid.Row="1"
                     Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
-                    Content="Next"/>
+                    Content="Next" />
                 </Grid>
             </materialDesign:TransitionerSlide>
 
@@ -78,22 +78,21 @@
             <materialDesign:TransitionerSlide>
                 <Grid VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <materialDesign:Card Padding="32" Margin="20,20,20,0">
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-
-                            <TextBlock 
+                            <TextBlock
                             Padding="0 10"
                             VerticalAlignment="Center"
                             Grid.Column="0"
@@ -101,39 +100,37 @@
                            Please select where you would like your servers to be stored
                             </TextBlock>
 
-                            <CheckBox 
+                            <CheckBox
                             Padding="0 10"
-                            Grid.Row="1" 
-                            Content="Use default directory" 
-                            Checked="DefaultCheckboxChanged" 
-                            Unchecked="DefaultCheckboxChanged" 
+                            Grid.Row="1"
+                            Content="Use default directory"
+                            Checked="DefaultCheckboxChanged"
+                            Unchecked="DefaultCheckboxChanged"
                             x:Name="DefaultBox" />
 
                             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                <materialDesign:PackIcon Margin="0 0 10 0" Kind="FolderOutline" VerticalAlignment="Center" Opacity="0.5"/>
-                                <TextBox 
+                                <materialDesign:PackIcon Margin="0 0 10 0" Kind="FolderOutline" VerticalAlignment="Center" Opacity="0.5" />
+                                <TextBox
                                 GotFocus="InputBox_GotFocus"
                                 x:Name="InputBox"
                                 Width="400"
-                                materialDesign:HintAssist.Hint="Plase enter a path"
-                                />
+                                materialDesign:HintAssist.Hint="Plase enter a path" />
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
 
-                    <Button 
+                    <Button
                         Style="{StaticResource RoundPrimaryButton}"
                         Click="ServerFolderNextButton_Click"
-                        Margin="0,20,20,20" 
-                        HorizontalAlignment="Center" 
-                        Width="600" 
+                        Margin="0,20,20,20"
+                        HorizontalAlignment="Center"
+                        Width="600"
                         Height="40"
-                        Grid.Row="1" 
+                        Grid.Row="1"
                         Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
-                        Content="Next"/>
+                        Content="Next" />
                 </Grid>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
-
     </Grid>
 </Window>

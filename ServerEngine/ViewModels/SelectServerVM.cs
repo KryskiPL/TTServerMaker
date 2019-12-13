@@ -2,18 +2,17 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine.ViewModels
+namespace TTServerMaker.ServerEngine.ViewModels
 {
+    using TTServerMaker.ServerEngine.Factories;
+    using TTServerMaker.ServerEngine.Models;
+    using TTServerMaker.ServerEngine.Models.Servers;
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
-    using ServerEngine.API.Purchase;
-    using ServerEngine.Factories;
-    using ServerEngine.Models;
-    using ServerEngine.Models.Servers;
 
     public class SelectServerVM
     {
@@ -26,15 +25,18 @@ namespace ServerEngine.ViewModels
         {
             this.LoadServers();
 
-            API.Purchase.CurrencyExchange ce = new CurrencyExchange();
             API.APIClient.LoadPricing();
         }
 
+        /// <summary>
+        /// Loads the servers
+        /// </summary>
         private void LoadServers()
         {
             // Getting directories where the server settings file exists
             var serverDirectories = Directory.GetDirectories(AppSettings.GeneralSettings.ServerFoldersPath)
-                .Where(x => File.Exists(Path.Combine(x, BasicServerInfo.BasicServerInfoFilename))).ToArray();
+                .Where(x => File.Exists(Path.Combine(x, BasicServerInfo.BasicServerInfoFilename)))
+                .ToArray();
 
             foreach (string dir in serverDirectories)
             {
@@ -49,7 +51,9 @@ namespace ServerEngine.ViewModels
             }
 
             // Storing and ordering the servers
-            Servers = new ObservableCollection<ServerBase>(this.Servers.OrderByDescending((x => x.BasicInfo.DateLastLoaded)).ThenBy(x => x.BasicInfo.Name));
+            this.Servers = new ObservableCollection<ServerBase>(
+                this.Servers.OrderByDescending(x => x.BasicInfo.DateLastLoaded)
+                .ThenBy(x => x.BasicInfo.Name));
         }
 
         /// <summary>
@@ -63,6 +67,10 @@ namespace ServerEngine.ViewModels
             Servers.Insert(0, newServer);
         }
 
+        /// <summary>
+        /// Deletes a given server from the harddrive.
+        /// </summary>
+        /// <param name="serverToDelete">The server to delete.</param>
         public void DeleteServer(ServerBase serverToDelete)
         {
             try
@@ -72,16 +80,12 @@ namespace ServerEngine.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                
                 throw;
             }
             finally
             {
-                Servers.Remove(serverToDelete);
+                this.Servers.Remove(serverToDelete);
             }
-            
-            
         }
-
     }
 }

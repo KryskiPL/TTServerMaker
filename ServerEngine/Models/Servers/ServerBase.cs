@@ -2,23 +2,23 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine.Models.Servers
+namespace TTServerMaker.ServerEngine.Models.Servers
 {
+    using TTServerMaker.ServerEngine.Exceptions;
+    using TTServerMaker.ServerEngine.Models.Versions;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
-    using ServerEngine.Exceptions;
-    using ServerEngine.Models.Versions;
 
     public abstract class ServerBase : BaseNotificationClass
     {
         public const string ServerSettingsFilename = ".server-settings.json";
 
         /// <summary>
-        /// The list of the 
+        /// The list of the
         /// </summary>
         public static readonly string[] DefaultServerImages =
             {
@@ -36,14 +36,12 @@ namespace ServerEngine.Models.Servers
         private bool isLoadingUp;
 
         public string VersionType { get { return typeof(Version).Name; } }
-        public VersionBase Version { get { return BasicInfo.Version; } set { BasicInfo.Version = value; } }
+        public ServerVersion Version { get { return BasicInfo.Version; } set { BasicInfo.Version = value; } }
+
         public Properties Properties
         {
             get
             {
-                if (!FullyLoadedUp && !IsLoadingUp)
-                    throw new ServerNotLoadedException();
-
                 return properties;
             }
             private set
@@ -51,46 +49,65 @@ namespace ServerEngine.Models.Servers
                 properties = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the folder the server is located in.
+        /// </summary>
         public string FolderPath
         {
             get
             {
-                return BasicInfo.ServerFolderPath;
+                return this.BasicInfo.ServerFolderPath;
             }
+
             set
             {
-                BasicInfo.ServerFolderPath = value.EndsWith("\\") ? value : value + "\\";
+                this.BasicInfo.ServerFolderPath = AppSettings.EnforceTrailingBackslash(value);
             }
         }
-        public bool FullyLoadedUp { get; set; }
-        public BasicServerInfo BasicInfo { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the server has been fully loaded up.
+        /// </summary>
+        public bool FullyLoadedUp { get; set; }
+
+        /// <summary>
+        /// Gets the basic information about the server.
+        /// </summary>
+        public BasicServerInfo BasicInfo { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether server is currently loading up.
+        /// </summary>
         public bool IsLoadingUp
         {
-            get { return isLoadingUp; }
-            set
+            get
             {
-                isLoadingUp = value;
-                OnPropertyChanged();
+                return this.isLoadingUp;
+            }
+
+            private set
+            {
+                this.isLoadingUp = value;
+                this.OnPropertyChanged();
             }
         }
-
 
         public abstract string ServerTypeStr { get; }
 
         /// <summary>
-        /// Load a server
+        /// Initializes a new instance of the <see cref="ServerBase"/> class.
         /// </summary>
         /// <param name="folderPath">The server folder path</param>
         /// <param name="basicServerInfo">The loaded basic server info</param>
         protected ServerBase(BasicServerInfo basicServerInfo)
         {
-            BasicInfo = basicServerInfo;
+            this.BasicInfo = basicServerInfo;
 
             if (!Directory.Exists(FolderPath))
                 throw new ArgumentException("Server folder does not exist");
-            
-            BasicInfo.ParentServer = this;
+
+            this.BasicInfo.parentServer = this;
         }
 
         /// <summary>
@@ -103,21 +120,20 @@ namespace ServerEngine.Models.Servers
             if (FullyLoadedUp)
                 return;
 
-            IsLoadingUp = true;
+            this.IsLoadingUp = true;
 
-            Properties = new Properties(this);
-            Properties.LoadFromFile();
+            this.Properties = new Properties(this);
+            this.Properties.LoadFromFile();
 
             // TODO
 
             // Updating last loadup time
-            BasicInfo.DateLastLoaded = DateTime.Now;
+            this.BasicInfo.DateLastLoaded = DateTime.Now;
 
-            BasicInfo.SaveBasicServerInfo();
+            this.BasicInfo.SaveBasicServerInfo();
 
-
-            IsLoadingUp = false;
-            FullyLoadedUp = true;
+            this.IsLoadingUp = false;
+            this.FullyLoadedUp = true;
         }
 
         /// <summary>
@@ -125,9 +141,7 @@ namespace ServerEngine.Models.Servers
         /// </summary>
         public void Delete()
         {
-            Directory.Delete(BasicInfo.ServerFolderPath, true);
+            Directory.Delete(this.BasicInfo.ServerFolderPath, true);
         }
-
-        
     }
 }

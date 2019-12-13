@@ -1,39 +1,64 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+﻿// <copyright file="BoolToVisibilityConverter.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.Converters
 {
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
 
+    /// <summary>
+    /// Converts a bool value to a visibility value.
+    /// </summary>
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public sealed class BoolToVisibilityConverter : IValueConverter
     {
-        public Visibility TrueValue { get; set; }
-        public Visibility FalseValue { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BoolToVisibilityConverter"/> class.
+        /// </summary>
         public BoolToVisibilityConverter()
         {
             // set defaults
-            TrueValue = Visibility.Visible;
-            FalseValue = Visibility.Collapsed;
+            this.TrueValue = Visibility.Visible;
+            this.FalseValue = Visibility.Collapsed;
         }
 
-        public object Convert(object value, Type targetType,
-            object parameter, CultureInfo culture)
+        /// <summary>
+        /// Gets or sets the visibility value of a True value.
+        /// </summary>
+        public Visibility TrueValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the visibility value of a False value.
+        /// </summary>
+        public Visibility FalseValue { get; set; }
+
+        /// <inheritdoc/>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is bool))
+            {
                 return null;
-            return (bool)value ? TrueValue : FalseValue;
+            }
+
+            return (bool)value ? this.TrueValue : this.FalseValue;
         }
 
-        public object ConvertBack(object value, Type targetType,
-            object parameter, CultureInfo culture)
+        /// <inheritdoc/>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (Equals(value, TrueValue))
+            if (Equals(value, this.TrueValue))
+            {
                 return true;
-            if (Equals(value, FalseValue))
+            }
+
+            if (Equals(value, this.FalseValue))
+            {
                 return false;
+            }
+
             return null;
         }
     }

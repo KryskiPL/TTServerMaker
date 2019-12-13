@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:ServerEngine.ViewModels;assembly=ServerEngine"
+    xmlns:viewModels="clr-namespace:TTServerMaker.ServerEngine.ViewModels;assembly=ServerEngine"
     xmlns:CustomControls="clr-namespace:TTServerMaker.CustomControls"
     xmlns:validators="clr-namespace:TTServerMaker.Validators"
     xmlns:commands="clr-namespace:TTServerMaker.Commands"
@@ -27,9 +27,8 @@
         <CommandBinding Command="self:CustomCommands.PropertyIconClicked" Executed="PropertyIconClicked_Executed" CanExecute="PropertyIconClicked_CanExecute" />
     </Window.CommandBindings>
 
-
     <WindowChrome.WindowChrome>
-        <WindowChrome 
+        <WindowChrome
             ResizeBorderThickness="5"
             CaptionHeight="{StaticResource WindowHeaderHeightDouble}"
             CornerRadius="{StaticResource WindowCornerRadius}"
@@ -41,42 +40,36 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <CustomControls:WindowHeader Grid.Row="0"/>
+        <CustomControls:WindowHeader Grid.Row="0" />
 
         <materialDesign:DialogHost Identifier="MainDialogHost" CloseOnClickAway="True" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
-                
-
-
-               
 
                 <!--#region Header -->
                 <Grid Grid.Row="0">
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="{StaticResource GradientBlue}" Offset="1"/>
-                            <GradientStop Color="{StaticResource GradientPink}" Offset="-0.3"/>
+                            <GradientStop Color="{StaticResource GradientBlue}" Offset="1" />
+                            <GradientStop Color="{StaticResource GradientPink}" Offset="-0.3" />
                         </LinearGradientBrush>
                     </Grid.Background>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" MinHeight="50"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto" MinHeight="50" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-
 
                     <!-- Title -->
                     <StackPanel
@@ -88,64 +81,62 @@
                     Foreground="White"
                     Margin="15,0,0,0"
                     Text="{Binding Server.BasicInfo.Name}"
-                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                    Style="{StaticResource MaterialDesignTextBlock}" />
                         <TextBlock
-                    
+
                     VerticalAlignment="Center"
                     Foreground="White"
                     Margin="10,0,0,0"
-                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"><Run Text="- TT Server Maker"/></TextBlock>
+                    Style="{StaticResource MaterialDesignTextBlock}"><Run Text="- TT Server Maker" /></TextBlock>
                     </StackPanel>
 
-                    <StackPanel 
+                    <StackPanel
                 Orientation="Horizontal"
                 VerticalAlignment="Center"
                 Grid.Row="0"
                 Grid.Column="1">
-                        <Button 
+                        <Button
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Margin="0,0,0,0"
                     Background="Transparent"
                     Style="{StaticResource TransparentButton}">
                             <StackPanel Orientation="Horizontal">
-                                <Label FontWeight="Normal" Foreground="White" Content="torokt21@gmail.com"/>
+                                <Label FontWeight="Normal" Foreground="White" Content="torokt21@gmail.com" />
                                 <materialDesign:PackIcon
-                        Kind="AccountCircle" 
-                        Foreground="White" 
-                        Height="20" 
-                        Width="20" 
-                        VerticalAlignment="Center"/>
+                        Kind="AccountCircle"
+                        Foreground="White"
+                        Height="20"
+                        Width="20"
+                        VerticalAlignment="Center" />
                             </StackPanel>
                         </Button>
 
-                        <Button 
+                        <Button
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Margin="5,0,0,0"
                     Background="Transparent"
                     Padding="3,0"
                     Style="{StaticResource TransparentButton}">
-                            <materialDesign:PackIcon 
-                        Kind="Settings" 
+                            <materialDesign:PackIcon
+                        Kind="Settings"
                         Margin="0,0"
-                        Foreground="White" 
-                        Height="20" 
-                        Width="20" 
-                        VerticalAlignment="Center"/>
+                        Foreground="White"
+                        Height="20"
+                        Width="20"
+                        VerticalAlignment="Center" />
                         </Button>
-
-
                     </StackPanel>
 
                     <materialDesign:ColorZone
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="4"
-                    Mode="PrimaryMid" 
+                    Mode="PrimaryMid"
                     Background="Transparent"
                     Height="60">
-                        <StackPanel 
+                        <StackPanel
                         Orientation="Horizontal">
                             <RadioButton
                     Style="{StaticResource MaterialDesignTabRadioButton}"
@@ -176,59 +167,55 @@
                 </Grid>
                 <!--#endregion-->
 
-
-
-
                 <!--#region Content-->
                 <TabControl Grid.Row="1" x:Name="TabControl">
                     <!--#region Server tab -->
-                    
+
                         <TabItem Header="Server" IsSelected="{Binding IsChecked, ElementName=ServerTabButton}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <!--#region IP + Port box -->
-                                <Border 
+                                <Border
                             BorderThickness="1"
                             BorderBrush="LightGray"
                             Padding="5 5 5 10"
-                            Grid.Row="0" 
-                            Grid.Column="0" 
+                            Grid.Row="0"
+                            Grid.Column="0"
                             Margin="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                     IconType="VideoInputComponent"
-                                    ServerPropertyName="server-ip"/>
+                                    ServerPropertyName="server-ip" />
 
-
-                                        <Label 
+                                        <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="IP"/>
+                                    Content="IP" />
 
                                         <TextBox
                                     Grid.Row="1"
@@ -237,30 +224,29 @@
                                             <TextBox.Text>
                                                 <Binding Path="Server.Properties[server-ip]">
                                                     <Binding.ValidationRules>
-                                                        <validators:IPAddressValidator CanBeEmpty="True"/>
+                                                        <validators:IPAddressValidator CanBeEmpty="True" />
                                                     </Binding.ValidationRules>
-
                                                 </Binding>
                                             </TextBox.Text>
                                         </TextBox>
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="1"
                                     Grid.Column="2"
                                     VerticalAlignment="Center"
-                                    Content=":"/>
+                                    Content=":" />
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="0"
                                     Grid.Column="3"
                                     VerticalAlignment="Center"
-                                    Content="Port"/>
+                                    Content="Port" />
 
                                         <TextBox
                                     Grid.Row="1"
                                     Grid.Column="3"
                                     Style="{StaticResource RoundedTextBox}"
-                                    Text="{Binding Server.Properties[server-port]}"/>
+                                    Text="{Binding Server.Properties[server-port]}" />
 
                                         <Button
                                     Grid.Row="1"
@@ -268,7 +254,7 @@
                                     Style="{StaticResource FlatGradientTextButton}"
                                     Padding="10 0"
                                     Margin="10 0"
-                                    Content="OPEN PORT"/>
+                                    Content="OPEN PORT" />
                                     </Grid>
                                 </Border>
                                 <!--#endregion -->
@@ -276,80 +262,78 @@
                                 <!--#region Custom ip -->
                                 <Border
                                     Padding="5"
-                                    Grid.Row="1" 
-                                    Grid.Column="0" 
+                                    Grid.Row="1"
+                                    Grid.Column="0"
                                     Margin="5">
                                     <StackPanel Orientation="Horizontal">
 
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                     IconType="FormatColourText"
                                     HelpMessage="Get a custom ip, like 'johnsmith.tthread.com' or 'johndoe.minecraftjoin.me'!"
-                                    Command="self:CustomCommands.PropertyIconClicked"/>
+                                    Command="self:CustomCommands.PropertyIconClicked" />
 
                                         <Button
                                     Padding="20 10"
                                     Margin="10 0"
                                     Height="38"
-                                    Style="{StaticResource RoundPrimaryButton}" Content="Get a custom ip"/>
+                                    Style="{StaticResource RoundPrimaryButton}" Content="Get a custom ip" />
 
                                         <Label
                                     VerticalAlignment="Center"
-                                    Content="800 Ft"/>
+                                    Content="800 Ft" />
 
-
-                                        <TextBlock 
+                                        <TextBlock
                                     VerticalAlignment="Center"
-                                    Foreground="Gray"
-                                    >
+                                    Foreground="Gray">
                                             <TextBlock.TextDecorations>
                                                 <TextDecoration Location="Strikethrough">
                                                     <TextDecoration.Pen>
                                                         <Pen Brush="Gray" />
                                                     </TextDecoration.Pen>
                                                 </TextDecoration>
-                                            </TextBlock.TextDecorations><Run Text="1000 Ft"/></TextBlock>
+                                            </TextBlock.TextDecorations><Run Text="1000 Ft" /></TextBlock>
 
                                         <Label
                                     FontWeight="Bold"
                                     Foreground="DeepPink"
                                     VerticalAlignment="Center"
-                                    Content="-20%"/>
+                                    Content="-20%" />
                                     </StackPanel>
                                 </Border>
                                 <!--#endregion -->
 
                                 <!--#region Server slogan + resource pack -->
-                                <Border 
+                                <Border
                                 BorderThickness="1"
                                 BorderBrush="LightGray"
                                 Padding="5 5 5 10"
-                                Grid.Row="2" 
-                                Grid.Column="0" 
+                                Grid.Row="2"
+                                Grid.Column="0"
                                 Margin="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         IconType="Message"
                                         ServerPropertyName="motd"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" />
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Server slogan"/>
+                                    Content="Server slogan" />
 
                                         <TextBox
                                         Grid.Row="1"
@@ -359,99 +343,91 @@
                                             <TextBox.Text>
                                                 <Binding Path="Server.Properties[motd]" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
-                                                        <validators:TextLengthValidator MinLength="0" MaxLength="10"/>
+                                                        <validators:TextLengthValidator MinLength="0" MaxLength="10" />
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </TextBox.Text>
                                         </TextBox>
 
-
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         IconType="FormatPaint"
                                         ServerPropertyName="resource-pack"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" />
 
-
-                                        <Label 
+                                        <Label
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Resource pack"/>
+                                    Content="Resource pack" />
 
                                         <TextBox
                                         Grid.Row="3"
                                         Grid.Column="1"
                                         Style="{StaticResource RoundedTextBox}"
-                                        Text="{Binding Server.Properties[resource-pack]}"/>
-
+                                        Text="{Binding Server.Properties[resource-pack]}" />
                                     </Grid>
                                 </Border>
                                 <!--#endregion -->
 
                                 <!--#region Right column -->
-                                <Border 
+                                <Border
                                 BorderThickness="1"
                                 BorderBrush="LightGray"
                                 Padding="5"
-                                Grid.Row="0" 
+                                Grid.Row="0"
                                 Grid.RowSpan="3"
-                                Grid.Column="1" 
+                                Grid.Column="1"
                                 Margin="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
 
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
 
-
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     IconType="Eye"
                                     ServerPropertyName="view-distance"
-                                    Command="self:CustomCommands.PropertyIconClicked"/>
+                                    Command="self:CustomCommands.PropertyIconClicked" />
 
-
-
-                                        <Label 
+                                        <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="View distance"/>
-
-
+                                    Content="View distance" />
 
                                         <!-- Allow flight -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="1"
                                         IconType="Airplane"
                                         ServerPropertyName="allow-flight"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" />
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Allow flight"/>
+                                    Content="Allow flight" />
 
-                                        <ToggleButton 
+                                        <ToggleButton
                                         Style="{StaticResource BlackToggleButtonSwitch}"
                                         IsChecked="{Binding Server.Properties[allow-flight], Converter={StaticResource StringToBooleanConverter}}"
                                         Grid.Row="1"
                                         Grid.Column="2"
-                                        HorizontalAlignment="Center"/>
+                                        HorizontalAlignment="Center" />
 
                                         <!-- Command blocks -->
 
@@ -463,54 +439,52 @@
                                         Source="pack://application:,,,/TTServerMaker;component/Img/SettingIcons/commandblock.png"
                                         VerticalAlignment="Center" />
 
-                                        <Label 
-                                    
+                                        <Label
+
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Command blocks"/>
+                                    Content="Command blocks" />
 
-                                        <ToggleButton 
+                                        <ToggleButton
                                         Style="{StaticResource BlackToggleButtonSwitch}"
                                         IsChecked="{Binding Server.Properties[enable-command-block], Converter={StaticResource StringToBooleanConverter}}"
                                         Grid.Row="2"
                                         Grid.Column="2"
-                                        HorizontalAlignment="Center"/>
+                                        HorizontalAlignment="Center" />
 
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="3"
                                         Grid.Column="0"
                                         IconType="Signal"
                                         ServerPropertyName="online-mode"
-                                        Command="self:CustomCommands.PropertyIconClicked"
-                                />
+                                        Command="self:CustomCommands.PropertyIconClicked" />
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Online mode"/>
+                                    Content="Online mode" />
 
-                                        <ToggleButton 
+                                        <ToggleButton
                                         Style="{StaticResource BlackToggleButtonSwitch}"
                                         IsChecked="{Binding Server.Properties[online-mode], Converter={StaticResource StringToBooleanConverter}}"
                                         HorizontalAlignment="Center"
                                         Grid.Row="3"
-                                        Grid.Column="2"/>
+                                        Grid.Column="2" />
 
-
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="4"
                                         Grid.Column="0"
                                         IconType="Image"
                                         HelpMessage="This is the icon shown in the multiplayer menu for your friends next to the server name"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" />
 
-                                        <Label 
+                                        <Label
                                     Grid.Row="4"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Content="Server icon"/>
+                                    Content="Server icon" />
 
                                         <Border Grid.Row="4"
                                         Grid.Column="2"
@@ -519,7 +493,7 @@
                                         BorderThickness="1"
                                         Cursor="Hand"
                                         MinHeight="60">
-                                            <Image/>
+                                            <Image />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -527,29 +501,29 @@
                             </Grid>
                             </ScrollViewer>
                         </TabItem>
-                    
+
                     <!--#endregion-->
 
                     <!--#region Map Tap-->
 
-                    <TabItem 
-                    Header="Map" 
+                    <TabItem
+                    Header="Map"
                     Height="40"
                     Width="80"
                     IsSelected="{Binding IsChecked, ElementName=MapTabButton}">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <Grid  MaxHeight="600">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*"/>
-                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="4*" />
                                 </Grid.RowDefinitions>
 
-                                <Border 
+                                <Border
                                 Padding="0 10 10 10"
                                 Margin="10"
                                 BorderThickness="1"
@@ -557,66 +531,65 @@
                                 BorderBrush="LightGray">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
                                             <RowDefinition Height="*" />
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
 
-
                                         <!-- World name -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         IconType="File"
                                         ServerPropertyName="level-name"
-                                        Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
                                         <Label Grid.Row="0" VerticalContentAlignment="Center" Grid.Column="1">World name</Label>
-                                        <TextBox 
+                                        <TextBox
                                     Text="{Binding Server.Properties[level-name]}"
-                                    Grid.Row="0" 
+                                    Grid.Row="0"
                                     Grid.Column="2"
                                     Style="{StaticResource RoundedTextBox}"></TextBox>
 
                                         <!-- Seed -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         IconType="Flower"
                                         ServerPropertyName="level-seed"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
+                                        Command="self:CustomCommands.PropertyIconClicked" />
                                         <Label Grid.Row="1"
                                            VerticalContentAlignment="Center" Grid.Column="1">Seed</Label>
-                                        <TextBox 
+                                        <TextBox
                                         Text="{Binding Server.Properties[seed]}"
-                                        Grid.Row="1" 
+                                        Grid.Row="1"
                                         Grid.Column="2"
                                         Style="{StaticResource RoundedTextBox}"></TextBox>
 
                                         <!-- Max build height -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         IconType="FormatVerticalAlignTop"
                                         ServerPropertyName="max-build-height"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="2" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="2"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Max build height</Label>
 
-                                        <ComboBox 
-                                        Grid.Row="2" 
+                                        <ComboBox
+                                        Grid.Row="2"
                                         Padding="10 5"
-                                        
+
                                         Style="{StaticResource MaterialDesignComboBox}"
                                          Grid.Column="2">
                                             <ComboBoxItem>124</ComboBoxItem>
@@ -624,19 +597,19 @@
                                         </ComboBox>
 
                                         <!-- World type -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="3"
                                         Grid.Column="0"
                                         IconType="EarthBox"
                                         ServerPropertyName="level-type"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="3" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="3"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">World type</Label>
 
-                                        <ComboBox 
-                                        Grid.Row="3" 
+                                        <ComboBox
+                                        Grid.Row="3"
                                         Padding="10 5"
                                         Style="{StaticResource MaterialDesignComboBox}"
                                         Grid.Column="2">
@@ -650,73 +623,71 @@
                                         <!-- TODO Kell generator settings? -->
 
                                         <!-- Spawn protection -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="4"
                                         Grid.Column="0"
                                         IconType="SecurityHome"
                                         ServerPropertyName="spawn-protection"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="4" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="4"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Spawn protection</Label>
                                         <!-- TODO NumericUpDown -->
 
                                         <!-- Max world size -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="5"
                                         Grid.Column="0"
                                         IconType="CropFree"
                                         ServerPropertyName="max-world-size"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="5" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="5"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Max world size</Label>
 
-
-
                                         <!-- Generate structures -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="6"
                                         Grid.Column="0"
                                         IconType="castle"
                                         ServerPropertyName="generate-structures"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="6" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="6"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Generate structures</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="6"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[generate-structures], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
 
                                         <!-- Generate structures -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="7"
                                         Grid.Column="0"
                                         IconType="SmileyDevil"
                                         ServerPropertyName="allow-nether"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="7" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="7"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Allow nether</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="7"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[allow-nether], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
                                     </Grid>
                                 </Border>
 
-                                <Border 
+                                <Border
                                 Padding="0 10 10 10"
                                 Margin="10"
                                 BorderThickness="1"
@@ -724,9 +695,9 @@
                                 BorderBrush="LightGray">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
@@ -735,68 +706,66 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
 
-
-
                                         <!-- Spawn NPCs -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="0"
                                         Grid.Column="0"
                                         IconType="AccountHeart"
                                         ServerPropertyName="spawn-npcs"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="0" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="0"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Spawn NPCs</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="0"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[spawn-npcs], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
 
                                         <!-- Spawn animals -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         IconType="pets"
                                         ServerPropertyName="spawn-animals"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="1" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="1"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Spawn animals</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[spawn-animals], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
 
                                         <!-- Spawn monsters -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         IconType="Gravestone"
                                         ServerPropertyName="spawn-monsters"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="2" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="2"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Spawn monsters</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="2"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[spawn-animals], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
                                     </Grid>
                                 </Border>
 
-                                <Border 
+                                <Border
                                 Padding="0 10 10 10"
                                 Margin="10"
                                 BorderThickness="1"
@@ -805,9 +774,9 @@
                                 BorderBrush="LightGray">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
@@ -817,78 +786,71 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
 
-
-
                                         <!-- Spawn NPCs -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="0"
                                         Grid.Column="0"
                                         IconType="ScaleBalance"
                                         ServerPropertyName="difficulty"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="0" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="0"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Difficulty</Label>
 
-
                                         <!-- Hardcore mode -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         IconType="SmileyDead"
                                         ServerPropertyName="hardcore"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="1" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="1"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Hardcore mode</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[hardcore], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
 
                                         <!-- Spawn animals -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         IconType="Looks"
                                         ServerPropertyName="gamemode"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="2" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="2"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Gamemode</Label>
 
-
-
                                         <!-- Spawn monsters -->
-                                        <CustomControls:HelpIcon 
+                                        <CustomControls:HelpIcon
                                         Grid.Row="3"
                                         Grid.Column="0"
                                         IconType="Balloon"
                                         ServerPropertyName="force-gamemode"
-                                        Command="self:CustomCommands.PropertyIconClicked"/>
-                                        <Label 
-                                        Grid.Row="3" 
+                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        <Label
+                                        Grid.Row="3"
                                         VerticalContentAlignment="Center"
                                         Grid.Column="1">Force gamemode</Label>
 
-                                        <CheckBox 
+                                        <CheckBox
                                         Grid.Row="3"
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         IsChecked="{Binding Server.Properties[force-gamemode], Converter={StaticResource StringToBooleanConverter}}"
-                                        Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                        Style="{StaticResource BlackToggleButtonSwitch}" />
                                     </Grid>
                                 </Border>
-
                             </Grid>
                         </ScrollViewer>
-
                     </TabItem>
 
                     <!--#endregion-->
@@ -897,168 +859,157 @@
                         <ScrollViewer Padding="10" VerticalScrollBarVisibility="Auto">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            
 
                             <!-- PvP -->
-                            <CustomControls:HelpIcon 
+                            <CustomControls:HelpIcon
                                 IconType="Sword"
                                 ServerPropertyName="pvp"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                            <Label 
-                                Grid.Row="0" 
-                                VerticalAlignment="Center" 
+                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                            <Label
+                                Grid.Row="0"
+                                VerticalAlignment="Center"
                                 Grid.Column="1">Allow PvP</Label>
-                            <CheckBox 
+                            <CheckBox
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 HorizontalAlignment="Left"
                                 IsChecked="{Binding Server.Properties[pvp], Converter={StaticResource StringToBooleanConverter}}"
-                                Style="{StaticResource BlackToggleButtonSwitch}"/>
+                                Style="{StaticResource BlackToggleButtonSwitch}" />
 
                             <!-- May Players -->
-                            <CustomControls:HelpIcon 
+                            <CustomControls:HelpIcon
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 IconType="UserGroup"
                                 ServerPropertyName="pvp"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                            <Label 
-                                Grid.Row="1" 
-                                VerticalAlignment="Center" 
+                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                            <Label
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
                                 Grid.Column="1">Max players</Label>
 
-
                             <!-- Idle timeout -->
-                            <CustomControls:HelpIcon 
-                                Grid.Row="2" 
+                            <CustomControls:HelpIcon
+                                Grid.Row="2"
                                 Grid.Column="0"
                                 IconType="Hourglass"
                                 ServerPropertyName="player-idle-timeout"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                            <Label 
-                                Grid.Row="2" 
-                                VerticalAlignment="Center" 
+                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                            <Label
+                                Grid.Row="2"
+                                VerticalAlignment="Center"
                                 Grid.Column="1">Idle timeout</Label>
 
                             <materialDesign:Card
-                                Grid.Row="3" 
-                                Grid.Column="0" 
+                                Grid.Row="3"
+                                Grid.Column="0"
                                 Grid.ColumnSpan="3"
                                 Margin="0 15 0 0">
 
                                 <StackPanel>
 
                                     <!-- Whitelist -->
-                                    <Expander 
+                                    <Expander
                                         Header="Whitelist">
 
                                         <Grid Margin="10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <!-- Whitelist -->
-                                            <CustomControls:HelpIcon 
+                                            <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                                            <Label 
-                                                Grid.Row="0" 
-                                                VerticalAlignment="Center" 
+                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                            <Label
+                                                Grid.Row="0"
+                                                VerticalAlignment="Center"
                                                 Grid.Column="1">Use white-list</Label>
-                                            <CheckBox 
+                                            <CheckBox
                                                 Grid.Row="0"
                                                 Grid.Column="2"
                                                 HorizontalAlignment="Right"
                                                 IsChecked="{Binding Server.Properties[white-list], Converter={StaticResource StringToBooleanConverter}}"
-                                                Style="{StaticResource BlackToggleButtonSwitch}"/>
-
+                                                Style="{StaticResource BlackToggleButtonSwitch}" />
                                         </Grid>
-
-
-
                                     </Expander>
 
                                     <!-- Blacklist -->
-                                    <Expander 
+                                    <Expander
                                         Header="Blacklist (banned players)">
 
                                         <Grid Margin="10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <!-- Whitelist -->
-                                            <CustomControls:HelpIcon 
+                                            <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                                            <Label 
-                                                Grid.Row="0" 
-                                                VerticalAlignment="Center" 
+                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                            <Label
+                                                Grid.Row="0"
+                                                VerticalAlignment="Center"
                                                 Grid.Column="1">Use white-list</Label>
-                                            <CheckBox 
+                                            <CheckBox
                                                 Grid.Row="0"
                                                 Grid.Column="2"
                                                 HorizontalAlignment="Right"
                                                 IsChecked="{Binding Server.Properties[white-list], Converter={StaticResource StringToBooleanConverter}}"
-                                                Style="{StaticResource BlackToggleButtonSwitch}"/>
-
+                                                Style="{StaticResource BlackToggleButtonSwitch}" />
                                         </Grid>
                                     </Expander>
 
                                     <!-- OPs -->
-                                    <Expander 
+                                    <Expander
                                         Header="OPs">
 
                                         <Grid Margin="10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <!-- Whitelist -->
-                                            <CustomControls:HelpIcon 
+                                            <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28"/>
-                                            <Label 
-                                                Grid.Row="0" 
-                                                VerticalAlignment="Center" 
+                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                            <Label
+                                                Grid.Row="0"
+                                                VerticalAlignment="Center"
                                                 Grid.Column="1">Use white-list</Label>
-                                            <CheckBox 
+                                            <CheckBox
                                                 Grid.Row="0"
                                                 Grid.Column="2"
                                                 HorizontalAlignment="Right"
                                                 IsChecked="{Binding Server.Properties[white-list], Converter={StaticResource StringToBooleanConverter}}"
-                                                Style="{StaticResource BlackToggleButtonSwitch}"/>
-
+                                                Style="{StaticResource BlackToggleButtonSwitch}" />
                                         </Grid>
                                     </Expander>
-
                                     </StackPanel>
-                                
-
                             </materialDesign:Card>
                         </Grid>
                         </ScrollViewer>
                     </TabItem>
 
                     <TabItem Header="Advanced"  IsSelected="{Binding IsChecked, ElementName=AdvancedTabButton}">
-                        <Button Command="{Binding }"/>
+                        <Button Command="{Binding }" />
                     </TabItem>
                 </TabControl>
                 <!--#endregion-->
@@ -1067,23 +1018,19 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="{StaticResource FaqLink}" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Need help?"/></Hyperlink></TextBlock>
+                    <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="{StaticResource FaqLink}" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Need help?" /></Hyperlink></TextBlock>
 
                     <Button
                 Grid.Column="2"
                 Width="110"
-                Style="{StaticResource RoundPrimaryButton}" Content="START"/>
-
+                Style="{StaticResource RoundPrimaryButton}" Content="START" />
                 </Grid>
 
                 <!--#endregion-->
             </Grid>
-
         </materialDesign:DialogHost>
-
     </Grid>
-    
 </Window>

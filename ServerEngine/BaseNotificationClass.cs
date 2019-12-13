@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine
+namespace TTServerMaker.ServerEngine
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -20,10 +20,10 @@ namespace ServerEngine
         /// <summary>
         /// Fires the property changed event with the given property's name as a parameter.
         /// </summary>
-        /// <param name="propertyName">Tha name of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,103 +1,91 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using ServerEngine.Models;
+﻿// <copyright file="HelpIcon.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.CustomControls
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
     /// <summary>
-    /// Interaction logic for HelpIcon.xaml
+    /// Interaction logic for HelpIcon.xaml.
     /// </summary>
     public partial class HelpIcon : Button, INotifyPropertyChanged
     {
-        public static readonly RoutedUICommand PropertyIconClicked = new RoutedUICommand
-        (
+        /// <summary>
+        /// The property icon clicked command.
+        /// </summary>
+        public static readonly RoutedUICommand PropertyIconClicked = new RoutedUICommand(
             "Help icon clicked",
             "HelpIconClicked",
-            typeof(HelpIcon)
-        );
+            typeof(HelpIcon));
 
-        private string _iconType;
+        private string iconType;
 
         /// <summary>
-        /// The custom message to show when the button is clicked
+        /// Initializes a new instance of the <see cref="HelpIcon"/> class.
+        /// </summary>
+        public HelpIcon()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <inheritdoc/>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets or sets the fallback custom message to show when the button is clicked if no property name was found.
         /// </summary>
         public string HelpMessage { get; set; }
 
         /// <summary>
-        /// The name of the server property which the help is for
+        /// Gets or sets the name of the server property which the help is for.
         /// </summary>
         public string ServerPropertyName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the string representing the Material Design icon type.
+        /// </summary>
         public string IconType
         {
-            get { return _iconType; }
+            get
+            {
+                return this.iconType;
+            }
+
             set
             {
-                _iconType = value;
-                OnPropertyChanged();
+                this.iconType = value;
+                this.OnPropertyChanged();
             }
         }
 
-        public HelpIcon()
+        /// <summary>
+        /// Gets the message based on the ServerPropertyName and the HelpMessage.
+        /// </summary>
+        public string Message
         {
-            InitializeComponent();
+            get
+            {
+                string msg = this.HelpMessage;
+                if (!string.IsNullOrEmpty(this.ServerPropertyName))
+                {
+                    msg = ServerEngine.Models.Properties.GetDescriptionByName(this.ServerPropertyName);
+                }
 
+                return msg;
+            }
         }
 
         /// <summary>
-        /// Returns the message based on the ServerPropertyName and the HelpMessage
+        /// Handles a property change.
         /// </summary>
-        /// <returns></returns>
-        public string GetMessage()
-        {
-            string msg = HelpMessage;
-            if (!string.IsNullOrEmpty(ServerPropertyName))
-                msg = ServerEngine.Models.Properties.GetDescriptionByName(ServerPropertyName);
-
-            return msg;
-        }
-
+        /// <param name="propertyName">The name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        /*
-          This was a fail
-        private async void PropertyIconClicked_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            string message = (e.Source as HelpIcon)?.GetMessage();
-            helpDialog.HelpText = message;
-
-            await DialogHost.Show(helpDialog, "MainDialogHost");
-        }
-
-        private void PropertyIconClicked_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon).GetMessage());
-        }
-
-        
-
-
-        */
-
     }
 }

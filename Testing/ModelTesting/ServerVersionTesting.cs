@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServerEngine.Models.Versions;
+using TTServerMaker.ServerEngine.Models.Versions;
 
 namespace TTServerMaker.Tests.ModelTesting
 {
@@ -18,7 +18,7 @@ namespace TTServerMaker.Tests.ModelTesting
                 /// </summary>
                 /// <param name="Smaller"></param>
                 /// <param name="Bigger"></param>
-                private void CompareBothWays(VersionBase Smaller, VersionBase Bigger)
+                private void CompareBothWays(ServerVersion Smaller, ServerVersion Bigger)
                 {
                     Assert.AreEqual(Smaller.CompareTo(Bigger), -1);
                     Assert.AreEqual(Bigger.CompareTo(Smaller), 1);

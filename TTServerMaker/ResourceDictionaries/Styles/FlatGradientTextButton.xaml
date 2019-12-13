@@ -5,11 +5,10 @@
         <Setter Property="Foreground">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1.5">
-                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1"/>
-                    <GradientStop Color="{StaticResource GradientPink}"/>
+                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1" />
+                    <GradientStop Color="{StaticResource GradientPink}" />
                 </LinearGradientBrush>
             </Setter.Value>
-            
         </Setter>
     </Style>
 </ResourceDictionary>

@@ -1,34 +1,38 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace ServerEngine.Models.Versions
+﻿namespace TTServerMaker.ServerEngine.Models.Versions
 {
+    using Newtonsoft.Json;
+    using System;
+
     [JsonObject(MemberSerialization.OptIn)]
-    abstract public class VersionBase : IComparable<VersionBase>
+    abstract public class ServerVersion : IComparable<ServerVersion>
     {
         [JsonProperty]
         public string VersionString { get; set; }
 
-        public abstract int CompareTo(VersionBase other);
+        public abstract int CompareTo(ServerVersion other);
 
-        public VersionBase(string VersionString)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServerVersion"/> class.
+        /// </summary>
+        /// <param name="VersionString"></param>
+        public ServerVersion(string VersionString)
         {
             this.VersionString = VersionString;
+        }
+
+        public static bool operator <(ServerVersion b, ServerVersion c)
+        {
+            return b.CompareTo(c) == -1;
+        }
+
+        public static bool operator >(ServerVersion b, ServerVersion c)
+        {
+            return b.CompareTo(c) == 1;
         }
 
         public override string ToString()
         {
             return VersionString;
-        }
-
-        public static bool operator <(VersionBase b, VersionBase c)
-        {
-            return b.CompareTo(c) == -1;
-        }
-
-        public static bool operator >(VersionBase b, VersionBase c)
-        {
-            return b.CompareTo(c) == 1;
         }
     }
 }

@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿// <copyright file="WindowHeader.xaml.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.CustomControls
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
-    /// Interaction logic for WindowHeader.xaml
+    /// Interaction logic for WindowHeader.xaml.
     /// </summary>
     public partial class WindowHeader : UserControl
     {
-        public bool IsMaximizable { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WindowHeader"/> class.
+        /// </summary>
         public WindowHeader()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the window can be maximized.
+        /// </summary>
+        public bool IsMaximizable { get; set; }
 
         private void MinimizeButton_OnClick(object sender, RoutedEventArgs e)
         {

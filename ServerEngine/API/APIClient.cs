@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace ServerEngine.API
+namespace TTServerMaker.ServerEngine.API
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,9 @@ namespace ServerEngine.API
     using System.Windows;
     using RestSharp;
 
+    /// <summary>
+    /// The API client in charge of getting data from the TThread API.
+    /// </summary>
     public static class APIClient
     {
         /// <summary>
@@ -24,21 +27,21 @@ namespace ServerEngine.API
         /// </summary>
         private static RestClient client;
 
-        private static string PricingUrl => APIURL + "purchase/get-pricing.php";
-
         static APIClient()
         {
             client = new RestClient(APIURL);
         }
 
+        private static string PricingUrl => APIURL + "purchase/get-pricing.php";
+
+        /// <summary>
+        /// Loads the pricing from the website.
+        /// </summary>
         public static void LoadPricing()
         {
             // TODO ez persze nem ide kell, csak próbálgatom
-
             RestRequest request = new RestRequest(PricingUrl);
             IRestResponse response = client.Post(request);
-
-            //MessageBox.Show(response.Content);
         }
     }
 }

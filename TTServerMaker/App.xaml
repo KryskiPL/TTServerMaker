@@ -12,27 +12,25 @@
     <Application.Resources>
 
         <ResourceDictionary>
-            
 
             <!--
             <Style TargetType="FrameworkElement" x:Key="VisibleAnimation">
-                <Setter Property="Visibility" Value="Hidden"/>
-                <Setter Property="Opacity" Value="0"/>
+                <Setter Property="Visibility" Value="Hidden" />
+                <Setter Property="Opacity" Value="0" />
                 <Style.Triggers>
                     <Trigger Property="Visibility" Value="Visible">
                         <Trigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                             From="0.0" To="1.0" Duration="0:0:0.2"/>
+                             From="0.0" To="1.0" Duration="0:0:0.2" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </Trigger.EnterActions>
                     </Trigger>
                 </Style.Triggers>
             </Style>-->
-            
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <!-- Material Design -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
@@ -42,20 +40,18 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Pink.xaml" />
 
                 <!-- Custom resources -->
-                <ResourceDictionary Source="ResourceDictionaries/Constants.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Converters.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Colors.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Urls.xaml"/>
-                
+                <ResourceDictionary Source="ResourceDictionaries/Constants.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Converters.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Colors.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Urls.xaml" />
+
                 <!-- Styles -->
-                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundPrimaryButton.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Styles/TransparentButton.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundedTextBox.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Styles/FlatGradientTextButton.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/Styles/BlackToggleButtonSwitch.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundPrimaryButton.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Styles/TransparentButton.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Styles/RoundedTextBox.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Styles/FlatGradientTextButton.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Styles/BlackToggleButtonSwitch.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
-
     </Application.Resources>
 </Application>
