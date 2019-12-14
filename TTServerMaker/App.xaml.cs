@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker
+namespace TTServerMaker.WPF
 {
     using System.Windows;
     using TTServerMaker.ServerEngine;
@@ -15,13 +15,13 @@ namespace TTServerMaker
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            Windows.MainWindow mainWindow = new Windows.MainWindow();
+            Views.MainWindow mainWindow = new Views.MainWindow();
             this.MainWindow = mainWindow;
 
             // Showing the greeting screen (with folder selection) on first startup
             if (AppSettings.FirstLaunch)
             {
-                Windows.FirstStart.FirstStartWindow firstStartWindow = new Windows.FirstStart.FirstStartWindow();
+                Views.FirstStart.FirstStartWindow firstStartWindow = new Views.FirstStart.FirstStartWindow();
 
                 bool? dialogResult = firstStartWindow.ShowDialog();
                 if (!dialogResult.HasValue || !dialogResult.Value)
@@ -31,7 +31,7 @@ namespace TTServerMaker
             }
 
             // Showing the server select dialog
-            Windows.ServerSelectWindow serverSelectWindow = new Windows.ServerSelectWindow();
+            Views.ServerSelectWindow serverSelectWindow = new Views.ServerSelectWindow();
             bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
             if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value ||

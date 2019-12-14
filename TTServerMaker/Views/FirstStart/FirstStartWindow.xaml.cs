@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Windows.FirstStart
+namespace TTServerMaker.WPF.Views.FirstStart
 {
     using System.IO;
     using System.Windows;

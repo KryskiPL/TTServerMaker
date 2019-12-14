@@ -8,8 +8,8 @@
     xmlns:CustomControls="clr-namespace:TTServerMaker.CustomControls"
     xmlns:validators="clr-namespace:TTServerMaker.Validators"
     xmlns:commands="clr-namespace:TTServerMaker.Commands"
-    xmlns:self="clr-namespace:TTServerMaker.Windows"
-    x:Class="TTServerMaker.Windows.MainWindow"
+    xmlns:self="clr-namespace:TTServerMaker.WPF.Views"
+    x:Class="TTServerMaker.WPF.Views.MainWindow"
     mc:Ignorable="d"
     FontFamily="{DynamicResource MaterialDesignFont}"
     FontSize="17"
@@ -872,10 +872,14 @@
                             </Grid.RowDefinitions>
 
                             <!-- PvP -->
-                            <CustomControls:HelpIcon
+                                <CustomControls:HelpIcon
                                 IconType="Sword"
                                 ServerPropertyName="pvp"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                HorizontalAlignment="Left" Width="28">
+                                    <CustomControls:HelpIcon.CommandBindings>
+                                        <CommandBinding Executed="PropertyIconClicked_Executed"/>
+                                    </CustomControls:HelpIcon.CommandBindings>
+                                </CustomControls:HelpIcon>
                             <Label
                                 Grid.Row="0"
                                 VerticalAlignment="Center"
@@ -893,7 +897,7 @@
                                 Grid.Column="0"
                                 IconType="UserGroup"
                                 ServerPropertyName="pvp"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                HorizontalAlignment="Left" Width="28" />
                             <Label
                                 Grid.Row="1"
                                 VerticalAlignment="Center"

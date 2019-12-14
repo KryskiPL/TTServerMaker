@@ -55,7 +55,7 @@
     <CodeAnalysisRuleSet />
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TTServerMaker.App</StartupObject>
+    <StartupObject>TTServerMaker.WPF.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
@@ -121,7 +121,7 @@
     <Compile Include="Validators\IPAddressValidator.cs" />
     <Compile Include="Validators\ServerEditValidation.cs" />
     <Compile Include="Validators\TextLengthValidator.cs" />
-    <Compile Include="Windows\FirstStart\FirstStartWindow.xaml.cs">
+    <Compile Include="Views\FirstStart\FirstStartWindow.xaml.cs">
       <DependentUpon>FirstStartWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\Dialogs\HelpDialog.xaml">
@@ -188,11 +188,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ServerSelectWindow.xaml">
+    <Page Include="Views\ServerSelectWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -203,14 +203,14 @@
     <Compile Include="CustomControls\NonManualToggleButton.xaml.cs">
       <DependentUpon>NonManualToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ServerSelectWindow.xaml.cs">
+    <Compile Include="Views\ServerSelectWindow.xaml.cs">
       <DependentUpon>ServerSelectWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\FirstStart\FirstStartWindow.xaml">
+    <Page Include="Views\FirstStart\FirstStartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,9 +258,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServerEngine\TTServerMaker.ServerEngine.csproj">
+    <ProjectReference Include="..\ServerEngine\TTServerMaker.Engine.csproj">
       <Project>{6acb38bf-09ca-460b-acb9-3f89a1cd234a}</Project>
-      <Name>TTServerMaker.ServerEngine</Name>
+      <Name>TTServerMaker.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

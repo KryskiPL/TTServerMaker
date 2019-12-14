@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Windows
+namespace TTServerMaker.WPF.Views
 {
     using System.Diagnostics;
     using System.Linq;
@@ -20,6 +20,8 @@ namespace TTServerMaker.Windows
     {
         private readonly HelpDialog helpDialog = new HelpDialog();
 
+        public RoutedCommand showServerPropertyInfoCommand = new RoutedCommand();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
@@ -28,10 +30,10 @@ namespace TTServerMaker.Windows
             this.InitializeComponent();
 
             // Hiding the tab item headers
-            foreach (TabItem item in this.TabControl.Items.OfType<TabItem>())
-            {
-                item.Visibility = Visibility.Collapsed;
-            }
+            this.TabControl.Items
+                .OfType<TabItem>()
+                .ToList()
+                .ForEach(x => x.Visibility = Visibility.Collapsed);
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
@@ -54,6 +56,7 @@ namespace TTServerMaker.Windows
         }
     }
 
+    
     public static class CustomCommands
     {
         public static readonly RoutedUICommand PropertyIconClicked = new RoutedUICommand(

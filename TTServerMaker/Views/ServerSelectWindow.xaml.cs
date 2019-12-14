@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Windows
+namespace TTServerMaker.WPF.Views
 {
     using System;
     using System.Threading.Tasks;
