@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Commands
+namespace TTServerMaker.WPF.Commands
 {
     using System;
     using System.Diagnostics;

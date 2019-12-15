@@ -27,7 +27,7 @@ namespace TTServerMaker.ServerEngine.Models
         /// <summary>
         /// The path of the default images.
         /// </summary>
-        public const string DefaultVanillaImageDirectory = "pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/";
+        public const string DefaultVanillaImageDirectory = "pack://application:,,,/TTServerMaker.WPF;component/Img/DefaultServerImages/";
 
         [JsonIgnore]
         public ServerBase parentServer;

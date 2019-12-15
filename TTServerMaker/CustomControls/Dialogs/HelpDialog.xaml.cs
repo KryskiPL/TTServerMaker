@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.CustomControls.Dialogs
+namespace TTServerMaker.WPF.CustomControls.Dialogs
 {
     using System.Windows.Controls;
 

@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Validators
+namespace TTServerMaker.WPF.Validators
 {
     using System.Globalization;
     using System.Linq;

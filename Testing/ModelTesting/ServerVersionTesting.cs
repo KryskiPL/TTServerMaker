@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TTServerMaker.ServerEngine.Models.Versions;
 
-namespace TTServerMaker.Tests.ModelTesting
+namespace TTServerMaker.WPF.Tests.ModelTesting
 {
     [TestClass]
     public class ServerVersionTesting

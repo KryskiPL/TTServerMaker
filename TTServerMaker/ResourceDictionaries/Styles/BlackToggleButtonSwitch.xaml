@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TTServerMaker.ResourceDictionaries.Styles"
+                    xmlns:local="clr-namespace:TTServerMaker.WPF.ResourceDictionaries.Styles"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style x:Key="BlackToggleButtonSwitch" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />

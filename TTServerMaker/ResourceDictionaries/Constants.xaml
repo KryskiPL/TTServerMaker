@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TTServerMaker.ResourceDictionaries"
+                    xmlns:local="clr-namespace:TTServerMaker.WPF.ResourceDictionaries"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- Design time server image-->
-    <BitmapImage x:Key="DesignServerImage" UriSource="pack://application:,,,/TTServerMaker;component/Img/DefaultServerImages/oldhub.jpg" />
+    <BitmapImage x:Key="DesignServerImage" UriSource="pack://application:,,,/TTServerMaker.WPF;component/Img/DefaultServerImages/oldhub.jpg" />
 
     <GridLength x:Key="WindowHeaderHeight">25</GridLength>
     <system:Double x:Key="WindowHeaderHeightDouble">25</system:Double>

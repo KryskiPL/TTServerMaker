@@ -13,7 +13,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TTServerMaker.WPF.Views.FirstStart"
         mc:Ignorable="d"
-        Icon="/TTServerMaker;component/Img/icon.ico"
+        Icon="/TTServerMaker.WPF;component/Img/icon.ico"
         Title="Welcome" Height="316" Width="680"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
@@ -41,7 +41,7 @@
                             <Image
                             Height="128"
                             Width="128"
-                            Source="/TTServerMaker;component/Img/Logo/logo_150x150.png"
+                            Source="/TTServerMaker.WPF;component/Img/Logo/logo_150x150.png"
                             Grid.RowSpan="3"
                             Stretch="UniformToFill" />
 

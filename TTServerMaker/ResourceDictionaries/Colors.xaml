@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TTServerMaker.ResourceDictionaries">
+                    xmlns:local="clr-namespace:TTServerMaker.WPF.ResourceDictionaries">
     <Color x:Key="GradientPink">#FF0A45</Color>
     <Color x:Key="GradientBlue">#3E2AFF</Color>
 

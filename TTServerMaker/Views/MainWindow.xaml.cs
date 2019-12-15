@@ -10,8 +10,8 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Controls;
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
-    using TTServerMaker.CustomControls;
-    using TTServerMaker.CustomControls.Dialogs;
+    using TTServerMaker.WPF.CustomControls;
+    using TTServerMaker.WPF.CustomControls.Dialogs;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml.

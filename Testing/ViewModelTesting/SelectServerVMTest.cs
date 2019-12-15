@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TTServerMaker.ServerEngine.ViewModels;
 
-namespace TTServerMaker.Tests.ViewModelTesting
+namespace TTServerMaker.WPF.Tests.ViewModelTesting
 {
     [TestClass]
     public class SelectServerVMTest

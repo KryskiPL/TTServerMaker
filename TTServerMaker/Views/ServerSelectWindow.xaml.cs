@@ -10,9 +10,9 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Controls;
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
-    using TTServerMaker.CustomControls.Dialogs.SelectServerWindow;
     using TTServerMaker.ServerEngine.Models.Servers;
     using TTServerMaker.ServerEngine.ViewModels;
+    using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
 
     /// <summary>
     /// Interaction logic for ServerSelectWindow.xaml.
@@ -83,7 +83,7 @@ namespace TTServerMaker.WPF.Views
         {
             ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
 
-            this.editDialogContent.NewEdit(server);
+            //this.editDialogContent.NewEdit(server); -- TODO uncomment
             await DialogHost.Show(this.editDialogContent, this.DialogHost.Identifier);
         }
 

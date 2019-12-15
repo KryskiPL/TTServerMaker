@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Converters
+namespace TTServerMaker.WPF.Converters
 {
     using System;
     using System.Globalization;

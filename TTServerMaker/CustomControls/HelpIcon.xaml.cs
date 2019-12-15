@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.CustomControls
+namespace TTServerMaker.WPF.CustomControls
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
