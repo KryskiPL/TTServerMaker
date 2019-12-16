@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine
+namespace TTServerMaker.Engine
 {
     using Newtonsoft.Json;
     using System;

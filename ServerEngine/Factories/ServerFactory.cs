@@ -2,11 +2,11 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine.Factories
+namespace TTServerMaker.Engine.Factories
 {
-    using TTServerMaker.ServerEngine.Exceptions;
-    using TTServerMaker.ServerEngine.Models;
-    using TTServerMaker.ServerEngine.Models.Servers;
+    using TTServerMaker.Engine.Exceptions;
+    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
     using System;
     using System.Collections.Generic;
     using System.Globalization;

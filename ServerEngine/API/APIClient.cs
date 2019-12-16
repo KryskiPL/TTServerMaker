@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine.API
+namespace TTServerMaker.Engine.API
 {
     using System;
     using System.Collections.Generic;

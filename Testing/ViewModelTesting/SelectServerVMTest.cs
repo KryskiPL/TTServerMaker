@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TTServerMaker.ServerEngine.ViewModels;
+using TTServerMaker.Engine.ViewModels;
 
 namespace TTServerMaker.WPF.Tests.ViewModelTesting
 {

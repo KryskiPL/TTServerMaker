@@ -2,23 +2,28 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine.Models
+namespace TTServerMaker.Engine.Models
 {
-    using TTServerMaker.ServerEngine.Models.Servers;
+    using TTServerMaker.Engine.Models.Servers;
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
     using System.Windows.Data;
     using System.Collections;
+    using System;
 
     /// <summary>
     /// Handles the server.properties file.
     /// </summary>
-    public class Properties : BaseNotificationClass, IEnumerable<KeyValuePair<string, string>>
+    public class Properties : BaseNotificationClass, IEnumerable<KeyValuePair<string, string>>, ICollection<string>
     {
         private const string Filename = "server.properties";
 
         private string PropertiesFilePath => this.server.FolderPath + Filename;
+
+        public int Count => properties.Count;
+
+        public bool IsReadOnly => false;
 
         private readonly ServerBase server;
 
@@ -291,22 +296,28 @@ namespace TTServerMaker.ServerEngine.Models
         /// Returns the dictionary containing the properties
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, string> ToDictionary()
-        {
-            return properties;
-        }
+        public Dictionary<string, string> ToDictionary() => properties;
 
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
-            foreach(var keyValue in this.properties)
+            foreach (var keyValue in this.properties)
             {
                 yield return keyValue;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => properties.GetEnumerator();
+
+        public void Add(string item) => throw new System.NotSupportedException();
+
+        public void Clear() => properties.Clear();
+
+        public bool Contains(string item) => this.properties.ContainsValue(item);
+
+        public void CopyTo(string[] array, int arrayIndex) => this.properties.Values.CopyTo(array, arrayIndex);
+
+        public bool Remove(string item) => this.properties.Remove(item);
+
+        IEnumerator<string> IEnumerable<string>.GetEnumerator() => this.properties.Values.GetEnumerator();
     }
 }

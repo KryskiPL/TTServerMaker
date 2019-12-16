@@ -23,7 +23,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
             this.InitializeComponent();
 
             this.DefaultBox.IsChecked = true;
-            this.serverFolderTemp = ServerEngine.GeneralSettings.GetDefaultServersPath;
+            this.serverFolderTemp = Engine.GeneralSettings.GetDefaultServersPath;
         }
 
         private void DefaultCheckboxChanged(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
             if (this.DefaultBox.IsChecked ?? false)
             {
                 this.serverFolderTemp = this.InputBox.Text;
-                this.InputBox.Text = ServerEngine.GeneralSettings.GetDefaultServersPath;
+                this.InputBox.Text = Engine.GeneralSettings.GetDefaultServersPath;
                 this.InputBox.IsEnabled = false;
             }
             else
@@ -75,7 +75,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
                         return;
                     }
 
-                    this.InputBox.Text = ServerEngine.AppSettings.EnforceTrailingBackslash(folderBrowserDialog.SelectedPath);
+                    this.InputBox.Text = Engine.AppSettings.EnforceTrailingBackslash(folderBrowserDialog.SelectedPath);
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
             // If the input was null, just assume the default folder
             if (string.IsNullOrEmpty(this.serverFolderTemp))
             {
-                this.serverFolderTemp = ServerEngine.GeneralSettings.GetDefaultServersPath;
+                this.serverFolderTemp = Engine.GeneralSettings.GetDefaultServersPath;
             }
 
             // Create directory if it dosn't exist
@@ -121,14 +121,14 @@ namespace TTServerMaker.WPF.Views.FirstStart
         /// </summary>
         private void SetupOver()
         {
-            ServerEngine.AppSettings.GeneralSettings = new ServerEngine.GeneralSettings
+            Engine.AppSettings.GeneralSettings = new Engine.GeneralSettings
             {
                 ServerFoldersPath = this.serverFolderTemp,
             };
 
             try
             {
-                ServerEngine.AppSettings.GeneralSettings.Save();
+                Engine.AppSettings.GeneralSettings.Save();
             }
             catch
             {

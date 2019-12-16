@@ -7,7 +7,7 @@ namespace TTServerMaker.WPF.Validators
     using System.Globalization;
     using System.Windows.Controls;
     using System.Windows.Data;
-    using TTServerMaker.ServerEngine.Models;
+    using TTServerMaker.Engine.Models;
 
     /// <summary>
     /// Validates the settings of a server edit.

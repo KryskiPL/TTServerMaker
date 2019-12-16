@@ -8,7 +8,7 @@
     x:Class="TTServerMaker.WPF.Views.ServerSelectWindow"
     Icon="pack://application:,,,/TTServerMaker.WPF;component/Img/icon.ico"
     mc:Ignorable="d"
-    xmlns:viewModels="clr-namespace:TTServerMaker.ServerEngine.ViewModels;assembly=ServerEngine"
+    xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
     d:DataContext="{d:DesignInstance viewModels:SelectServerVM}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"

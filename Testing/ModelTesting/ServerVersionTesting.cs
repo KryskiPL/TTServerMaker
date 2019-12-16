@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TTServerMaker.ServerEngine.Models.Versions;
+using TTServerMaker.Engine.Models.Versions;
 
 namespace TTServerMaker.WPF.Tests.ModelTesting
 {

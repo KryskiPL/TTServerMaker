@@ -2,11 +2,11 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine.Models
+namespace TTServerMaker.Engine.Models
 {
     using Newtonsoft.Json;
-    using TTServerMaker.ServerEngine.Models.Servers;
-    using TTServerMaker.ServerEngine.Models.Versions;
+    using TTServerMaker.Engine.Models.Servers;
+    using TTServerMaker.Engine.Models.Versions;
     using System;
     using System.Collections.Generic;
     using System.IO;

@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:TTServerMaker.ServerEngine.ViewModels;assembly=ServerEngine"
+    xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:CustomControls="clr-namespace:TTServerMaker.WPF.CustomControls"
     xmlns:validators="clr-namespace:TTServerMaker.WPF.Validators"
     xmlns:commands="clr-namespace:TTServerMaker.WPF.Commands"
@@ -436,7 +436,7 @@
                                         Grid.Column="0"
                                         Width="20"
                                         Height="20"
-                                        Source="pack://application:,,,/TTServerMaker;component/Img/SettingIcons/commandblock.png"
+                                        Source="pack://application:,,,/TTServerMaker.WPF;component/Img/SettingIcons/commandblock.png"
                                         VerticalAlignment="Center" />
 
                                         <Label

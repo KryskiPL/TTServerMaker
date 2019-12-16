@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace TTServerMaker.ServerEngine.Models.Versions
+namespace TTServerMaker.Engine.Models.Versions
 {
     /// <summary>
     /// The official vanilla server type.

@@ -6,7 +6,7 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
 {
     using System.Windows;
     using System.Windows.Controls;
-    using TTServerMaker.ServerEngine.ViewModels;
+    using TTServerMaker.Engine.ViewModels;
 
     /// <summary>
     /// Interaction logic for AddServerDialog.xaml.

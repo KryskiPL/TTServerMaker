@@ -1,8 +1,8 @@
-﻿namespace TTServerMaker.ServerEngine.ViewModels
+﻿namespace TTServerMaker.Engine.ViewModels
 {
-    using TTServerMaker.ServerEngine.Factories;
-    using TTServerMaker.ServerEngine.Models;
-    using TTServerMaker.ServerEngine.Models.Servers;
+    using TTServerMaker.Engine.Factories;
+    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
     using System;
     using System.Collections.Generic;
     using System.Linq;

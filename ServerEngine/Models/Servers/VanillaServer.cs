@@ -1,4 +1,4 @@
-﻿namespace TTServerMaker.ServerEngine.Models.Servers
+﻿namespace TTServerMaker.Engine.Models.Servers
 {
     /// <summary>
     /// The vanillia minecraft server.

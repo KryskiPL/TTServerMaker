@@ -10,8 +10,8 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Controls;
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
-    using TTServerMaker.ServerEngine.Models.Servers;
-    using TTServerMaker.ServerEngine.ViewModels;
+    using TTServerMaker.Engine.Models.Servers;
+    using TTServerMaker.Engine.ViewModels;
     using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
 
     /// <summary>
@@ -83,7 +83,7 @@ namespace TTServerMaker.WPF.Views
         {
             ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
 
-            //this.editDialogContent.NewEdit(server); -- TODO uncomment
+            this.editDialogContent.NewEdit(server);
             await DialogHost.Show(this.editDialogContent, this.DialogHost.Identifier);
         }
 
@@ -91,8 +91,8 @@ namespace TTServerMaker.WPF.Views
         {
             MessageBox.Show((await DialogHost.Show(this.addDialogContent, this.DialogHost.Identifier))?.ToString());
 
-            /* TODO
-            EditDialogContent.DataContext = null;
+            /*
+            this.editDialogContent.DataContext = null;
             await EditServerDialog.ShowDialog(EditDialogContent);
             ServerTypeCombobox.SelectedIndex = -1;
             */

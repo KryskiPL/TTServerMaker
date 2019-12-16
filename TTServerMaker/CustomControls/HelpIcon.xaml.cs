@@ -72,7 +72,7 @@ namespace TTServerMaker.WPF.CustomControls
                 string msg = this.HelpMessage;
                 if (!string.IsNullOrEmpty(this.ServerPropertyName))
                 {
-                    msg = ServerEngine.Models.Properties.GetDescriptionByName(this.ServerPropertyName);
+                    msg = Engine.Models.Properties.GetDescriptionByName(this.ServerPropertyName);
                 }
 
                 return msg;

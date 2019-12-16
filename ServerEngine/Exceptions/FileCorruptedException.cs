@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.ServerEngine.Exceptions
+namespace TTServerMaker.Engine.Exceptions
 {
     using System;
 

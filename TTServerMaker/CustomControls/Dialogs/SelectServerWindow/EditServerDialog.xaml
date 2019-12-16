@@ -11,8 +11,8 @@
              mc:Ignorable="d"
              d:DesignHeight="295.957" d:DesignWidth="329">
 
-    <!--<UserControl.Resources>
-        --><!--<converters:StringStripWhitespaceConverter x:Key="StringStripWhitespaceConverter" />--><!--
+    <UserControl.Resources>
+        <converters:StringStripWhitespaceConverter x:Key="StringStripWhitespaceConverter" />
     </UserControl.Resources>
     <StackPanel
                 Margin="30"
@@ -36,7 +36,7 @@
             <TextBox.Text>
                 <Binding Path="BasicInfo.Name" Mode="TwoWay" Converter="{StaticResource StringStripWhitespaceConverter}">
                     <Binding.ValidationRules>
-                        <validators.TextLengthValidator MinLength="3" />
+                        <validators:TextLengthValidator MinLength="3" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -60,5 +60,5 @@
                 Style="{StaticResource RoundPrimaryButton}">
             Done
         </Button>
-    </StackPanel>-->
+    </StackPanel>
 </UserControl>

@@ -5,8 +5,8 @@
 namespace TTServerMaker.WPF
 {
     using System.Windows;
-    using TTServerMaker.ServerEngine;
-    using TTServerMaker.ServerEngine.ViewModels;
+    using TTServerMaker.Engine;
+    using TTServerMaker.Engine.ViewModels;
 
     /// <summary>
     /// Interaction logic for App.xaml.

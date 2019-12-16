@@ -20,8 +20,6 @@ namespace TTServerMaker.WPF.Views
     {
         private readonly HelpDialog helpDialog = new HelpDialog();
 
-        public RoutedCommand showServerPropertyInfoCommand = new RoutedCommand();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
