@@ -32,39 +32,15 @@ namespace TTServerMaker.Engine.Models.Servers
                 "village.jpg",
             };
 
-        private Properties properties;
-        private bool isLoadingUp;
-
         public string VersionType { get { return typeof(Version).Name; } }
         public ServerVersion Version { get { return BasicInfo.Version; } set { BasicInfo.Version = value; } }
 
-        public Properties Properties
-        {
-            get
-            {
-                return properties;
-            }
-            private set
-            {
-                properties = value;
-            }
-        }
+        public Properties Properties { get; private set; }
 
         /// <summary>
-        /// Gets or sets the folder the server is located in.
+        /// Gets the folder the server is located in.
         /// </summary>
-        public string FolderPath
-        {
-            get
-            {
-                return this.BasicInfo.ServerFolderPath;
-            }
-
-            set
-            {
-                this.BasicInfo.ServerFolderPath = AppSettings.EnforceTrailingBackslash(value);
-            }
-        }
+        public string FolderPath => this.BasicInfo.ServerFolderPath;
 
         /// <summary>
         /// Gets or sets a value indicating whether the server has been fully loaded up.
@@ -74,24 +50,7 @@ namespace TTServerMaker.Engine.Models.Servers
         /// <summary>
         /// Gets the basic information about the server.
         /// </summary>
-        public BasicServerInfo BasicInfo { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether server is currently loading up.
-        /// </summary>
-        public bool IsLoadingUp
-        {
-            get
-            {
-                return this.isLoadingUp;
-            }
-
-            private set
-            {
-                this.isLoadingUp = value;
-                this.OnPropertyChanged();
-            }
-        }
+        public ServerSettings BasicInfo { get; }
 
         public abstract string ServerTypeStr { get; }
 
@@ -100,28 +59,20 @@ namespace TTServerMaker.Engine.Models.Servers
         /// </summary>
         /// <param name="folderPath">The server folder path</param>
         /// <param name="basicServerInfo">The loaded basic server info</param>
-        protected ServerBase(BasicServerInfo basicServerInfo)
+        protected ServerBase(ServerSettings basicServerInfo)
         {
             this.BasicInfo = basicServerInfo;
 
             if (!Directory.Exists(FolderPath))
                 throw new ArgumentException("Server folder does not exist");
-
-            this.BasicInfo.parentServer = this;
         }
 
         /// <summary>
         /// Loads up more information about the server:
         /// Server.properties
         /// </summary>
-        public void LoadUp()
+        public async Task LoadUpAsync()
         {
-            // Preventing double load up
-            if (FullyLoadedUp)
-                return;
-
-            this.IsLoadingUp = true;
-
             this.Properties = new Properties(this);
             this.Properties.LoadFromFile();
 
@@ -129,19 +80,9 @@ namespace TTServerMaker.Engine.Models.Servers
 
             // Updating last loadup time
             this.BasicInfo.DateLastLoaded = DateTime.Now;
+            this.BasicInfo.SaveChanges();
 
-            this.BasicInfo.SaveBasicServerInfo();
-
-            this.IsLoadingUp = false;
             this.FullyLoadedUp = true;
-        }
-
-        /// <summary>
-        /// Deletes the server's folder
-        /// </summary>
-        public void Delete()
-        {
-            Directory.Delete(this.BasicInfo.ServerFolderPath, true);
         }
     }
 }

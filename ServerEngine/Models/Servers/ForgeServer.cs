@@ -6,7 +6,7 @@ namespace TTServerMaker.Engine.Models.Servers
 {
     public class ForgeServer : ServerBase
     {
-        public ForgeServer(BasicServerInfo basicServerInfo) : base(basicServerInfo)
+        public ForgeServer(ServerSettings basicServerInfo) : base(basicServerInfo)
         {
         }
 

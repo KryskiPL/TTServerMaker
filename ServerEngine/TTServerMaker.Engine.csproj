@@ -64,15 +64,14 @@
     <Compile Include="Exceptions\FileCorruptedException.cs" />
     <Compile Include="Exceptions\ServerNotLoadedException.cs" />
     <Compile Include="Factories\ServerFactory.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\BasicServerInfo.cs" />
+    <Compile Include="Models\ServerSettings.cs" />
     <Compile Include="Models\Properties.cs" />
     <Compile Include="Models\Servers\ForgeServer.cs" />
     <Compile Include="Models\Servers\ServerBase.cs" />
     <Compile Include="Models\Servers\VanillaServer.cs" />
     <Compile Include="Models\Versions\VanillaOfficialVersion.cs" />
     <Compile Include="Models\Versions\VanillaSnapshotVersion.cs" />
-    <Compile Include="Models\Versions\VersionBase.cs" />
+    <Compile Include="Models\Versions\ServerVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
@@ -80,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\defaultServerProperties.txt" />

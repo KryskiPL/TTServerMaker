@@ -20,7 +20,7 @@ namespace TTServerMaker.WPF.Validators
             BindingGroup bg = value as BindingGroup;
 
             // Getting the BasicServerInfo object
-            BasicServerInfo basicInfo = bg.Items[1] as BasicServerInfo;
+            ServerSettings basicInfo = bg.Items[1] as ServerSettings;
 
             if (basicInfo.Name.Length <= 3)
             {

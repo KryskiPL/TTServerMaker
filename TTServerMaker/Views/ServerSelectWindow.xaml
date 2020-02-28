@@ -90,7 +90,7 @@
                           PreviewMouseMove="ScrollViewer_PreviewMouseMove"
                           CanContentScroll="True"
                           x:Name="ScrollViewer">
-                    <ItemsControl Name="ServerList" ItemsSource="{Binding Servers}"  Padding="10">
+                    <ItemsControl Name="ServerList" ItemsSource="{Binding ServerSettingsList}"  Padding="10">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <materialDesign:Card Margin="0,0,0,20"  UniformCornerRadius="25"  Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth3">
@@ -108,7 +108,7 @@
                                         <!-- Server picture -->
                                         <Image Grid.ColumnSpan="2"
                                            VerticalAlignment="Center" Grid.Row="0"
-                                           Source="{Binding BasicInfo.ServerImagePath, FallbackValue={StaticResource DesignServerImage}}"
+                                           Source="{Binding ServerImagePath, FallbackValue={StaticResource DesignServerImage}}"
                                            Stretch="UniformToFill" />
 
                                         <!-- Load button -->
@@ -121,7 +121,6 @@
                                                 VerticalAlignment="Bottom"
                                                 BorderBrush="Transparent"
                                                 Width="46"
-                                                materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsLoadingUp, Mode=OneWay}"
                                                 materialDesign:ButtonProgressAssist.Value="-1"
                                                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                                                 Height="46"
@@ -138,7 +137,7 @@
                                         Grid.Row="1" Grid.Column="0"
                                         Margin="10,10,0,0">
                                             <TextBlock FontSize="16"
-                                            Margin="2"><Run Text="{Binding BasicInfo.Name}" />
+                                            Margin="2"><Run Text="{Binding Name}" />
                                             </TextBlock>
 
                                             <StackPanel

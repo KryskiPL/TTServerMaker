@@ -10,6 +10,7 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Controls;
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
+    using TTServerMaker.Engine.Models;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.ViewModels;
     using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
@@ -45,14 +46,13 @@ namespace TTServerMaker.WPF.Views
         /// <summary>
         /// Gets or sets the currently selected server.
         /// </summary>
-        public ServerBase SelectedServer { get; set; }
+        public ServerSettings SelectedServer { get; set; }
 
         private async void LoadUpButton_Click(object sender, RoutedEventArgs e)
         {
-            this.SelectedServer = (ServerBase)(sender as FrameworkElement)?.DataContext;
+            this.SelectedServer = (ServerSettings)(sender as FrameworkElement)?.DataContext;
 
-            // Loading up the server
-            await Task.Run(() => this.SelectedServer.LoadUp());
+            await this.SelectServerVM.LoadSelectedServerAsync(this.SelectedServer);
 
             this.DialogResult = true;
             this.Close();
@@ -102,7 +102,7 @@ namespace TTServerMaker.WPF.Views
         {
             try
             {
-                this.SelectServerVM.DeleteServer((sender as FrameworkElement)?.DataContext as ServerBase);
+                this.SelectServerVM.DeleteServer((sender as FrameworkElement)?.DataContext as ServerSettings);
             }
             catch (Exception exception)
             {

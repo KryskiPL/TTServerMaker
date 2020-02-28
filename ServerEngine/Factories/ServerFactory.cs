@@ -19,33 +19,71 @@ namespace TTServerMaker.Engine.Factories
     internal class ServerFactory
     {
         /// <summary>
-        /// Creates a new server instance with the appropriate server type by reading the basic server info file.
+        /// Creates a new server instance with the appropriate server based on the server settings.
         /// </summary>
-        /// <param name="serverPath">The path to the server folder.</param>
+        /// <param name="serverSettings">The server settings contatining the type of the new server.</param>
         /// <returns>New server instance</returns>
-        public static ServerBase CreateNewServerInstance(string serverPath)
+        public static ServerBase CreateNewServerInstance(ServerSettings serverSettings)
         {
-            BasicServerInfo basicServerInfo = BasicServerInfo.LoadBasicServerInfo(serverPath);
-
-            if (basicServerInfo == null)
+            Type serverType = default;
+            switch (serverSettings.ServerType)
             {
-                throw new FileCorruptedException("Corrupted server info file", serverPath);
+                case ServerType.Vanilla:
+                    serverType = typeof(VanillaServer);
+                    break;
+                case ServerType.Forge:
+                    serverType = typeof(ForgeServer);
+                    break;
             }
 
-            ServerBase newServer = Activator.CreateInstance(basicServerInfo.GetServerTypeClassType(), basicServerInfo) as ServerBase;
+            ServerBase newServer = Activator.CreateInstance(serverType, serverSettings) as ServerBase;
             return newServer;
         }
 
         /// <summary>
-        /// Creates a brand new server.
+        /// Creates a brand new server folder.
         /// </summary>
         /// <param name="serverName">The name of the server.</param>
         /// <param name="typeString">The string representation of the server type.</param>
         /// <returns></returns>
-        internal static ServerBase CreateNewServerFromScratch(string serverName, string typeString)
+        internal static ServerSettings CreateNewServerFolder(string serverName, string typeString)
         {
-            string folderName = serverName;
+            string folderName = MakeStringFoldernameFriendly(serverName);
 
+            // Making sure the folder doesn't exist yet
+            string newDir = AppSettings.GeneralSettings.ServerFoldersPath + folderName;
+
+            while (Directory.Exists(newDir))
+            {
+                newDir += "v2";
+            }
+
+            // Creating directory
+            Directory.CreateDirectory(newDir);
+
+            ServerSettings basicInfo = new ServerSettings
+            {
+                ServerFolderPath = newDir,
+                Name = serverName,
+                DateCreated = DateTime.Now,
+                DateLastLoaded = DateTime.Now,
+            };
+
+            basicInfo.ServerImagePath = basicInfo.ServerImagePath;
+
+            // Saving the new basic server info to file
+            basicInfo.SaveChanges();
+
+            return basicInfo;
+        }
+
+        /// <summary>
+        /// Makes any string foldername friendly by replacing/removing forbidden characters. (e.g: "#Árvíz néző" => "ArvizNezo")
+        /// </summary>
+        /// <param name="folderName">The string to convert</param>
+        /// <returns>Directory name friendly string</returns>
+        private static string MakeStringFoldernameFriendly(string folderName)
+        {
             // Capitalizing letters after spaces, for better readability
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             folderName = textInfo.ToTitleCase(folderName);
@@ -87,35 +125,7 @@ namespace TTServerMaker.Engine.Factories
             folderName = Regex.Replace(folderName, "[œ]", "oe");
             folderName = Regex.Replace(folderName, "[Œ]", "Oe");
 
-            // Making sure the folder doesn't exist yet
-            string newDir = AppSettings.GeneralSettings.ServerFoldersPath + folderName;
-
-            while (Directory.Exists(newDir))
-            {
-                newDir += "v2";
-            }
-
-            newDir = AppSettings.EnforceTrailingBackslash(newDir);
-
-            // Creating directory
-            Directory.CreateDirectory(newDir);
-
-            BasicServerInfo basicInfo = new BasicServerInfo
-            {
-                ServerFolderPath = newDir,
-                Name = serverName,
-                DateCreated = DateTime.Now,
-                DateLastLoaded = DateTime.Now,
-            };
-
-            basicInfo.ServerImagePath = basicInfo.ServerImagePath;
-
-            // Saving the new basic server info to file
-            basicInfo.ChangeServerTypeForNextSave(typeString);
-            basicInfo.SaveBasicServerInfo();
-
-            // Loading a new server instance (loading the file written in the last step)
-            return CreateNewServerInstance(newDir);
+            return folderName;
         }
     }
 }

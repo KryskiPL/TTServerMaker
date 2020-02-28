@@ -13,47 +13,63 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Collections.Generic;
 
     public class SelectServerVM
     {
         /// <summary>
         /// Gets or sets the list of the servers.
         /// </summary>
-        public ObservableCollection<ServerBase> Servers { get; set; } = new ObservableCollection<ServerBase>();
+        public ObservableCollection<ServerSettings> ServerSettingsList { get; set; } = new ObservableCollection<ServerSettings>();
+
+        public ServerBase LoadedServer { get; set; }
 
         public SelectServerVM()
         {
-            this.LoadServers();
-
-            API.APIClient.LoadPricing();
+            this.ServerSettingsList = new ObservableCollection<ServerSettings>(GetServers());
         }
 
+        public async Task<ServerBase> LoadSelectedServerAsync(ServerSettings serverSettings)
+        {
+            ServerBase server = ServerFactory.CreateNewServerInstance(serverSettings);
+            await server.LoadUpAsync();
+
+            LoadedServer = server;
+
+            return server;
+        }
+
+
         /// <summary>
-        /// Loads the servers
+        /// Loads the information about the servers
         /// </summary>
-        private void LoadServers()
+        private static List<ServerSettings> GetServers()
         {
             // Getting directories where the server settings file exists
             var serverDirectories = Directory.GetDirectories(AppSettings.GeneralSettings.ServerFoldersPath)
-                .Where(x => File.Exists(Path.Combine(x, BasicServerInfo.BasicServerInfoFilename)))
+                .Where(x => File.Exists(Path.Combine(x, TTServerMaker.Engine.Models.ServerSettings.ServerSettingsFileName)))
                 .ToArray();
+
+            ObservableCollection<ServerSettings> servers = new ObservableCollection<ServerSettings>();
 
             foreach (string dir in serverDirectories)
             {
                 try
                 {
-                    this.Servers.Add(ServerFactory.CreateNewServerInstance(dir));
+                    servers.Add(ServerSettings.LoadServerSettings(dir));
                 }
                 catch (Exception ex)
                 {
+                    // Todo hiba kiírása
                     Console.WriteLine("Failed to load server. " + ex.Message);
                 }
             }
 
             // Storing and ordering the servers
-            this.Servers = new ObservableCollection<ServerBase>(
-                this.Servers.OrderByDescending(x => x.BasicInfo.DateLastLoaded)
-                .ThenBy(x => x.BasicInfo.Name));
+            return servers
+                .OrderByDescending(x => x.DateLastLoaded)
+                .ThenBy(x => x.Name)
+                .ToList();
         }
 
         /// <summary>
@@ -61,30 +77,30 @@ namespace TTServerMaker.Engine.ViewModels
         /// </summary>
         /// <param name="serverName">Server name</param>
         /// <param name="typeString"></param>
-        public void CreateNewServer(string serverName, string typeString = "VanillaServer")
+        public void CreateNewServer(string serverName, string typeString = "Vanilla") // TODO ez elég fura
         {
-            ServerBase newServer = ServerFactory.CreateNewServerFromScratch(serverName, typeString);
-            Servers.Insert(0, newServer);
+            ServerSettings newServer = ServerFactory.CreateNewServerFolder(serverName, typeString);
+            this.ServerSettingsList.Insert(0, newServer);
         }
 
         /// <summary>
         /// Deletes a given server from the harddrive.
         /// </summary>
         /// <param name="serverToDelete">The server to delete.</param>
-        public void DeleteServer(ServerBase serverToDelete)
+        public void DeleteServer(ServerSettings serverToDelete)
         {
             try
             {
-                serverToDelete.Delete();
+                Directory.Delete(serverToDelete.ServerFolderPath, true);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                // TODO - error handling
                 throw;
             }
             finally
             {
-                this.Servers.Remove(serverToDelete);
+                this.ServerSettingsList.Remove(serverToDelete);
             }
         }
     }

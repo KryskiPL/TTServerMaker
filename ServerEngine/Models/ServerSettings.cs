@@ -13,40 +13,29 @@ namespace TTServerMaker.Engine.Models
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json.Converters;
+
+    public enum ServerType { Vanilla, Forge }
 
     /// <summary>
     /// The basic information of the server.
     /// </summary>
-    public class BasicServerInfo : BaseNotificationClass
+    public class ServerSettings : BaseNotificationClass
     {
         /// <summary>
         /// The name of the file the basic server info is stored in.
         /// </summary>
-        public const string BasicServerInfoFilename = ".srvnfo.json";
+        public const string ServerSettingsFileName = ".srvnfo.json";
 
         /// <summary>
         /// The path of the default images.
         /// </summary>
         public const string DefaultVanillaImageDirectory = "pack://application:,,,/TTServerMaker.WPF;component/Img/DefaultServerImages/";
 
-        [JsonIgnore]
-        public ServerBase parentServer;
-
         private string name;
-        private string serverType;
+        private ServerType serverType;
         private string serverImagePath;
         private string serverFolderPath;
-
-        private bool changingServerType = false;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BasicServerInfo"/> class.
-        /// </summary>
-        /// <param name="parentServer"></param>
-        public BasicServerInfo(ServerBase parentServer = null)
-        {
-            this.parentServer = parentServer;
-        }
 
         /// <summary>
         /// Gets or sets the user defined name of the server.
@@ -103,16 +92,16 @@ namespace TTServerMaker.Engine.Models
         /// <summary>
         /// Gets or sets the server type string
         /// </summary>
-        public string ServerType
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ServerType ServerType
         {
-            // Returns the parent servers server type, if that is not null
-            // or if 'changingServerType' variable is set to true
-            get
-            {
-                return (this.parentServer != null && !this.changingServerType) ? this.ParentServerType : this.serverType;
-            }
+            get => this.serverType;
 
-            set { this.serverType = value; }
+            set
+            {
+                this.serverType = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -139,43 +128,19 @@ namespace TTServerMaker.Engine.Models
         }
 
         /// <summary>
-        /// Gets the type of the server.
-        /// </summary>
-        private string ParentServerType => this.parentServer.GetType().Name;
-
-        /// <summary>
-        /// Returns the Type of the server.
-        /// </summary>
-        /// <returns>The type of the server.</returns>
-        public Type GetServerTypeClassType()
-        {
-            return Type.GetType(typeof(ServerBase).Namespace + "." + this.ServerType);
-        }
-
-        /// <summary>
-        /// Next time the Save() function is called, it will not save the real serverType string, it will save the given string instead
-        /// </summary>
-        /// <param name="typeString"></param>
-        public void ChangeServerTypeForNextSave(string typeString)
-        {
-            this.changingServerType = true;
-            this.ServerType = typeString;
-        }
-
-        /// <summary>
-        /// Loads the basic server info from the given folder. It's static, because this will determine what type of server
+        /// Loads the server settings from the given folder. It's static, because this will determine what type of server
         /// needs to be created (vanilla/etc...).
         /// </summary>
         /// <param name="folderPath">The full path of the server folder.</param>
-        /// <returns>New BasicServerInfo object.</returns>
-        public static BasicServerInfo LoadBasicServerInfo(string folderPath)
+        /// <returns>New instance of the <see cref="Models.ServerSettings"/> object.</returns>
+        internal static ServerSettings LoadServerSettings(string folderPath)
         {
             try
             {
                 using (StreamReader reader =
-                    new StreamReader(AppSettings.EnforceTrailingBackslash(folderPath) + BasicServerInfoFilename))
+                    new StreamReader(Path.Combine(folderPath, ServerSettingsFileName)))
                 {
-                    BasicServerInfo basicServerInfo = JsonConvert.DeserializeObject<BasicServerInfo>(reader.ReadToEnd(),
+                    ServerSettings basicServerInfo = JsonConvert.DeserializeObject<ServerSettings>(reader.ReadToEnd(),
                         new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects });
                     basicServerInfo.ServerFolderPath = folderPath;
                     return basicServerInfo;
@@ -190,20 +155,22 @@ namespace TTServerMaker.Engine.Models
         /// <summary>
         /// Saves the server info to file
         /// </summary>
-        public void SaveBasicServerInfo()
+        public void SaveChanges()
         {
             try
             {
-                StreamWriter writer = new StreamWriter(AppSettings.EnforceTrailingBackslash(this.ServerFolderPath) + BasicServerInfoFilename);
-                var settings = new JsonSerializerSettings();
-                settings.TypeNameHandling = TypeNameHandling.Objects;
-                writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
-                writer.Close();
+                using (StreamWriter writer = new StreamWriter(Path.Combine(this.ServerFolderPath, ServerSettingsFileName)))
+                {
+                    var settings = new JsonSerializerSettings();
+                    settings.TypeNameHandling = TypeNameHandling.Objects;
+                    writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
+                }
             }
             catch (Exception ex)
             {
                 throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
             }
         }
+
     }
 }

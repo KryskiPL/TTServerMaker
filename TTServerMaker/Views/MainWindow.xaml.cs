@@ -53,7 +53,6 @@ namespace TTServerMaker.WPF.Views
             e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon)?.Message);
         }
     }
-
     
     public static class CustomCommands
     {

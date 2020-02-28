@@ -42,7 +42,7 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
             if (this.editStackPanel.BindingGroup.CommitEdit())
             {
                 // Saving changes to file
-                (this.editStackPanel.BindingGroup.Items[1] as BasicServerInfo)?.SaveBasicServerInfo();
+                (this.editStackPanel.BindingGroup.Items[1] as ServerSettings)?.SaveChanges();
                 this.editStackPanel.BindingGroup.BeginEdit();
             }
         }

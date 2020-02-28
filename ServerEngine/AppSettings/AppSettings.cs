@@ -23,7 +23,7 @@ namespace TTServerMaker.Engine
         static AppSettings()
         {
             // Getting the program's storage folder inside the appdata\local\ folder
-            AppdataFolder = EnforceTrailingBackslash(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + AppdataFolderName + "\\";
+            AppdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppdataFolderName);
 
             // Making sure the folder exists
             if (!Directory.Exists(AppdataFolder))
@@ -67,28 +67,6 @@ namespace TTServerMaker.Engine
         /// Gets or sets the application's general settings.
         /// </summary>
         public static GeneralSettings GeneralSettings { get; set; }
-
-        /// <summary>
-        /// Makes sure that the string passed ends with a slash.
-        /// </summary>
-        /// <param name="path">The string to add slash to (by reference).</param>
-        public static void EnforceTrailingBackslash(ref string path)
-        {
-            if (!path.EndsWith("\\"))
-            {
-                path += "\\";
-            }
-        }
-
-        /// <summary>
-        /// Returns the given path with a trailing backslash.
-        /// </summary>
-        /// <param name="path">The path with or without a backslash.</param>
-        /// <returns>The path with a trailing backslash.</returns>
-        public static string EnforceTrailingBackslash(string path)
-        {
-            return path.EndsWith("\\") ? path : path + "\\";
-        }
 
         /// <summary>
         /// Saves the application settings.

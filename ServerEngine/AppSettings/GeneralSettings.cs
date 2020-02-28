@@ -26,8 +26,6 @@ namespace TTServerMaker.Engine
         [JsonIgnore]
         private const string DefaultServerFolderName = "My Servers";
 
-        private string serverFoldersPath;
-
         /// <summary>
         /// Gets returns the default server folder path (in the user's documents folder).
         /// </summary>
@@ -37,7 +35,7 @@ namespace TTServerMaker.Engine
         /// <summary>
         /// Gets or sets the path to the folder containing the servers with a trailing slash.
         /// </summary>
-        public string ServerFoldersPath { get => this.serverFoldersPath; set => this.serverFoldersPath = string.IsNullOrEmpty(value) ? string.Empty : AppSettings.EnforceTrailingBackslash(value); }
+        public string ServerFoldersPath { get; set; }
 
         /// <summary>
         /// Gets the full path to the settings file.

@@ -9,7 +9,7 @@
         /// Initializes a new instance of the <see cref="VanillaServer"/> class.
         /// </summary>
         /// <param name="basicServerInfo">The basic server info.</param>
-        public VanillaServer(BasicServerInfo basicServerInfo)
+        public VanillaServer(ServerSettings basicServerInfo)
             : base(basicServerInfo)
         {
         }

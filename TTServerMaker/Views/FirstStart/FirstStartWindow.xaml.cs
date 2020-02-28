@@ -75,7 +75,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
                         return;
                     }
 
-                    this.InputBox.Text = Engine.AppSettings.EnforceTrailingBackslash(folderBrowserDialog.SelectedPath);
+                    this.InputBox.Text = folderBrowserDialog.SelectedPath;
                 }
             }
         }

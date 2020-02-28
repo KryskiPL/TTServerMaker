@@ -35,13 +35,13 @@ namespace TTServerMaker.WPF
             bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
             if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value ||
-                serverSelectWindow.SelectedServer == null)
+                serverSelectWindow.SelectServerVM.LoadedServer == null)
             {
                 this.Shutdown();
                 return;
             }
 
-            MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectedServer);
+            MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectServerVM.LoadedServer);
 
             mainWindow.DataContext = mainWindowVM;
             mainWindow.Show();
