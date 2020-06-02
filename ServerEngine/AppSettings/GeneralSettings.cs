@@ -27,10 +27,10 @@ namespace TTServerMaker.Engine
         private const string DefaultServerFolderName = "My Servers";
 
         /// <summary>
-        /// Gets returns the default server folder path (in the user's documents folder).
+        /// Gets the default server folder path (in the user's documents folder).
         /// </summary>
         /// <returns>The path to the default folder.</returns>
-        public static string GetDefaultServersPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DefaultServerFolderName) + "\\";
+        public static string DefaultServersPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DefaultServerFolderName) + "\\";
 
         /// <summary>
         /// Gets or sets the path to the folder containing the servers with a trailing slash.

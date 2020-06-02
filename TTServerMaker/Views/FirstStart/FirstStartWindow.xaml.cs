@@ -21,29 +21,6 @@ namespace TTServerMaker.WPF.Views.FirstStart
         public FirstStartWindow()
         {
             this.InitializeComponent();
-
-            this.DefaultBox.IsChecked = true;
-            this.serverFolderTemp = Engine.GeneralSettings.GetDefaultServersPath;
-        }
-
-        private void DefaultCheckboxChanged(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsInitialized)
-            {
-                return;
-            }
-
-            if (this.DefaultBox.IsChecked ?? false)
-            {
-                this.serverFolderTemp = this.InputBox.Text;
-                this.InputBox.Text = Engine.GeneralSettings.GetDefaultServersPath;
-                this.InputBox.IsEnabled = false;
-            }
-            else
-            {
-                this.InputBox.Text = this.serverFolderTemp;
-                this.InputBox.IsEnabled = true;
-            }
         }
 
         /// <summary>
@@ -90,7 +67,7 @@ namespace TTServerMaker.WPF.Views.FirstStart
             // If the input was null, just assume the default folder
             if (string.IsNullOrEmpty(this.serverFolderTemp))
             {
-                this.serverFolderTemp = Engine.GeneralSettings.GetDefaultServersPath;
+                this.serverFolderTemp = Engine.GeneralSettings.DefaultServersPath;
             }
 
             // Create directory if it dosn't exist

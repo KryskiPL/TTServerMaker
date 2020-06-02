@@ -3,8 +3,8 @@
                     xmlns:math="http://hexinnovation.com/math"
                     xmlns:converters="clr-namespace:TTServerMaker.WPF.Converters">
     
-    
     <converters:HasSelectedItemConverter x:Key="HasSelectedItemConverter" />
+    <converters:BoolToNegatedBoolConverter x:Key="BoolToNegatedBoolConverter" />
     <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden" />
     <converters:StringToBooleanConverter x:Key="StringToBooleanConverter" />
 

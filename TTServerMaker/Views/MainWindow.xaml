@@ -170,8 +170,6 @@
                         <TabItem Header="Server" IsSelected="{Binding IsChecked, ElementName=ServerTabButton}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid>
-                                    
-                                    
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -268,7 +266,7 @@
                                         <CustomControls:HelpIcon
                                     IconType="FormatColourText"
                                     HelpMessage="Get a custom ip, like 'johnsmith.tthread.com' or 'johndoe.minecraftjoin.me'!"
-                                    Command="self:CustomCommands.PropertyIconClicked" />
+                                     />
 
                                         <Button
                                     Padding="20 10"
@@ -351,7 +349,7 @@
                                         Grid.Column="0"
                                         IconType="FormatPaint"
                                         ServerPropertyName="resource-pack"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
 
                                         <Label
                                     Grid.Row="2"
@@ -398,7 +396,7 @@
                                     Grid.Column="0"
                                     IconType="Eye"
                                     ServerPropertyName="view-distance"
-                                    Command="self:CustomCommands.PropertyIconClicked" />
+                                     />
 
                                         <Label
                                     Grid.Row="0"
@@ -411,7 +409,7 @@
                                         Grid.Row="1"
                                         IconType="Airplane"
                                         ServerPropertyName="allow-flight"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
 
                                         <Label
                                     Grid.Row="1"
@@ -455,7 +453,7 @@
                                         Grid.Column="0"
                                         IconType="Signal"
                                         ServerPropertyName="online-mode"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
 
                                         <Label
                                     Grid.Row="3"
@@ -475,7 +473,7 @@
                                         Grid.Column="0"
                                         IconType="Image"
                                         HelpMessage="This is the icon shown in the multiplayer menu for your friends next to the server name"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
 
                                         <Label
                                     Grid.Row="4"
@@ -548,7 +546,7 @@
                                         <CustomControls:HelpIcon
                                         IconType="File"
                                         ServerPropertyName="level-name"
-                                        Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                         HorizontalAlignment="Left" Width="28" />
                                         <Label Grid.Row="0" VerticalContentAlignment="Center" Grid.Column="1">World name</Label>
                                         <TextBox
                                     Text="{Binding Server.Properties[level-name]}"
@@ -562,7 +560,7 @@
                                         Grid.Column="0"
                                         IconType="Flower"
                                         ServerPropertyName="level-seed"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label Grid.Row="1"
                                            VerticalContentAlignment="Center" Grid.Column="1">Seed</Label>
                                         <TextBox
@@ -577,7 +575,7 @@
                                         Grid.Column="0"
                                         IconType="FormatVerticalAlignTop"
                                         ServerPropertyName="max-build-height"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="2"
                                         VerticalContentAlignment="Center"
@@ -599,7 +597,7 @@
                                         Grid.Column="0"
                                         IconType="EarthBox"
                                         ServerPropertyName="level-type"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="3"
                                         VerticalContentAlignment="Center"
@@ -625,7 +623,7 @@
                                         Grid.Column="0"
                                         IconType="SecurityHome"
                                         ServerPropertyName="spawn-protection"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="4"
                                         VerticalContentAlignment="Center"
@@ -638,7 +636,7 @@
                                         Grid.Column="0"
                                         IconType="CropFree"
                                         ServerPropertyName="max-world-size"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="5"
                                         VerticalContentAlignment="Center"
@@ -650,7 +648,7 @@
                                         Grid.Column="0"
                                         IconType="castle"
                                         ServerPropertyName="generate-structures"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="6"
                                         VerticalContentAlignment="Center"
@@ -669,7 +667,7 @@
                                         Grid.Column="0"
                                         IconType="SmileyDevil"
                                         ServerPropertyName="allow-nether"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="7"
                                         VerticalContentAlignment="Center"
@@ -709,7 +707,7 @@
                                         Grid.Column="0"
                                         IconType="AccountHeart"
                                         ServerPropertyName="spawn-npcs"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="0"
                                         VerticalContentAlignment="Center"
@@ -728,7 +726,7 @@
                                         Grid.Column="0"
                                         IconType="pets"
                                         ServerPropertyName="spawn-animals"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="1"
                                         VerticalContentAlignment="Center"
@@ -747,7 +745,7 @@
                                         Grid.Column="0"
                                         IconType="Gravestone"
                                         ServerPropertyName="spawn-monsters"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="2"
                                         VerticalContentAlignment="Center"
@@ -789,7 +787,7 @@
                                         Grid.Column="0"
                                         IconType="ScaleBalance"
                                         ServerPropertyName="difficulty"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="0"
                                         VerticalContentAlignment="Center"
@@ -801,7 +799,7 @@
                                         Grid.Column="0"
                                         IconType="SmileyDead"
                                         ServerPropertyName="hardcore"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="1"
                                         VerticalContentAlignment="Center"
@@ -820,7 +818,7 @@
                                         Grid.Column="0"
                                         IconType="Looks"
                                         ServerPropertyName="gamemode"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="2"
                                         VerticalContentAlignment="Center"
@@ -832,7 +830,7 @@
                                         Grid.Column="0"
                                         IconType="Balloon"
                                         ServerPropertyName="force-gamemode"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                         />
                                         <Label
                                         Grid.Row="3"
                                         VerticalContentAlignment="Center"
@@ -906,7 +904,7 @@
                                 Grid.Column="0"
                                 IconType="Hourglass"
                                 ServerPropertyName="player-idle-timeout"
-                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                 HorizontalAlignment="Left" Width="28" />
                             <Label
                                 Grid.Row="2"
                                 VerticalAlignment="Center"
@@ -934,7 +932,7 @@
                                             <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                                 HorizontalAlignment="Left" Width="28" />
                                             <Label
                                                 Grid.Row="0"
                                                 VerticalAlignment="Center"
@@ -962,7 +960,7 @@
                                             <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                                 HorizontalAlignment="Left" Width="28" />
                                             <Label
                                                 Grid.Row="0"
                                                 VerticalAlignment="Center"
@@ -990,7 +988,7 @@
                                             <CustomControls:HelpIcon
                                                 IconType="Sword"
                                                 ServerPropertyName="pvp"
-                                                Command="self:CustomCommands.PropertyIconClicked" HorizontalAlignment="Left" Width="28" />
+                                                 HorizontalAlignment="Left" Width="28" />
                                             <Label
                                                 Grid.Row="0"
                                                 VerticalAlignment="Center"

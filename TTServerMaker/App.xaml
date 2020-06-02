@@ -41,7 +41,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Pink.xaml" />
 
                 <!-- Custom resources -->
-                
                 <ResourceDictionary Source="ResourceDictionaries/Constants.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/Converters.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/Colors.xaml" />

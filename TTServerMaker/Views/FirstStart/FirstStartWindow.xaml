@@ -12,123 +12,133 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TTServerMaker.WPF.Views.FirstStart"
+        xmlns:vm="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
         mc:Ignorable="d"
         Icon="/TTServerMaker.WPF;component/Img/icon.ico"
-        Title="Welcome" Height="316" Width="680"
+        Title="Welcome" Height="550" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-
-    <Grid>
-        <materialDesign:Transitioner x:Name="Transitioner"  SelectedIndex="0">
+    <Window.Resources>
+        <vm:FirstStartWindowVM x:Key="VM" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource VM}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="168*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="0" Grid.ColumnSpan="2">
             <!-- PAGE 1 -->
             <materialDesign:TransitionerSlide>
-                <Grid VerticalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <materialDesign:Card Padding="1 32 32 32" Margin="20,20,20,0">
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
 
-                            <Image
+                        <Image
                             Height="128"
                             Width="128"
+                            Margin="0 30 0 0"
                             Source="/TTServerMaker.WPF;component/Img/Logo/logo_150x150.png"
-                            Grid.RowSpan="3"
                             Stretch="UniformToFill" />
+                        <materialDesign:Card Grid.Row="1" Padding="32" Margin="20,20,20,0">
+                            <StackPanel>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Margin="0 20"
+                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                    Welcome to TT Server Maker!
+                                </TextBlock>
 
-                            <TextBlock
-                            VerticalAlignment="Center"
-                            Grid.Column="1"
-                            Style="{StaticResource MaterialDesignDisplay1TextBlock}">
-                            Welcome to TT Server Maker
-                            </TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignBody1TextBlock}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                                    Thanks for downloading the program! Please remember,
+                                    that the program is currently in beta stage. Bugs are
+                                    to be expected. You are just a few steps away from
+                                    running your first Minecraft server!
+                                </TextBlock>
+                            </StackPanel>
+                        </materialDesign:Card>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                            <AccessText TextWrapping="WrapWithOverflow">
-                                Thanks for downloading the program! Please remember,
-                                that the program is currently in beta stage. Bugs are
-                                to be expected. You are just a few steps away from
-                                running your first Minecraft server!
-                            </AccessText>
-                            </TextBlock>
-                        </Grid>
-                    </materialDesign:Card>
-
-                    <Button
-                    Style="{StaticResource RoundPrimaryButton}"
-                    Margin="0,20,20,20"
-                    HorizontalAlignment="Right"
-                    Width="634"
-                    Grid.Row="1"
-                    Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
-                    Content="Next" />
-                </Grid>
+                        <Button
+                            Style="{StaticResource RoundPrimaryButton}"
+                            Margin="20"
+                            Grid.Row="2"
+                            Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
+                            Content="Next" />
+                    </Grid>
             </materialDesign:TransitionerSlide>
 
             <!-- PAGE 2 -->
             <materialDesign:TransitionerSlide>
-                <Grid VerticalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <materialDesign:Card Padding="32" Margin="20,20,20,0">
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
+                    <materialDesign:Card Padding="32" Margin="20,20,20,0" Grid.ColumnSpan="2">
+                        <StackPanel>
                             <TextBlock
-                            Padding="0 10"
-                            VerticalAlignment="Center"
-                            Grid.Column="0"
-                            Style="{StaticResource MaterialDesignTitleTextBlock}">
-                           Please select where you would like your servers to be stored
+                                TextWrapping="Wrap"
+                                Style="{StaticResource MaterialDesignHeadline6TextBlock}" >
+                                    Please select where you would like your servers to be stored
                             </TextBlock>
 
-                            <CheckBox
-                            Padding="0 10"
-                            Grid.Row="1"
-                            Content="Use default directory"
-                            Checked="DefaultCheckboxChanged"
-                            Unchecked="DefaultCheckboxChanged"
-                            x:Name="DefaultBox" />
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                Margin="0 10 0 40"
+                                Style="{StaticResource MaterialDesignBody1TextBlock}">
+                                    Every server you create will be stored in this directory.
+                            </TextBlock>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                <materialDesign:PackIcon Margin="0 0 10 0" Kind="FolderOutline" VerticalAlignment="Center" Opacity="0.5" />
+                            <RadioButton
+                                Grid.Row="1"
+                                IsChecked="True"
+                                Style="{StaticResource MaterialDesignAccentRadioButton}"
+                                x:Name="DefaultBox">
+                                <TextBlock FontWeight="Bold">Use the default directory (recommended)</TextBlock>
+                            </RadioButton>
+
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                Margin="15 10 0 20"
+                                Text="{Binding DefaultServerFolderPath}"
+                                Style="{StaticResource MaterialDesignBody2TextBlock}">
+                            </TextBlock>
+
+                            <RadioButton
+                                Grid.Row="1"
+                                x:Name="CustomRadioButton"
+                                Style="{StaticResource MaterialDesignAccentRadioButton}">
+                                <TextBlock FontWeight="Bold">Use custom directory</TextBlock>
+                            </RadioButton>
+
+                            <Grid IsEnabled="{Binding ElementName=CustomRadioButton, Path=IsChecked}" Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
                                 <TextBox
-                                GotFocus="InputBox_GotFocus"
-                                x:Name="InputBox"
-                                Width="400"
-                                materialDesign:HintAssist.Hint="Plase enter a path" />
-                            </StackPanel>
-                        </Grid>
+                                    GotFocus="InputBox_GotFocus"
+                                    x:Name="InputBox"
+                                    Text="{Binding CustomServerFolderPath}"
+                                    materialDesign:HintAssist.Hint="Plase enter a path" />
+                                <Button Grid.Column="1" Style="{StaticResource FlatGradientTextButton}">Browse</Button>
+                            </Grid>
+                        </StackPanel>
                     </materialDesign:Card>
 
                     <Button
                         Style="{StaticResource RoundPrimaryButton}"
                         Click="ServerFolderNextButton_Click"
-                        Margin="0,20,20,20"
-                        HorizontalAlignment="Center"
-                        Width="600"
+                        Margin="20"
                         Height="40"
                         Grid.Row="1"
                         Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
-                        Content="Next" />
+                        Content="Next" Grid.ColumnSpan="2" />
                 </Grid>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
