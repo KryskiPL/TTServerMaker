@@ -1,13 +1,17 @@
-﻿namespace TTServerMaker.Engine.ViewModels
+﻿// <copyright file="MainWindowVM.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
+
+namespace TTServerMaker.Engine.ViewModels
 {
-    using TTServerMaker.Engine.Factories;
-    using TTServerMaker.Engine.Models;
-    using TTServerMaker.Engine.Models.Servers;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using TTServerMaker.Engine.Factories;
+    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
     /// The view model controlling the main server settings window.

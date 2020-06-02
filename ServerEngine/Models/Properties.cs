@@ -4,13 +4,13 @@
 
 namespace TTServerMaker.Engine.Models
 {
-    using TTServerMaker.Engine.Models.Servers;
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
     using System.Windows.Data;
-    using System.Collections;
-    using System;
+    using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
     /// Handles the server.properties file.
@@ -19,20 +19,34 @@ namespace TTServerMaker.Engine.Models
     {
         private const string Filename = "server.properties";
 
-        private string PropertiesFilePath => this.server.FolderPath + Filename;
-
-        public int Count => properties.Count;
-
-        public bool IsReadOnly => false;
-
+        /// <summary>
+        /// The parent server.
+        /// </summary>
         private readonly ServerBase server;
 
         private Dictionary<string, string> properties;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Properties"/> class.
+        /// </summary>
+        /// <param name="server">The server the properties belong to.</param>
+        public Properties(ServerBase server)
+        {
+            this.server = server;
+        }
+
+        /// <inheritdoc/>
+        public int Count => this.properties.Count;
+
+        /// <inheritdoc/>
+        public bool IsReadOnly => false;
+
+        private string PropertiesFilePath => Path.Combine(this.server.FolderPath, Filename);
+
+        /// <summary>
         /// Gives the value of a server property setting, or an empty string if not found.
         /// </summary>
-        /// <param name="propertyName">The name of the property</param>
+        /// <param name="propertyName">The name of the property.</param>
         /// <returns>Value or an empty string.</returns>
         public string this[string propertyName]
         {
@@ -49,92 +63,10 @@ namespace TTServerMaker.Engine.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Properties"/> class.
-        /// </summary>
-        /// <param name="server"></param>
-        public Properties(ServerBase server)
-        {
-            this.server = server;
-        }
-
-        /// <summary>
-        /// Reads the default server.properties file (from the resources folder), and sets the properties to default
-        /// </summary>
-        public async void SetToDefault()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ServerEngine.Resources.defaultServerProperties.txt";
-
-            //string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("defaultServerProperties.txt"));
-
-            properties = new Dictionary<string, string>();
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string row = await reader.ReadLineAsync();
-                    string[] spl = row.Split('=');
-
-                    if (spl.Length > 1)
-                        properties.Add(spl[0], spl[1]);
-                }
-                reader.Close();
-            }
-        }
-
-        /// <summary>
-        /// Reads the .properties file.
-        /// </summary>
-        public void LoadFromFile()
-        {
-            // If the file does not exist yet, we load the default values to the properties, and save the file.
-            if (!File.Exists(PropertiesFilePath))
-            {
-                SetToDefault();
-                SaveToFile();
-                return;
-            }
-
-            properties = new Dictionary<string, string>();
-
-            using (StreamReader olv = new StreamReader(PropertiesFilePath))
-            {
-                while (!olv.EndOfStream)
-                {
-                    string[] splitLine = olv.ReadLine().Split(new[] { '=' }, 2);
-
-                    if (splitLine.Length > 1)
-                        this.properties.Add(splitLine[0], splitLine[1]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Saves to properties to the server.properties file
-        /// </summary>
-        public async void SaveToFile()
-        {
-            using (StreamWriter writer = new StreamWriter(PropertiesFilePath))
-            {
-                foreach (KeyValuePair<string, string> property in properties)
-                {
-                    // Removing invalid characters from the property value
-                    string value = property.Value.Replace("=", "");
-
-                    await writer.WriteLineAsync($"{property.Key}={value}");
-                }
-
-                writer.Close();
-            }
-        }
-
-        /// <summary>
         /// Returns the description of the given property. Returns null if not supported.
         /// </summary>
-        /// <param name="propertyName">Name of the property</param>
-        /// <returns></returns>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>Retruns the property description.</returns>
         public static string GetDescriptionByName(string propertyName)
         {
             switch (propertyName.ToLower())
@@ -293,11 +225,86 @@ namespace TTServerMaker.Engine.Models
         }
 
         /// <summary>
-        /// Returns the dictionary containing the properties
+        /// Reads the default server.properties file (from the resources folder), and sets the properties to default.
         /// </summary>
-        /// <returns></returns>
-        public Dictionary<string, string> ToDictionary() => properties;
+        public async void SetToDefault()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "ServerEngine.Resources.defaultServerProperties.txt";
 
+            this.properties = new Dictionary<string, string>();
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string row = await reader.ReadLineAsync();
+                    string[] spl = row.Split('=');
+
+                    if (spl.Length > 1)
+                    {
+                        this.properties.Add(spl[0], spl[1]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reads the .properties file.
+        /// </summary>
+        public void LoadFromFile()
+        {
+            // If the file does not exist yet, we load the default values to the properties, and save the file.
+            if (!File.Exists(this.PropertiesFilePath))
+            {
+                this.SetToDefault();
+                this.SaveToFile();
+                return;
+            }
+
+            this.properties = new Dictionary<string, string>();
+
+            using (StreamReader olv = new StreamReader(this.PropertiesFilePath))
+            {
+                while (!olv.EndOfStream)
+                {
+                    string[] splitLine = olv.ReadLine().Split(new[] { '=' }, 2);
+
+                    if (splitLine.Length > 1)
+                    {
+                        this.properties.Add(splitLine[0], splitLine[1]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Saves to properties to the server.properties file.
+        /// </summary>
+        public async void SaveToFile()
+        {
+            using (StreamWriter writer = new StreamWriter(this.PropertiesFilePath))
+            {
+                foreach (KeyValuePair<string, string> property in this.properties)
+                {
+                    // Removing invalid characters from the property value
+                    string value = property.Value.Replace("=", string.Empty);
+
+                    await writer.WriteLineAsync($"{property.Key}={value}");
+                }
+
+                writer.Close();
+            }
+        }
+
+        /// <summary>
+        /// Returns the dictionary containing the properties.
+        /// </summary>
+        /// <returns>Converts the properties to a dictionary.</returns>
+        public Dictionary<string, string> ToDictionary() => this.properties;
+
+        /// <inheritdoc/>
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
             foreach (var keyValue in this.properties)
@@ -306,18 +313,25 @@ namespace TTServerMaker.Engine.Models
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => properties.GetEnumerator();
+        /// <inheritdoc/>
+        IEnumerator IEnumerable.GetEnumerator() => this.properties.GetEnumerator();
 
+        /// <inheritdoc/>
         public void Add(string item) => throw new System.NotSupportedException();
 
-        public void Clear() => properties.Clear();
+        /// <inheritdoc/>
+        public void Clear() => this.properties.Clear();
 
+        /// <inheritdoc/>
         public bool Contains(string item) => this.properties.ContainsValue(item);
 
+        /// <inheritdoc/>
         public void CopyTo(string[] array, int arrayIndex) => this.properties.Values.CopyTo(array, arrayIndex);
 
+        /// <inheritdoc/>
         public bool Remove(string item) => this.properties.Remove(item);
 
+        /// <inheritdoc/>
         IEnumerator<string> IEnumerable<string>.GetEnumerator() => this.properties.Values.GetEnumerator();
     }
 }

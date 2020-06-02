@@ -4,44 +4,89 @@
 
 namespace TTServerMaker.Engine.ViewModels
 {
-    using TTServerMaker.Engine.Factories;
-    using TTServerMaker.Engine.Models;
-    using TTServerMaker.Engine.Models.Servers;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
-    using System.Collections.Generic;
+    using TTServerMaker.Engine.Factories;
+    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
 
+    /// <summary>
+    /// The view model of selecting a server.
+    /// </summary>
     public class SelectServerVM
     {
         /// <summary>
-        /// Gets or sets the list of the servers.
+        /// Initializes a new instance of the <see cref="SelectServerVM"/> class.
         /// </summary>
-        public ObservableCollection<ServerSettings> ServerSettingsList { get; set; } = new ObservableCollection<ServerSettings>();
-
-        public ServerBase LoadedServer { get; set; }
-
         public SelectServerVM()
         {
             this.ServerSettingsList = new ObservableCollection<ServerSettings>(GetServers());
         }
 
+        /// <summary>
+        /// Gets or sets the list of the servers.
+        /// </summary>
+        public ObservableCollection<ServerSettings> ServerSettingsList { get; set; } = new ObservableCollection<ServerSettings>();
+
+        /// <summary>
+        /// Gets or sets the server that is currently loaded.
+        /// </summary>
+        public ServerBase LoadedServer { get; set; }
+
+        /// <summary>
+        /// Loads the given server.
+        /// </summary>
+        /// <param name="serverSettings">The server settings containing the info about the server.</param>
+        /// <returns>Returns a loaded server.</returns>
         public async Task<ServerBase> LoadSelectedServerAsync(ServerSettings serverSettings)
         {
             ServerBase server = ServerFactory.CreateNewServerInstance(serverSettings);
             await server.LoadUpAsync();
 
-            LoadedServer = server;
+            this.LoadedServer = server;
 
             return server;
         }
 
+        /// <summary>
+        /// Creates a new server.
+        /// </summary>
+        /// <param name="serverName">The server name.</param>
+        /// <param name="typeString">The server type in... string.</param>
+        public void CreateNewServer(string serverName, string typeString = "Vanilla") // TODO ez elég fura
+        {
+            ServerSettings newServer = ServerFactory.CreateNewServerFolder(serverName, typeString);
+            this.ServerSettingsList.Insert(0, newServer);
+        }
 
         /// <summary>
-        /// Loads the information about the servers
+        /// Deletes a given server from the harddrive.
+        /// </summary>
+        /// <param name="serverToDelete">The server to delete.</param>
+        public void DeleteServer(ServerSettings serverToDelete)
+        {
+            try
+            {
+                Directory.Delete(serverToDelete.ServerFolderPath, true);
+            }
+            catch
+            {
+                // TODO - error handling
+                throw;
+            }
+            finally
+            {
+                this.ServerSettingsList.Remove(serverToDelete);
+            }
+        }
+
+        /// <summary>
+        /// Loads the information about the servers.
         /// </summary>
         private static List<ServerSettings> GetServers()
         {
@@ -70,38 +115,6 @@ namespace TTServerMaker.Engine.ViewModels
                 .OrderByDescending(x => x.DateLastLoaded)
                 .ThenBy(x => x.Name)
                 .ToList();
-        }
-
-        /// <summary>
-        /// Creates a new server
-        /// </summary>
-        /// <param name="serverName">Server name</param>
-        /// <param name="typeString"></param>
-        public void CreateNewServer(string serverName, string typeString = "Vanilla") // TODO ez elég fura
-        {
-            ServerSettings newServer = ServerFactory.CreateNewServerFolder(serverName, typeString);
-            this.ServerSettingsList.Insert(0, newServer);
-        }
-
-        /// <summary>
-        /// Deletes a given server from the harddrive.
-        /// </summary>
-        /// <param name="serverToDelete">The server to delete.</param>
-        public void DeleteServer(ServerSettings serverToDelete)
-        {
-            try
-            {
-                Directory.Delete(serverToDelete.ServerFolderPath, true);
-            }
-            catch (Exception e)
-            {
-                // TODO - error handling
-                throw;
-            }
-            finally
-            {
-                this.ServerSettingsList.Remove(serverToDelete);
-            }
         }
     }
 }
