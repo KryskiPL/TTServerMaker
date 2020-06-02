@@ -53,12 +53,4 @@ namespace TTServerMaker.WPF.Views
             e.CanExecute = !string.IsNullOrEmpty((e.Source as HelpIcon)?.Message);
         }
     }
-    
-    public static class CustomCommands
-    {
-        public static readonly RoutedUICommand PropertyIconClicked = new RoutedUICommand(
-            "PropertyIconClicked",
-            "PropertyIconClicked",
-            typeof(CustomCommands));
-    }
 }

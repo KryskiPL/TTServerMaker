@@ -23,10 +23,6 @@
     MaxHeight="{Binding Height, Source={x:Static SystemParameters.WorkArea}}"
     WindowStartupLocation="CenterScreen">
 
-    <Window.CommandBindings>
-        <CommandBinding Command="self:CustomCommands.PropertyIconClicked" Executed="PropertyIconClicked_Executed" CanExecute="PropertyIconClicked_CanExecute" />
-    </Window.CommandBindings>
-
     <WindowChrome.WindowChrome>
         <WindowChrome
             ResizeBorderThickness="5"
@@ -328,8 +324,7 @@
 
                                         <CustomControls:HelpIcon
                                         IconType="Message"
-                                        ServerPropertyName="motd"
-                                        Command="self:CustomCommands.PropertyIconClicked" />
+                                        ServerPropertyName="motd" />
 
                                         <Label
                                     Grid.Row="0"

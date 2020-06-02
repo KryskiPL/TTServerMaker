@@ -120,6 +120,7 @@ namespace TTServerMaker.Engine.Models
 
                 return this.serverImagePath;
             }
+
             set
             {
                 this.serverImagePath = value;
