@@ -29,7 +29,7 @@ namespace TTServerMaker.WPF
             // Showing the greeting screen (with folder selection) on first startup
             if (AppSettings.FirstLaunch)
             {
-                Views.FirstStart.FirstStartWindow firstStartWindow = new Views.FirstStart.FirstStartWindow();
+                Views.FirstStartWindow firstStartWindow = new Views.FirstStartWindow();
 
                 bool? dialogResult = firstStartWindow.ShowDialog();
                 if (!dialogResult.HasValue || !dialogResult.Value)
