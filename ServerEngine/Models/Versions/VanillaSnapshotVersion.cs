@@ -1,35 +1,18 @@
-﻿namespace TTServerMaker.Engine.Models.Versions
+﻿// <copyright file="VanillaSnapshotVersion.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
+
+namespace TTServerMaker.Engine.Models.Versions
 {
-    using Newtonsoft.Json;
     using System;
     using System.Text.RegularExpressions;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Snapshot version of the vanilla game.
     /// </summary>
     public class VanillaSnapshotVersion : ServerVersion
     {
-        /// <summary>
-        /// Gets or sets the year part of the snapshot version.
-        /// </summary>
-        public int Year { get; set; }
-
-        /// <summary>
-        /// Gets or sets the week part of the snapshot version.
-        /// </summary>
-        public int Week { get; set; }
-
-        /// <summary>
-        /// Gets or sets the character at the end of the snapshot version.
-        /// </summary>
-        public char Character { get; set; }
-
-        /// <summary>
-        /// Gives a number representation to the snapshot's version. Makes it easy to compare them.
-        /// </summary>
-        [JsonIgnore]
-        public int NumberRepresentation => (this.Year * 10000) + (this.Week * 100) + char.ToUpper(this.Character) - 64;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VanillaSnapshotVersion"/> class.
         /// </summary>
@@ -58,6 +41,27 @@
             this.Week = Convert.ToInt32(match.Groups["month"].Value);
             this.Character = match.Groups["character"].Value[0];
         }
+
+        /// <summary>
+        /// Gets or sets the year part of the snapshot version.
+        /// </summary>
+        public int Year { get; set; }
+
+        /// <summary>
+        /// Gets or sets the week part of the snapshot version.
+        /// </summary>
+        public int Week { get; set; }
+
+        /// <summary>
+        /// Gets or sets the character at the end of the snapshot version.
+        /// </summary>
+        public char Character { get; set; }
+
+        /// <summary>
+        /// Gets a number representation to the snapshot's version. Makes it easy to compare them.
+        /// </summary>
+        [JsonIgnore]
+        public int NumberRepresentation => (this.Year * 10000) + (this.Week * 100) + char.ToUpper(this.Character) - 64;
 
         /// <inheritdoc/>
         public override int CompareTo(ServerVersion other)

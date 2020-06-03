@@ -1,26 +1,41 @@
-﻿// <copyright file="BasicServerInfo.cs" company="TThread">
+﻿// <copyright file="ServerSettings.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
 namespace TTServerMaker.Engine.Models
 {
-    using Newtonsoft.Json;
-    using TTServerMaker.Engine.Models.Servers;
-    using TTServerMaker.Engine.Models.Versions;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using GalaSoft.MvvmLight;
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+    using TTServerMaker.Engine.Models.Servers;
+    using TTServerMaker.Engine.Models.Versions;
 
-    public enum ServerType { Vanilla, Forge }
+    /// <summary>
+    /// The different type of servers the program supports.
+    /// </summary>
+    public enum ServerType
+    {
+        /// <summary>
+        /// A vanilla official server.
+        /// </summary>
+        Vanilla,
+
+        /// <summary>
+        /// A Forge, moddable server.
+        /// </summary>
+        Forge,
+    }
 
     /// <summary>
     /// The basic information of the server.
     /// </summary>
-    public class ServerSettings : BaseNotificationClass
+    public class ServerSettings : ObservableObject
     {
         /// <summary>
         /// The name of the file the basic server info is stored in.
@@ -42,16 +57,8 @@ namespace TTServerMaker.Engine.Models
         /// </summary>
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
-            set
-            {
-                this.name = value;
-                this.OnPropertyChanged();
-            }
+            get => this.name;
+            set => this.Set(ref this.name, value);
         }
 
         /// <summary>
@@ -90,18 +97,14 @@ namespace TTServerMaker.Engine.Models
         }
 
         /// <summary>
-        /// Gets or sets the server type string
+        /// Gets or sets the server type string.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public ServerType ServerType
         {
             get => this.serverType;
 
-            set
-            {
-                this.serverType = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this.serverType, value);
         }
 
         /// <summary>
@@ -121,10 +124,27 @@ namespace TTServerMaker.Engine.Models
                 return this.serverImagePath;
             }
 
-            set
+            set => this.Set(ref this.serverImagePath, value);
+        }
+
+        /// <summary>
+        /// Saves the server info to file.
+        /// </summary>
+        /// <returns>Returns the task.</returns>
+        public async Task SaveChangesAsync()
+        {
+            try
             {
-                this.serverImagePath = value;
-                this.OnPropertyChanged();
+                using (StreamWriter writer = new StreamWriter(Path.Combine(this.ServerFolderPath, ServerSettingsFileName)))
+                {
+                    var settings = new JsonSerializerSettings();
+                    settings.TypeNameHandling = TypeNameHandling.Objects;
+                    await writer.WriteAsync(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
             }
         }
 
@@ -141,7 +161,8 @@ namespace TTServerMaker.Engine.Models
                 using (StreamReader reader =
                     new StreamReader(Path.Combine(folderPath, ServerSettingsFileName)))
                 {
-                    ServerSettings basicServerInfo = JsonConvert.DeserializeObject<ServerSettings>(reader.ReadToEnd(),
+                    ServerSettings basicServerInfo = JsonConvert.DeserializeObject<ServerSettings>(
+                        reader.ReadToEnd(),
                         new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects });
                     basicServerInfo.ServerFolderPath = folderPath;
                     return basicServerInfo;
@@ -152,26 +173,5 @@ namespace TTServerMaker.Engine.Models
                 throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
             }
         }
-
-        /// <summary>
-        /// Saves the server info to file
-        /// </summary>
-        public void SaveChanges()
-        {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(this.ServerFolderPath, ServerSettingsFileName)))
-                {
-                    var settings = new JsonSerializerSettings();
-                    settings.TypeNameHandling = TypeNameHandling.Objects;
-                    writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new FileLoadException("Failed to read the basic server info from file. " + ex.Message);
-            }
-        }
-
     }
 }

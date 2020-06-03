@@ -58,9 +58,10 @@ namespace TTServerMaker.Engine.ViewModels
         /// </summary>
         /// <param name="serverName">The server name.</param>
         /// <param name="typeString">The server type in... string.</param>
-        public void CreateNewServer(string serverName, string typeString = "Vanilla") // TODO ez elég fura
+        /// <returns>The task.</returns>
+        public async Task CreateNewServer(string serverName, string typeString = "Vanilla") // TODO ez elég fura
         {
-            ServerSettings newServer = ServerFactory.CreateNewServerFolder(serverName, typeString);
+            ServerSettings newServer = await ServerFactory.CreateNewServerFolderAsync(serverName, typeString);
             this.ServerSettingsList.Insert(0, newServer);
         }
 

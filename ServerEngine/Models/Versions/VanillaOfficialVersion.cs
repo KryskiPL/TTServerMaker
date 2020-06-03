@@ -1,8 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿// <copyright file="VanillaOfficialVersion.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
 
 namespace TTServerMaker.Engine.Models.Versions
 {
+    using System;
+    using Newtonsoft.Json;
+
     /// <summary>
     /// The official vanilla server type.
     /// </summary>
@@ -14,7 +18,9 @@ namespace TTServerMaker.Engine.Models.Versions
         /// <param name="versionString">The string that represents the version.</param>
         [JsonConstructor]
         public VanillaOfficialVersion(string versionString)
-            : base(versionString) { }
+            : base(versionString)
+        {
+        }
 
         /// <inheritdoc/>
         public override int CompareTo(ServerVersion other)
@@ -26,12 +32,14 @@ namespace TTServerMaker.Engine.Models.Versions
              *
              * Comparing two versions only needs to test which version has a bigger number first, or is longer
              */
+
+            // TODO regex
             if (!(other is VanillaOfficialVersion))
             {
                 return 0;
             }
 
-            string[] thisSpl = VersionString.Split('.');
+            string[] thisSpl = this.VersionString.Split('.');
             string[] otherSpl = other.VersionString.Split('.');
 
             for (int i = 0; i < Math.Min(thisSpl.Length, otherSpl.Length); i++)

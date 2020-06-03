@@ -4,14 +4,15 @@
 
 namespace TTServerMaker.Engine.Factories
 {
-    using TTServerMaker.Engine.Exceptions;
-    using TTServerMaker.Engine.Models;
-    using TTServerMaker.Engine.Models.Servers;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using TTServerMaker.Engine.Exceptions;
+    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
     /// Creates server objects.
@@ -22,7 +23,7 @@ namespace TTServerMaker.Engine.Factories
         /// Creates a new server instance with the appropriate server based on the server settings.
         /// </summary>
         /// <param name="serverSettings">The server settings contatining the type of the new server.</param>
-        /// <returns>New server instance</returns>
+        /// <returns>New server instance.</returns>
         public static ServerBase CreateNewServerInstance(ServerSettings serverSettings)
         {
             Type serverType = default;
@@ -45,8 +46,8 @@ namespace TTServerMaker.Engine.Factories
         /// </summary>
         /// <param name="serverName">The name of the server.</param>
         /// <param name="typeString">The string representation of the server type.</param>
-        /// <returns></returns>
-        internal static ServerSettings CreateNewServerFolder(string serverName, string typeString)
+        /// <returns>Returns the server settings stored in the new folder.</returns> // TODO weird?
+        internal static async Task<ServerSettings> CreateNewServerFolderAsync(string serverName, string typeString)
         {
             string folderName = MakeStringFoldernameFriendly(serverName);
 
@@ -72,16 +73,16 @@ namespace TTServerMaker.Engine.Factories
             basicInfo.ServerImagePath = basicInfo.ServerImagePath;
 
             // Saving the new basic server info to file
-            basicInfo.SaveChanges();
+            await basicInfo.SaveChangesAsync();
 
             return basicInfo;
         }
 
         /// <summary>
-        /// Makes any string foldername friendly by replacing/removing forbidden characters. (e.g: "#Árvíz néző" => "ArvizNezo")
+        /// Makes any string foldername friendly by replacing/removing forbidden characters. (e.g: "#Árvíz néző" => "ArvizNezo").
         /// </summary>
-        /// <param name="folderName">The string to convert</param>
-        /// <returns>Directory name friendly string</returns>
+        /// <param name="folderName">The string to convert.</param>
+        /// <returns>Directory name friendly string.</returns>
         private static string MakeStringFoldernameFriendly(string folderName)
         {
             // Capitalizing letters after spaces, for better readability

@@ -1,4 +1,8 @@
-﻿namespace TTServerMaker.Engine.Models.Servers
+﻿// <copyright file="VanillaServer.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
+
+namespace TTServerMaker.Engine.Models.Servers
 {
     /// <summary>
     /// The vanillia minecraft server.
@@ -14,6 +18,7 @@
         {
         }
 
+        /// <inheritdoc/>
         public override string ServerTypeStr
         {
             get { return "Vanilla"; }

@@ -4,10 +4,10 @@
 
 namespace TTServerMaker.Engine
 {
-    using Newtonsoft.Json;
     using System;
     using System.IO;
     using System.Windows;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The application settings.

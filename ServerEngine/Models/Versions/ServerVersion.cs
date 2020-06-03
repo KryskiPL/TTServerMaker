@@ -1,38 +1,56 @@
-﻿namespace TTServerMaker.Engine.Models.Versions
+﻿// <copyright file="ServerVersion.cs" company="TThread">
+// Copyright (c) TThread. All rights reserved.
+// </copyright>
+
+namespace TTServerMaker.Engine.Models.Versions
 {
-    using Newtonsoft.Json;
     using System;
+    using Newtonsoft.Json;
 
+    /// <summary>
+    /// A server version.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    abstract public class ServerVersion : IComparable<ServerVersion>
+    public abstract class ServerVersion : IComparable<ServerVersion>
     {
-        [JsonProperty]
-        public string VersionString { get; set; }
-
-        public abstract int CompareTo(ServerVersion other);
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerVersion"/> class.
         /// </summary>
-        /// <param name="VersionString"></param>
-        public ServerVersion(string VersionString)
+        /// <param name="versionString">The string describing the version.</param>
+        public ServerVersion(string versionString)
         {
-            this.VersionString = VersionString;
+            this.VersionString = versionString;
         }
 
-        public static bool operator <(ServerVersion b, ServerVersion c)
-        {
-            return b.CompareTo(c) == -1;
-        }
+        /// <summary>
+        /// Gets or sets the string representing the version. Should be enough to replicate the same version.
+        /// </summary>
+        [JsonProperty]
+        public string VersionString { get; set; }
 
-        public static bool operator >(ServerVersion b, ServerVersion c)
-        {
-            return b.CompareTo(c) == 1;
-        }
+        /// <summary>
+        /// Compares two versions.
+        /// </summary>
+        /// <param name="b">The left side of the equasion.</param>
+        /// <param name="c">The right side of the equasion.</param>
+        /// <returns>Returns the obvious result.</returns>
+        public static bool operator <(ServerVersion b, ServerVersion c) => b.CompareTo(c) == -1;
 
+        /// <summary>
+        /// Compares two versions.
+        /// </summary>
+        /// <param name="b">The left side of the equasion.</param>
+        /// <param name="c">The right side of the equasion.</param>
+        /// <returns>Returns the obvious result.</returns>
+        public static bool operator >(ServerVersion b, ServerVersion c) => b.CompareTo(c) == 1;
+
+        /// <inheritdoc/>
+        public abstract int CompareTo(ServerVersion other);
+
+        /// <inheritdoc/>
         public override string ToString()
         {
-            return VersionString;
+            return this.VersionString;
         }
     }
 }

@@ -4,21 +4,27 @@
 
 namespace TTServerMaker.Engine.Models.Servers
 {
-    using TTServerMaker.Engine.Exceptions;
-    using TTServerMaker.Engine.Models.Versions;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using TTServerMaker.Engine.Exceptions;
+    using TTServerMaker.Engine.Models.Versions;
 
+    /// <summary>
+    /// The base information about a server.
+    /// </summary>
     public abstract class ServerBase : BaseNotificationClass
     {
+        /// <summary>
+        /// The name of the file the server settings are stored in.
+        /// </summary>
         public const string ServerSettingsFilename = ".server-settings.json";
 
         /// <summary>
-        /// The list of the
+        /// The list of the images the servers can get by default.
         /// </summary>
         public static readonly string[] DefaultServerImages =
             {
@@ -32,9 +38,33 @@ namespace TTServerMaker.Engine.Models.Servers
                 "village.jpg",
             };
 
-        public string VersionType { get { return typeof(Version).Name; } }
-        public ServerVersion Version { get { return BasicInfo.Version; } set { BasicInfo.Version = value; } }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServerBase"/> class.
+        /// </summary>
+        /// <param name="basicServerInfo">The loaded basic server info.</param>
+        protected ServerBase(ServerSettings basicServerInfo)
+        {
+            this.BasicInfo = basicServerInfo;
 
+            if (!Directory.Exists(this.FolderPath))
+            {
+                throw new ArgumentException("Server folder does not exist");
+            }
+        }
+
+        /// <summary>
+        /// Gets TODO something to remove.
+        /// </summary>
+        public string VersionType { get => typeof(Version).Name; }
+
+        /// <summary>
+        /// Gets or sets the version of the server.
+        /// </summary>
+        public ServerVersion Version { get => this.BasicInfo.Version; set => this.BasicInfo.Version = value; }
+
+        /// <summary>
+        /// Gets the server properties.
+        /// </summary>
         public Properties Properties { get; private set; }
 
         /// <summary>
@@ -52,25 +82,15 @@ namespace TTServerMaker.Engine.Models.Servers
         /// </summary>
         public ServerSettings BasicInfo { get; }
 
+        /// <summary>
+        /// Gets TODO somethign to delete.
+        /// </summary>
         public abstract string ServerTypeStr { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServerBase"/> class.
+        /// Loads the server info into memory.
         /// </summary>
-        /// <param name="folderPath">The server folder path</param>
-        /// <param name="basicServerInfo">The loaded basic server info</param>
-        protected ServerBase(ServerSettings basicServerInfo)
-        {
-            this.BasicInfo = basicServerInfo;
-
-            if (!Directory.Exists(FolderPath))
-                throw new ArgumentException("Server folder does not exist");
-        }
-
-        /// <summary>
-        /// Loads up more information about the server:
-        /// Server.properties
-        /// </summary>
+        /// <returns>Returns the task of loading up.</returns>
         public async Task LoadUpAsync()
         {
             this.Properties = new Properties(this);
@@ -80,7 +100,7 @@ namespace TTServerMaker.Engine.Models.Servers
 
             // Updating last loadup time
             this.BasicInfo.DateLastLoaded = DateTime.Now;
-            this.BasicInfo.SaveChanges();
+            await this.BasicInfo.SaveChangesAsync();
 
             this.FullyLoadedUp = true;
         }
