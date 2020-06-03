@@ -134,11 +134,13 @@
     <Compile Include="CustomControls\WindowHeader.xaml.cs">
       <DependentUpon>WindowHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DialogCloser.cs" />
+    <Compile Include="Services\WindowsFolderSelectorService.cs" />
     <Compile Include="Validators\AllowedCharactersValidator.cs" />
     <Compile Include="Validators\IPAddressValidator.cs" />
     <Compile Include="Validators\ServerEditValidation.cs" />
     <Compile Include="Validators\TextLengthValidator.cs" />
-    <Compile Include="Views\FirstStart\FirstStartWindow.xaml.cs">
+    <Compile Include="Views\FirstStartWindow.xaml.cs">
       <DependentUpon>FirstStartWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\Dialogs\HelpDialog.xaml">
@@ -227,7 +229,7 @@
       <DependentUpon>ServerSelectWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\FirstStart\FirstStartWindow.xaml">
+    <Page Include="Views\FirstStartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

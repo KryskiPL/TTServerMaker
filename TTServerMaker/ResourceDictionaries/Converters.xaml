@@ -7,6 +7,7 @@
     <converters:BoolToNegatedBoolConverter x:Key="BoolToNegatedBoolConverter" />
     <converters:BoolToVisibilityConverter x:Key="BooleanToHiddenConverter" TrueValue="Visible" FalseValue="Hidden" />
     <converters:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+    <converters:NullToBoolConverter x:Key="NullToBooleanConverter" />
 
     <math:MathConverter x:Key="Math" />
 </ResourceDictionary>

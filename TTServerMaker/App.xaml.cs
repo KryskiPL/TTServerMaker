@@ -5,8 +5,13 @@
 namespace TTServerMaker.WPF
 {
     using System.Windows;
+    using CommonServiceLocator;
+    using GalaSoft.MvvmLight.Ioc;
+    using GalaSoft.MvvmLight.Messaging;
     using TTServerMaker.Engine;
+    using TTServerMaker.Engine.Services;
     using TTServerMaker.Engine.ViewModels;
+    using TTServerMaker.WPF.Services;
 
     /// <summary>
     /// Interaction logic for App.xaml.
@@ -15,6 +20,9 @@ namespace TTServerMaker.WPF
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            // Registering IoC
+            this.RegisterIoC();
+
             Views.MainWindow mainWindow = new Views.MainWindow();
             this.MainWindow = mainWindow;
 
@@ -45,6 +53,20 @@ namespace TTServerMaker.WPF
 
             mainWindow.DataContext = mainWindowVM;
             mainWindow.Show();
+        }
+
+        private void RegisterIoC()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SimpleIoc.Default
+                .Register<IServerInfoLoadingService, ServerInfoLoadingService>();
+
+            SimpleIoc.Default
+                .Register<IFolderSelectorService, WindowsFolderSelectorService>();
+
+            SimpleIoc.Default.Register
+                <IMessenger>(() => Messenger.Default);
         }
     }
 }
