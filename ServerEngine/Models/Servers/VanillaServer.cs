@@ -13,15 +13,12 @@ namespace TTServerMaker.Engine.Models.Servers
         /// Initializes a new instance of the <see cref="VanillaServer"/> class.
         /// </summary>
         /// <param name="basicServerInfo">The basic server info.</param>
-        public VanillaServer(ServerSettings basicServerInfo)
+        public VanillaServer(BasicInfo basicServerInfo)
             : base(basicServerInfo)
         {
         }
 
         /// <inheritdoc/>
-        public override string ServerTypeStr
-        {
-            get { return "Vanilla"; }
-        }
+        public override string ServerTypeStr => "Vanilla";
     }
 }

@@ -11,7 +11,7 @@ namespace TTServerMaker.Engine.Models.Versions
     /// A server version.
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class ServerVersion : IComparable<ServerVersion>
+    public abstract class ServerVersion : IComparable<ServerVersion> // TODO interface
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerVersion"/> class.

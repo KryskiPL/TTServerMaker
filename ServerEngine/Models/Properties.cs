@@ -4,7 +4,6 @@
 
 namespace TTServerMaker.Engine.Models
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -38,10 +37,10 @@ namespace TTServerMaker.Engine.Models
         /// <inheritdoc/>
         public int Count => this.properties.Count;
 
-        /// <inheritdoc/>
+        /// <inheritdoc/> // Required for collection
         public bool IsReadOnly => false;
 
-        private string PropertiesFilePath => Path.Combine(this.server.FolderPath, Filename);
+        private string PropertiesFilePath => Path.Combine(this.server.BasicInfo.Folder, Filename);
 
         /// <summary>
         /// Gives the value of a server property setting, or an empty string if not found.

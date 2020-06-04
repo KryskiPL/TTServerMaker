@@ -11,7 +11,6 @@ namespace TTServerMaker.Engine.Factories
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using TTServerMaker.Engine.Exceptions;
-    using TTServerMaker.Engine.Models;
     using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
@@ -19,6 +18,7 @@ namespace TTServerMaker.Engine.Factories
     /// </summary>
     internal class ServerFactory
     {
+        /*
         /// <summary>
         /// Creates a new server instance with the appropriate server based on the server settings.
         /// </summary>
@@ -128,5 +128,6 @@ namespace TTServerMaker.Engine.Factories
 
             return folderName;
         }
+        */
     }
 }

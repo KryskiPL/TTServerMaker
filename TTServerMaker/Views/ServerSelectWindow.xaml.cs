@@ -10,7 +10,6 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Controls;
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
-    using TTServerMaker.Engine.Models;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.ViewModels;
     using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
@@ -41,21 +40,23 @@ namespace TTServerMaker.WPF.Views
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
-        public SelectServerVM SelectServerVM { get; set; } = new SelectServerVM();
+        public ServerSelectWindowVM SelectServerVM { get; set; } = new ServerSelectWindowVM();
 
         /// <summary>
         /// Gets or sets the currently selected server.
         /// </summary>
-        public ServerSettings SelectedServer { get; set; }
+        public BasicInfo SelectedServer { get; set; }
 
         private async void LoadUpButton_Click(object sender, RoutedEventArgs e)
         {
-            this.SelectedServer = (ServerSettings)(sender as FrameworkElement)?.DataContext;
+            /*
+            this.SelectedServer = (BasicInfo)(sender as FrameworkElement)?.DataContext;
 
             await this.SelectServerVM.LoadSelectedServerAsync(this.SelectedServer);
 
             this.DialogResult = true;
             this.Close();
+            */
         }
 
         private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -81,16 +82,16 @@ namespace TTServerMaker.WPF.Views
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            /*
             ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
 
             this.editDialogContent.NewEdit(server);
             await DialogHost.Show(this.editDialogContent, this.DialogHost.Identifier);
+            */
         }
 
         private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show((await DialogHost.Show(this.addDialogContent, this.DialogHost.Identifier))?.ToString());
-
             /*
             this.editDialogContent.DataContext = null;
             await EditServerDialog.ShowDialog(EditDialogContent);
@@ -100,6 +101,7 @@ namespace TTServerMaker.WPF.Views
 
         private void DeleteServerButton_Clicked(object sender, RoutedEventArgs e)
         {
+            /*
             try
             {
                 this.SelectServerVM.DeleteServer((sender as FrameworkElement)?.DataContext as ServerSettings);
@@ -108,6 +110,7 @@ namespace TTServerMaker.WPF.Views
             {
                 MessageBox.Show("Failed to delete server. " + exception.Message);
             }
+            */
         }
     }
 }

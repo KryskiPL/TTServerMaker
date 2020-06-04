@@ -297,9 +297,7 @@
   <ItemGroup>
     <Resource Include="Img\DefaultServerImages\oldgardens.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Behaviours\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Img\icon.ico" />
   </ItemGroup>

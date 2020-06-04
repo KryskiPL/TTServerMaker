@@ -13,7 +13,7 @@ namespace TTServerMaker.Engine.Models.Servers
         /// Initializes a new instance of the <see cref="ForgeServer"/> class.
         /// </summary>
         /// <param name="basicServerInfo">The basic server info.</param>
-        public ForgeServer(ServerSettings basicServerInfo)
+        public ForgeServer(BasicInfo basicServerInfo)
             : base(basicServerInfo)
         {
         }

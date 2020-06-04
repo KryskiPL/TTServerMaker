@@ -130,7 +130,7 @@ namespace TTServerMaker.Engine.ViewModels
 
             try
             {
-                ServiceLocator.Current.GetInstance<IServerInfoLoadingService>().CreateRootServerFolder(folderPath);
+                ServiceLocator.Current.GetInstance<IBasicInfoManagerService>().CreateRootServerFolder(folderPath);
             }
             catch (Exception e)
             {

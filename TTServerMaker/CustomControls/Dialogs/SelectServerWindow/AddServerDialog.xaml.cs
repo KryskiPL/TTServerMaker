@@ -13,13 +13,13 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
     /// </summary>
     public partial class AddServerDialog : UserControl
     {
-        private readonly SelectServerVM selectServerVM;
+        private readonly ServerSelectWindowVM selectServerVM;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddServerDialog"/> class.
         /// </summary>
         /// <param name="selectServerViewModel">The parent view model.</param>
-        public AddServerDialog(SelectServerVM selectServerViewModel)
+        public AddServerDialog(ServerSelectWindowVM selectServerViewModel)
         {
             this.InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO Validation
-            this.selectServerVM.CreateNewServer(this.ServerNameTextBox.Text); // TODO Server type
+            // this.selectServerVM.CreateNewServer(this.ServerNameTextBox.Text); // TODO Server type
         }
     }
 }

@@ -7,7 +7,7 @@ namespace TTServerMaker.WPF.Validators
     using System.Globalization;
     using System.Windows.Controls;
     using System.Windows.Data;
-    using TTServerMaker.Engine.Models;
+    using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
     /// Validates the settings of a server edit.
@@ -19,8 +19,8 @@ namespace TTServerMaker.WPF.Validators
         {
             BindingGroup bg = value as BindingGroup;
 
-            // Getting the BasicServerInfo object
-            ServerSettings basicInfo = bg.Items[1] as ServerSettings;
+            // Getting the BasicInfo object
+            BasicInfo basicInfo = bg.Items[1] as BasicInfo;
 
             if (basicInfo.Name.Length <= 3)
             {

@@ -9,6 +9,7 @@ namespace TTServerMaker.WPF
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Messaging;
     using TTServerMaker.Engine;
+    using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
     using TTServerMaker.Engine.ViewModels;
     using TTServerMaker.WPF.Services;
@@ -29,30 +30,44 @@ namespace TTServerMaker.WPF
             // Showing the greeting screen (with folder selection) on first startup
             if (AppSettings.FirstLaunch)
             {
-                Views.FirstStartWindow firstStartWindow = new Views.FirstStartWindow();
-
-                bool? dialogResult = firstStartWindow.ShowDialog();
-                if (!dialogResult.HasValue || !dialogResult.Value)
-                {
-                    this.Shutdown();
-                }
+                this.ShowFirstLaunchWindow();
             }
 
             // Showing the server select dialog
+            BasicInfo info = this.ShowServerSelectWindow();
+
+            // MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectServerVM.LoadedServer);
+
+            // mainWindow.DataContext = mainWindowVM;
+            // mainWindow.Show();
+        }
+
+        private bool ShowFirstLaunchWindow()
+        {
+            Views.FirstStartWindow firstStartWindow = new Views.FirstStartWindow();
+
+            bool? dialogResult = firstStartWindow.ShowDialog();
+            if (!dialogResult.HasValue || !dialogResult.Value)
+            {
+                this.Shutdown();
+            }
+
+            return true;
+        }
+
+        private BasicInfo ShowServerSelectWindow()
+        {
             Views.ServerSelectWindow serverSelectWindow = new Views.ServerSelectWindow();
             bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
-            if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value ||
-                serverSelectWindow.SelectServerVM.LoadedServer == null)
+            BasicInfo selectedServer = (serverSelectWindow.DataContext as ServerSelectWindowVM).SelectedServer;
+            if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value || selectedServer == null)
             {
                 this.Shutdown();
-                return;
+                return null;
             }
 
-            MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectServerVM.LoadedServer);
-
-            mainWindow.DataContext = mainWindowVM;
-            mainWindow.Show();
+            return selectedServer;
         }
 
         private void RegisterIoC()
@@ -60,10 +75,13 @@ namespace TTServerMaker.WPF
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default
-                .Register<IServerInfoLoadingService, ServerInfoLoadingService>();
+                .Register<IBasicInfoManagerService, BasicInfoManagerService>();
 
             SimpleIoc.Default
                 .Register<IFolderSelectorService, WindowsFolderSelectorService>();
+
+            SimpleIoc.Default
+                .Register<IBasicInfoManagerService, BasicInfoManagerService>();
 
             SimpleIoc.Default.Register
                 <IMessenger>(() => Messenger.Default);

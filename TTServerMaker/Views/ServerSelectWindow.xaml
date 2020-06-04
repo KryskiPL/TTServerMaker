@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
-    d:DataContext="{d:DesignInstance viewModels:SelectServerVM}"
+    d:DataContext="{d:DesignInstance viewModels:ServerSelectWindowVM}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -18,11 +18,15 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     Title="TT Server Maker"
-    Height="728.8" Width="410"
+    Height="728.8"
+    Width="410"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     ResizeMode="NoResize"
     PreviewMouseUp="ScrollViewer_PreviewMouseLeftButtonUp">
+    <Window.DataContext>
+        <viewModels:ServerSelectWindowVM />
+    </Window.DataContext>
     <WindowChrome.WindowChrome>
         <WindowChrome
             ResizeBorderThickness="5"
@@ -31,159 +35,202 @@
             GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
 
-    <!--#region Dialogs -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <customControls:WindowHeader
-                IsMaximizable="False" />
-
-            <materialDesign:DialogHost
-                x:Name="DialogHost"
-                Identifier="dialogHost"
-                Grid.Row="1"
-                CloseOnClickAway="True">
+        <customControls:WindowHeader
+            IsMaximizable="False" />
+        <!--#region Dialogs -->
+        <materialDesign:DialogHost
+            x:Name="DialogHost"
+            Identifier="dialogHost"
+            Grid.Row="1"
+            CloseOnClickAway="True">
             <!--#endregion-->
 
-            <Grid Grid.Row="2" Margin="14,10,14,24">
+            <Grid
+                Grid.Row="2"
+                Margin="14,10,14,24">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="354*" />
-                    <RowDefinition Height="227*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="354*" />
+                    <RowDefinition
+                        Height="227*" />
+                    <RowDefinition
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!--#region Header-->
                 <!-- Gray line on top -->
-                <Border Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="LightGray" Margin="10,0,10,0" />
+                <Border
+                    Grid.Row="0"
+                    BorderThickness="0,0,0,2"
+                    BorderBrush="LightGray"
+                    Margin="10,0,10,0" />
 
                 <!-- My Servers label -->
                 <DockPanel>
                     <TextBlock
-                FontSize="20"
-                Margin="10,10,0,23">
+                        FontSize="20"
+                        Margin="10,10,0,23">
                 My Servers
                     </TextBlock>
 
                     <Button
-                    Style="{StaticResource MaterialDesignToolButton}"
-                    Width="30"
-                    Padding="2 0 2 0"
-                    ToolTip="Settings"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,10,10"
-                    materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="Settings" Width="23" Height="23" />
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        ToolTip="Settings"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,10"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon
+                            Kind="Settings"
+                            Width="23"
+                            Height="23" />
                     </Button>
                 </DockPanel>
                 <!--#endregion-->
 
                 <!--#region Server list-->
-                <ScrollViewer Grid.Row="1"
-                          Grid.RowSpan="2"
-                          VerticalScrollBarVisibility="Hidden" Margin="0,0,0,50"
-                          PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
-                          PreviewMouseMove="ScrollViewer_PreviewMouseMove"
-                          CanContentScroll="True"
-                          x:Name="ScrollViewer">
-                    <ItemsControl Name="ServerList" ItemsSource="{Binding ServerSettingsList}"  Padding="10">
+                <ScrollViewer
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    VerticalScrollBarVisibility="Hidden"
+                    Margin="0,0,0,50"
+                    PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
+                    PreviewMouseMove="ScrollViewer_PreviewMouseMove"
+                    CanContentScroll="True"
+                    x:Name="ScrollViewer">
+                    <ItemsControl
+                        Name="ServerList"
+                        ItemsSource="{Binding ServerInfoList}"
+                        Padding="10">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Margin="0,0,0,20"  UniformCornerRadius="25"  Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                <materialDesign:Card
+                                    Margin="0,0,0,20"
+                                    UniformCornerRadius="25"
+                                    Height="200"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="131" />
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition
+                                                Height="131" />
+                                            <RowDefinition
+                                                Height="Auto" />
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*" />
-                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition
+                                                Width="3*" />
+                                            <ColumnDefinition
+                                                Width="1*" />
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Server picture -->
-                                        <Image Grid.ColumnSpan="2"
-                                           VerticalAlignment="Center" Grid.Row="0"
-                                           Source="{Binding ServerImagePath, FallbackValue={StaticResource DesignServerImage}}"
-                                           Stretch="UniformToFill" />
+                                        <Image
+                                            Grid.ColumnSpan="2"
+                                            VerticalAlignment="Center"
+                                            Grid.Row="0"
+                                            Source="{Binding Image.Path, FallbackValue={StaticResource DesignServerImage}}"
+                                            Stretch="UniformToFill" />
 
                                         <!-- Load button -->
                                         <Button
-                                                Click="LoadUpButton_Click"
-                                                Grid.Row="0"
-                                                ToolTip="Load up server"
-                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Bottom"
-                                                BorderBrush="Transparent"
-                                                Width="46"
-                                                materialDesign:ButtonProgressAssist.Value="-1"
-                                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                                                Height="46"
-                                                Margin="0,0,20,38" Grid.RowSpan="2" Grid.Column="1">
-                                            <materialDesign:PackIcon Width="18" Height="18" Kind="Send" />
+                                            Click="LoadUpButton_Click"
+                                            Grid.Row="0"
+                                            ToolTip="Load up server"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            BorderBrush="Transparent"
+                                            Width="46"
+                                            materialDesign:ButtonProgressAssist.Value="-1"
+                                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                            Height="46"
+                                            Margin="0,0,20,38"
+                                            Grid.RowSpan="2"
+                                            Grid.Column="1">
+                                            <materialDesign:PackIcon
+                                                Width="18"
+                                                Height="18"
+                                                Kind="Send" />
                                             <Button.Background>
-                                                <LinearGradientBrush StartPoint="0.9,0" EndPoint="0,1">
-                                                    <GradientStop Color="{StaticResource GradientBlue}" Offset="1.1" />
-                                                    <GradientStop Color="{StaticResource GradientPink}" />
+                                                <LinearGradientBrush
+                                                    StartPoint="0.9,0"
+                                                    EndPoint="0,1">
+                                                    <GradientStop
+                                                        Color="{StaticResource GradientBlue}"
+                                                        Offset="1.1" />
+                                                    <GradientStop
+                                                        Color="{StaticResource GradientPink}" />
                                                 </LinearGradientBrush>
                                             </Button.Background>
                                         </Button>
                                         <StackPanel
-                                        Grid.Row="1" Grid.Column="0"
-                                        Margin="10,10,0,0">
-                                            <TextBlock FontSize="16"
-                                            Margin="2"><Run Text="{Binding Name}" />
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Margin="10,10,0,0">
+                                            <TextBlock
+                                                FontSize="16"
+                                                Margin="2"><Run
+                                                    Text="{Binding Name}" />
                                             </TextBlock>
 
                                             <StackPanel
-                                            Margin="-3,0"
-                                            Orientation="Horizontal">
+                                                Margin="-3,0"
+                                                Orientation="Horizontal">
                                                 <Label
-                                                Foreground="#B1B1B1"
-                                                Margin="0"
-                                                FontSize="15"
-                                                VerticalAlignment="Center"
-                                                Content="{Binding ServerTypeStr}" />
+                                                    Foreground="#B1B1B1"
+                                                    Margin="0"
+                                                    FontSize="15"
+                                                    VerticalAlignment="Center"
+                                                    Content="{Binding ServerTypeStr}" />
 
                                                 <Label
-                                                Foreground="#B1B1B1"
-                                                Margin="-5,0"
-                                                FontSize="15"
-                                                VerticalAlignment="Center"
-                                                Content="{Binding Version.VersionString}" />
+                                                    Foreground="#B1B1B1"
+                                                    Margin="-5,0"
+                                                    FontSize="15"
+                                                    VerticalAlignment="Center"
+                                                    Content="{Binding Version.VersionString}" />
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom"
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        Margin="0,20,10,0">
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Orientation="Horizontal"
+                                            Margin="0,20,10,0">
                                             <Button
-                                            Style="{StaticResource MaterialDesignToolButton}"
-                                            Width="30"
-                                            Padding="2 0 2 0"
-                                            ToolTip="Edit Server"
-                                            Click="EditButton_Click"
-                                            materialDesign:RippleAssist.IsCentered="True">
-                                                <materialDesign:PackIcon Kind="Edit" />
+                                                Style="{StaticResource MaterialDesignToolButton}"
+                                                Width="30"
+                                                Padding="2 0 2 0"
+                                                ToolTip="Edit Server"
+                                                Click="EditButton_Click"
+                                                materialDesign:RippleAssist.IsCentered="True">
+                                                <materialDesign:PackIcon
+                                                    Kind="Edit" />
                                             </Button>
                                             <Button
-                                            ToolTip="Delete server"
-                                            Style="{StaticResource MaterialDesignToolButton}"
-                                            Width="30"
-                                            Padding="2 0 2 0"
-                                            materialDesign:RippleAssist.IsCentered="True"
-                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                                                ToolTip="Delete server"
+                                                Style="{StaticResource MaterialDesignToolButton}"
+                                                Width="30"
+                                                Padding="2 0 2 0"
+                                                materialDesign:RippleAssist.IsCentered="True"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                                                 <!--#region Delete server dialog -->
                                                 <Button.CommandParameter>
-                                                    <Grid Margin="30">
+                                                    <Grid
+                                                        Margin="30">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition />
                                                             <RowDefinition />
@@ -191,8 +238,10 @@
                                                         </Grid.RowDefinitions>
 
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*" />
-                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition
+                                                                Width="*" />
+                                                            <ColumnDefinition
+                                                                Width="*" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <TextBlock
@@ -234,7 +283,8 @@
 
                                                     <!--#endregion-->
                                                 </Button.CommandParameter>
-                                                <materialDesign:PackIcon Kind="DeleteForever" />
+                                                <materialDesign:PackIcon
+                                                    Kind="DeleteForever" />
                                             </Button>
                                         </StackPanel>
                                     </Grid>
@@ -247,32 +297,41 @@
 
                 <!--#region Footer-->
                 <!-- White gradient -->
-                <Border Grid.Row="2"
+                <Border
+                    Grid.Row="2"
                     IsHitTestVisible="False"
                     Margin="0,100,0,0"
                     PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
                     PreviewMouseMove="ScrollViewer_PreviewMouseMove">
                     <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Color="Transparent" />
-                            <GradientStop Color="White" Offset="0.526" />
-                            <GradientStop Color="#D2FFFFFF" Offset="0.396" />
+                        <LinearGradientBrush
+                            StartPoint="0,0"
+                            EndPoint="0,1">
+                            <GradientStop
+                                Color="Transparent" />
+                            <GradientStop
+                                Color="White"
+                                Offset="0.526" />
+                            <GradientStop
+                                Color="#D2FFFFFF"
+                                Offset="0.396" />
                         </LinearGradientBrush>
                     </Border.Background>
                 </Border>
                 <!-- Add server button -->
-                <Button Grid.Row="2"
-                        FontSize="16"
-                        Width="330"
-                        Style="{StaticResource RoundPrimaryButton}"
-                        Click="AddNewServerButton_Click"
-                        VerticalAlignment="Bottom"
-                        Height="42">
+                <Button
+                    Grid.Row="2"
+                    FontSize="16"
+                    Width="330"
+                    Style="{StaticResource RoundPrimaryButton}"
+                    Click="AddNewServerButton_Click"
+                    VerticalAlignment="Bottom"
+                    Height="42">
                     + Add new server
                 </Button>
 
                 <!--#endregion-->
             </Grid>
-            </materialDesign:DialogHost>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>

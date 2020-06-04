@@ -79,22 +79,27 @@
     <Compile Include="Exceptions\FileCorruptedException.cs" />
     <Compile Include="Exceptions\ServerNotLoadedException.cs" />
     <Compile Include="Factories\ServerFactory.cs" />
-    <Compile Include="Models\ServerSettings.cs" />
+    <Compile Include="Models\Servers\ServerImage.cs" />
+    <Compile Include="Models\Servers\ServerSettings.cs" />
     <Compile Include="Models\Properties.cs" />
+    <Compile Include="Models\Servers\BasicInfo.cs" />
     <Compile Include="Models\Servers\ForgeServer.cs" />
     <Compile Include="Models\Servers\ServerBase.cs" />
+    <Compile Include="Models\Servers\ServerTypesEnum.cs" />
     <Compile Include="Models\Servers\VanillaServer.cs" />
     <Compile Include="Models\Versions\VanillaOfficialVersion.cs" />
     <Compile Include="Models\Versions\VanillaSnapshotVersion.cs" />
     <Compile Include="Models\Versions\ServerVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IFolderSelectorService.cs" />
-    <Compile Include="Services\IServerInfoLoadingService.cs" />
-    <Compile Include="Services\ServerInfoLoadingService.cs" />
+    <Compile Include="Services\IBasicInfoManagerService.cs" />
+    <Compile Include="Services\BasicInfoManagerService.cs" />
+    <Compile Include="Services\IServerSettingsManagerService.cs" />
+    <Compile Include="Services\ServerSettingsManagerService.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\FirstStartWindowVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
-    <Compile Include="ViewModels\SelectServerVM.cs" />
+    <Compile Include="ViewModels\ServerSelectWindowVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="oenik.ruleset" />
