@@ -18,12 +18,9 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
         /// <summary>
         /// Initializes a new instance of the <see cref="AddServerDialog"/> class.
         /// </summary>
-        /// <param name="selectServerViewModel">The parent view model.</param>
-        public AddServerDialog(ServerSelectWindowVM selectServerViewModel)
+        public AddServerDialog()
         {
             this.InitializeComponent();
-
-            this.selectServerVM = selectServerViewModel;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

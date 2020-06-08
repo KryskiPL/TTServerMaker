@@ -10,6 +10,7 @@
     mc:Ignorable="d"
     xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
+    xmlns:Dialogs="clr-namespace:TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow"
     d:DataContext="{d:DesignInstance viewModels:ServerSelectWindowVM}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
@@ -27,6 +28,17 @@
     <Window.DataContext>
         <viewModels:ServerSelectWindowVM />
     </Window.DataContext>
+
+    <Window.Resources>
+        <Dialogs:EditServerDialog
+            x:Key="EditDialogContent"
+            x:Name="EditDialogContent"/>
+
+        <Dialogs:AddServerDialog
+            x:Key="AddDialogContent"
+            x:Name="AddDialogContent" />
+    </Window.Resources>
+    
     <WindowChrome.WindowChrome>
         <WindowChrome
             ResizeBorderThickness="5"
@@ -51,6 +63,20 @@
             Identifier="dialogHost"
             Grid.Row="1"
             CloseOnClickAway="True">
+
+            <materialDesign:DialogHost.DialogContentTemplate>
+                <DataTemplate
+                    DataType="local:Person">
+                    <StackPanel
+                        Margin="20">
+                        <TextBlock
+                            Text="{Binding FirstName}" />
+                        <TextBlock
+                            Text="{Binding LastName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </materialDesign:DialogHost.DialogContentTemplate>
+
             <!--#endregion-->
 
             <Grid
@@ -80,7 +106,7 @@
                     <TextBlock
                         FontSize="20"
                         Margin="10,10,0,23">
-                My Servers
+                        My Servers
                     </TextBlock>
 
                     <Button
@@ -181,8 +207,8 @@
                                             Margin="10,10,0,0">
                                             <TextBlock
                                                 FontSize="16"
-                                                Margin="2"><Run
-                                                    Text="{Binding Name}" />
+                                                Text="{Binding Name}"
+                                                Margin="2">
                                             </TextBlock>
 
                                             <StackPanel
@@ -216,6 +242,8 @@
                                                 Padding="2 0 2 0"
                                                 ToolTip="Edit Server"
                                                 Click="EditButton_Click"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                CommandParameter="{StaticResource ResourceKey=AddDialogContent}"
                                                 materialDesign:RippleAssist.IsCentered="True">
                                                 <materialDesign:PackIcon
                                                     Kind="Edit" />
@@ -247,7 +275,7 @@
                                                         <TextBlock
                                                             Grid.ColumnSpan="2"
                                                             Margin="0 0 0 10"
-                                                            Style="{StaticResource MaterialDesignHeadline1TextBlock}">
+                                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
                                                             Deleting server
                                                         </TextBlock>
 

@@ -19,9 +19,7 @@ namespace TTServerMaker.WPF.Views
     /// </summary>
     public partial class ServerSelectWindow : Window
     {
-        private readonly EditServerDialog editDialogContent = new EditServerDialog();
-        private readonly AddServerDialog addDialogContent;
-
+        // Fields for scrolling
         private Point scrollMousePoint = default;
         private double vOff = 1;
         private bool dragScrolling = false;
@@ -33,8 +31,8 @@ namespace TTServerMaker.WPF.Views
         {
             this.InitializeComponent();
 
-            this.DataContext = this.SelectServerVM;
-            this.addDialogContent = new AddServerDialog(this.SelectServerVM);
+           // this.DataContext = this.SelectServerVM;
+           // this.addDialogContent = new AddServerDialog(this.SelectServerVM);
         }
 
         /// <summary>

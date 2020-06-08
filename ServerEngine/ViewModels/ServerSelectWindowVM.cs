@@ -1,4 +1,4 @@
-﻿// <copyright file="SelectServerVM.cs" company="TThread">
+﻿// <copyright file="ServerSelectWindowVM.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 

@@ -81,7 +81,7 @@ namespace TTServerMaker.WPF
                 .Register<IFolderSelectorService, WindowsFolderSelectorService>();
 
             SimpleIoc.Default
-                .Register<IBasicInfoManagerService, BasicInfoManagerService>();
+                .Register<IServerSettingsManagerService, ServerSettingsManagerService>();
 
             SimpleIoc.Default.Register
                 <IMessenger>(() => Messenger.Default);
