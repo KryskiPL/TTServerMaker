@@ -17,6 +17,7 @@
     xmlns:vm="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:CustomControls="clr-namespace:TTServerMaker.WPF.CustomControls"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance vm:FirstStartWindowVM, IsDesignTimeCreatable=True}"
     Icon="/TTServerMaker.WPF;component/Img/icon.ico"
     Title="Welcome"
     Height="550"
@@ -24,9 +25,6 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     ResizeMode="NoResize">
-    <Window.DataContext>
-        <vm:FirstStartWindowVM />
-    </Window.DataContext>
     <WindowChrome.WindowChrome>
         <WindowChrome
             ResizeBorderThickness="0"
@@ -34,6 +32,9 @@
             CornerRadius="{StaticResource WindowCornerRadius}"
             GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <vm:FirstStartWindowVM/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition

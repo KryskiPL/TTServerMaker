@@ -10,10 +10,7 @@
              xmlns:system1="clr-namespace:System;assembly=System"
              Startup="OnStartup">
     <Application.Resources>
-
         <ResourceDictionary>
-
-
             <Style TargetType="FrameworkElement" x:Key="VisibleAnimation">
                 <Setter Property="Visibility" Value="Hidden" />
                 <Setter Property="Opacity" Value="0" />
@@ -23,7 +20,7 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                             From="0.0" To="1.0" Duration="0:0:0.2" />
+                                        From="0.0" To="1.0" Duration="0:0:0.2" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </Trigger.EnterActions>

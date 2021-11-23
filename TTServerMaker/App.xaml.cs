@@ -36,10 +36,10 @@ namespace TTServerMaker.WPF
             // Showing the server select dialog
             BasicInfo info = this.ShowServerSelectWindow();
 
-            // MainWindowVM mainWindowVM = new MainWindowVM(serverSelectWindow.SelectServerVM.LoadedServer);
+            //MainWindowVM mainWindowVM = new MainWindowVM(new VanillaServer(new BasicInfo() { Name ="My First Server"}));
 
-            // mainWindow.DataContext = mainWindowVM;
-            // mainWindow.Show();
+            //mainWindow.DataContext = mainWindowVM;
+            //mainWindow.Show();
         }
 
         private bool ShowFirstLaunchWindow()

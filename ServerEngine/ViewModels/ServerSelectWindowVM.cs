@@ -52,7 +52,7 @@ namespace TTServerMaker.Engine.ViewModels
             task.ContinueWith((a) =>
             {
                 this.ServerInfoList = a.Result;
-                this.ServerInfoList.Add(new BasicInfo { Name = "sup" });
+                this.ServerInfoList.Add(new BasicInfo { Name = "My first server", ServerType = ServerType.Vanilla, DateLastLoaded = DateTime.Now });
             });
             task.Start();
         }
