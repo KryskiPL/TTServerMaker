@@ -1,4 +1,4 @@
-# Welcome to the TT Server Maker wiki!
+# Welcome to the TT Server Maker!
 
 ***
 
