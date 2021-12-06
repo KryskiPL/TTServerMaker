@@ -1,0 +1,200 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CodeAnalysisRuleSet />
+    <DocumentationFile>bin\Debug\TTServerMaker.WPF.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TTServerMaker.WPF.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\village.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\swamp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\swamp2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\jungle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\train.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\oldhub.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\DefaultServerImages\oldgardens.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Logo\logo_150x150.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\SettingIcons\commandblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\SeverIcons\blocks\28bwn7q.png" />
+    <Resource Include="Img\SeverIcons\blocks\2918.png" />
+    <Resource Include="Img\SeverIcons\blocks\542e768c85c0a.png" />
+    <Resource Include="Img\SeverIcons\blocks\64px-Lapis_Lazuli_Block.png" />
+    <Resource Include="Img\SeverIcons\blocks\bedrock.png" />
+    <Resource Include="Img\SeverIcons\blocks\bookshelf.png" />
+    <Resource Include="Img\SeverIcons\blocks\brick.png" />
+    <Resource Include="Img\SeverIcons\blocks\cactus_side.png" />
+    <Resource Include="Img\SeverIcons\blocks\cake_side.png" />
+    <Resource Include="Img\SeverIcons\blocks\cake_top.png" />
+    <Resource Include="Img\SeverIcons\blocks\coal_ore.png" />
+    <Resource Include="Img\SeverIcons\blocks\cobblestone.png" />
+    <Resource Include="Img\SeverIcons\blocks\cobblestone_mossy.png" />
+    <Resource Include="Img\SeverIcons\blocks\command_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\crafting_table_front.png" />
+    <Resource Include="Img\SeverIcons\blocks\crafting_table_top.png" />
+    <Resource Include="Img\SeverIcons\blocks\diamond_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\dirt.png" />
+    <Resource Include="Img\SeverIcons\blocks\dispenser_front_horizontal.png" />
+    <Resource Include="Img\SeverIcons\blocks\emerald_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\furnace_front_off.png" />
+    <Resource Include="Img\SeverIcons\blocks\furnace_front_on.png" />
+    <Resource Include="Img\SeverIcons\blocks\glowstone.png" />
+    <Resource Include="Img\SeverIcons\blocks\gold_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\ice.png" />
+    <Resource Include="Img\SeverIcons\blocks\iron_bars.png" />
+    <Resource Include="Img\SeverIcons\blocks\iron_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\iron_ore.png" />
+    <Resource Include="Img\SeverIcons\blocks\Item_Vines.png" />
+    <Resource Include="Img\SeverIcons\blocks\jukebox_side.png" />
+    <Resource Include="Img\SeverIcons\blocks\ladder.png" />
+    <Resource Include="Img\SeverIcons\blocks\lapis_block.png" />
+    <Resource Include="Img\SeverIcons\blocks\lapis_ore.png" />
+    <Resource Include="Img\SeverIcons\blocks\melon_side.png" />
+    <Resource Include="Img\SeverIcons\blocks\netherrack.png" />
+    <Resource Include="Img\SeverIcons\blocks\piston_top_normal.png" />
+    <Resource Include="Img\SeverIcons\blocks\piston_top_sticky.png" />
+    <Resource Include="Img\SeverIcons\blocks\prismarine_bricks.png" />
+    <Resource Include="Img\SeverIcons\blocks\prismarine_dark.png" />
+    <Resource Include="Img\SeverIcons\blocks\quartz_block_chiseled.png" />
+    <Resource Include="Img\SeverIcons\blocks\rail_normal.png" />
+    <Resource Include="Img\SeverIcons\blocks\redstone_lamp_off.png" />
+    <Resource Include="Img\SeverIcons\blocks\redstone_lamp_on.png" />
+    <Resource Include="Img\SeverIcons\blocks\sponge.png" />
+    <Resource Include="Img\SeverIcons\blocks\tnt_side.png" />
+    <Resource Include="Img\SeverIcons\blocks\torch_on.png" />
+    <Resource Include="Img\SeverIcons\blocks\web.png" />
+    <Resource Include="Img\SeverIcons\faces\BatFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Blaze_Face.png" />
+    <Resource Include="Img\SeverIcons\faces\CaveSpiderFace.png" />
+    <Resource Include="Img\SeverIcons\faces\ChickenFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Chickenjockey.png" />
+    <Resource Include="Img\SeverIcons\faces\CowFace.png" />
+    <Resource Include="Img\SeverIcons\faces\CreeperFace.png" />
+    <Resource Include="Img\SeverIcons\faces\DonkeyHead.png" />
+    <Resource Include="Img\SeverIcons\faces\Elder_GuardianFace.png" />
+    <Resource Include="Img\SeverIcons\faces\EndermanFace.png" />
+    <Resource Include="Img\SeverIcons\faces\GhastFace.png" />
+    <Resource Include="Img\SeverIcons\faces\GuardianFace.png" />
+    <Resource Include="Img\SeverIcons\faces\HorseHead.png" />
+    <Resource Include="Img\SeverIcons\faces\Magma_Cube_Face.png" />
+    <Resource Include="Img\SeverIcons\faces\MooshroomFace.png" />
+    <Resource Include="Img\SeverIcons\faces\MuleHead.png" />
+    <Resource Include="Img\SeverIcons\faces\PigFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Rabbiticon.png" />
+    <Resource Include="Img\SeverIcons\faces\SheepFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Shulker.png" />
+    <Resource Include="Img\SeverIcons\faces\SkeletonFace.png" />
+    <Resource Include="Img\SeverIcons\faces\SlimeFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Snowgolemhead.png" />
+    <Resource Include="Img\SeverIcons\faces\SpiderFace.png" />
+    <Resource Include="Img\SeverIcons\faces\SpiderJockeyFace.png" />
+    <Resource Include="Img\SeverIcons\faces\Squidface.png" />
+    <Resource Include="Img\SeverIcons\faces\Villagerhead.png" />
+    <Resource Include="Img\SeverIcons\faces\Witchface2.png" />
+    <Resource Include="Img\SeverIcons\faces\WitherFace.png" />
+    <Resource Include="Img\SeverIcons\faces\WitherSkeletonHead.png" />
+    <Resource Include="Img\SeverIcons\faces\ZombieFace.png" />
+    <Resource Include="Img\SeverIcons\faces\ZombiePigmanFace.png" />
+    <Resource Include="Img\SeverIcons\faces\ZombieVillagerHead.png" />
+    <Resource Include="Img\SeverIcons\items\635357009263692269.png" />
+    <Resource Include="Img\SeverIcons\items\canvas_19.png" />
+    <Resource Include="Img\SeverIcons\items\coal-small.png" />
+    <Resource Include="Img\SeverIcons\items\diamondhelmet_icon32.png" />
+    <Resource Include="Img\SeverIcons\items\golden_apple-small.png" />
+    <Resource Include="Img\SeverIcons\items\iron_chestplate.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Diamond.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Diamond_Chestplate.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Emerald.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Iron_Ingot.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Iron_Pickaxe.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Lapis_Lazuli.png" />
+    <Resource Include="Img\SeverIcons\items\Item_Steeleaf.png" />
+    <Resource Include="Img\SeverIcons\items\stone-sword.png" />
+    <Resource Include="Img\SeverIcons\random\banana.png" />
+    <Resource Include="Img\SeverIcons\random\bow_pulling_0.png" />
+    <Resource Include="Img\SeverIcons\random\logo_white_tiny64x64.png" />
+    <Resource Include="Img\SeverIcons\random\TgcmG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TTServerMaker.Engine\TTServerMaker.Engine.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="MathConverter" Version="1.2.1.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>
