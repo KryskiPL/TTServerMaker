@@ -1,32 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TTServerMaker.Engine.Models.Versions;
-
-namespace TTServerMaker.WPF.Tests.ModelTesting
+﻿namespace TTServerMaker.WPF.Tests.ModelTesting
 {
-    [TestClass]
+    using System;
+    using NUnit.Framework;
+    using TTServerMaker.Engine.Models.Versions;
+
     public class ServerVersionTesting
     {
-        [TestClass]
         public class ServerVersionComparison
         {
-            [TestClass]
             public class VanillaServerVersionComparison
             {
-                /// <summary>
-                /// Compare two versions both ways using the .CompareTo function. Only works if the first is smaller
-                /// </summary>
-                /// <param name="Smaller"></param>
-                /// <param name="Bigger"></param>
-                private void CompareBothWays(ServerVersion Smaller, ServerVersion Bigger)
-                {
-                    Assert.AreEqual(Smaller.CompareTo(Bigger), -1);
-                    Assert.AreEqual(Bigger.CompareTo(Smaller), 1);
-                }
-
-
-                #region Official
-                [TestMethod]
+                [TestCase]
                 public void TestSameVersions()
                 {
                     VanillaOfficialVersion same = new VanillaOfficialVersion("1.2.3");
@@ -35,7 +19,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     Assert.AreEqual(same.CompareTo(another), 0);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void OneShorter()
                 {
                     VanillaOfficialVersion smaller = new VanillaOfficialVersion("1.2");
@@ -44,7 +28,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     CompareBothWays(smaller, bigger);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void Normal()
                 {
                     VanillaOfficialVersion smaller = new VanillaOfficialVersion("1.2.4");
@@ -54,7 +38,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     Assert.IsTrue(smaller < bigger);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void FirstNumberDifferent()
                 {
                     VanillaOfficialVersion smaller = new VanillaOfficialVersion("1.2.4" );
@@ -65,12 +49,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     Assert.IsTrue(smaller < bigger);
                 }
 
-
-
-                #endregion
-
-                #region Snapshot
-                [TestMethod]
+                [TestCase]
                 public void SameVersions()
                 {
                     VanillaSnapshotVersion same = new VanillaSnapshotVersion("11w10a");
@@ -79,7 +58,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     Assert.AreEqual(same.CompareTo(another), 0);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void DifferentCharacters()
                 {
                     VanillaSnapshotVersion some = new VanillaSnapshotVersion("19w03b");
@@ -88,7 +67,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     CompareBothWays(some, another);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void NewYear()
                 {
                     VanillaSnapshotVersion some = new VanillaSnapshotVersion("19w53b");
@@ -97,7 +76,7 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
                     CompareBothWays(some, another);
                 }
 
-                [TestMethod]
+                [TestCase]
                 public void NextWeek()
                 {
                     VanillaSnapshotVersion some = new VanillaSnapshotVersion("19w01z");
@@ -105,7 +84,18 @@ namespace TTServerMaker.WPF.Tests.ModelTesting
 
                     CompareBothWays(some, another);
                 }
-                #endregion
+
+                [TestCase]
+                /// <summary>
+                /// Compare two versions both ways using the .CompareTo function. Only works if the first is smaller
+                /// </summary>
+                /// <param name="smaller"></param>
+                /// <param name="bigger"></param>
+                private static void CompareBothWays(ServerVersion smaller, ServerVersion bigger)
+                {
+                    Assert.That(smaller, Is.LessThan(bigger));
+                    Assert.That(bigger, Is.GreaterThan(smaller));
+                }
             }
         }
     }

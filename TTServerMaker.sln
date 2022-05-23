@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Engine", "TTServerMaker.Engine\TTServerMaker.Engine.csproj", "{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTServerMaker.Engine", "TTServerMaker.Engine\TTServerMaker.Engine.csproj", "{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Tests", "TTServerMaker.Tests\TTServerMaker.Tests.csproj", "{F1EE79E9-7541-43D4-B10F-A9434715817D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTServerMaker.WPF", "TTServerMaker.WPF\TTServerMaker.WPF.csproj", "{B4B30B3F-C566-4F1D-9B70-757339ED0769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.WPF", "TTServerMaker.WPF\TTServerMaker.WPF.csproj", "{B4B30B3F-C566-4F1D-9B70-757339ED0769}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Test", "TTServerMaker.Test\TTServerMaker.Test.csproj", "{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACB38BF-09CA-460B-ACB9-3F89A1CD234A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1EE79E9-7541-43D4-B10F-A9434715817D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1EE79E9-7541-43D4-B10F-A9434715817D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1EE79E9-7541-43D4-B10F-A9434715817D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1EE79E9-7541-43D4-B10F-A9434715817D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4B30B3F-C566-4F1D-9B70-757339ED0769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4B30B3F-C566-4F1D-9B70-757339ED0769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B30B3F-C566-4F1D-9B70-757339ED0769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B30B3F-C566-4F1D-9B70-757339ED0769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

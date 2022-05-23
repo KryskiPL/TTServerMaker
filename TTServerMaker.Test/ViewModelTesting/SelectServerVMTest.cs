@@ -1,13 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using TTServerMaker.Engine.ViewModels;
 
 namespace TTServerMaker.WPF.Tests.ViewModelTesting
 {
-    [TestClass]
     public class SelectServerVMTest
     {
-        [TestMethod]
+        [TestCase]
         public void TestMethod1()
         {
         }
