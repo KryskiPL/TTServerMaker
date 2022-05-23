@@ -41,7 +41,7 @@ namespace TTServerMaker.Engine.API
         {
             // TODO ez persze nem ide kell, csak próbálgatom
             RestRequest request = new RestRequest(PricingUrl);
-            IRestResponse response = client.Post(request);
+            //IRestResponse response = client.Post(request);
         }
     }
 }

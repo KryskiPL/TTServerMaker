@@ -191,7 +191,7 @@
     <ProjectReference Include="..\TTServerMaker.Engine\TTServerMaker.Engine.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
     <PackageReference Include="MathConverter" Version="1.2.1.6" />
   </ItemGroup>
   <ItemGroup>
