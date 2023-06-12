@@ -5,7 +5,7 @@
 namespace TTServerMaker.Engine.Models.Servers
 {
     using System;
-    using GalaSoft.MvvmLight;
+    using CommunityToolkit.Mvvm.ComponentModel;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using TTServerMaker.Engine.Models.Versions;
@@ -30,7 +30,7 @@ namespace TTServerMaker.Engine.Models.Servers
         public string Name
         {
             get => this.name;
-            set => this.Set(ref this.name, value);
+            set => this.SetProperty(ref this.name, value);
         }
 
         /// <summary>
@@ -41,17 +41,17 @@ namespace TTServerMaker.Engine.Models.Servers
         /// <summary>
         /// Gets or sets the date and time the server was loaded last.
         /// </summary>
-        public DateTime DateLastLoaded { get => this.dateLastLoaded; set => this.Set(ref this.dateLastLoaded, value); }
+        public DateTime DateLastLoaded { get => this.dateLastLoaded; set => this.SetProperty(ref this.dateLastLoaded, value); }
 
         /// <summary>
         /// Gets or sets the date and time the server was last ran.
         /// </summary>
-        public DateTime DateLastRun { get => this.dateLastRun; set => this.Set(ref this.dateLastRun, value); }
+        public DateTime DateLastRun { get => this.dateLastRun; set => this.SetProperty(ref this.dateLastRun, value); }
 
         /// <summary>
         /// Gets or sets the date and time of the last server backup.
         /// </summary>
-        public DateTime DateLastBackup { get => this.dateLastBackup; set => this.Set(ref this.dateLastBackup, value); }
+        public DateTime DateLastBackup { get => this.dateLastBackup; set => this.SetProperty(ref this.dateLastBackup, value); }
 
         /// <summary>
         /// Gets or sets the folder where the server files are located.
@@ -60,7 +60,7 @@ namespace TTServerMaker.Engine.Models.Servers
         public string Folder
         {
             get => this.serverFolderPath;
-            set => this.Set(ref this.serverFolderPath, value.EndsWith("/") ? value : value + "/");
+            set => this.SetProperty(ref this.serverFolderPath, value.EndsWith("/") ? value : value + "/");
         }
 
         /// <summary>
@@ -70,17 +70,17 @@ namespace TTServerMaker.Engine.Models.Servers
         public ServerType ServerType
         {
             get => this.serverType;
-            set => this.Set(ref this.serverType, value);
+            set => this.SetProperty(ref this.serverType, value);
         }
 
         /// <summary>
         /// Gets or sets the version of the server.
         /// </summary>
-        public ServerVersion Version { get => this.version; set => this.Set(ref this.version, value); }
+        public ServerVersion Version { get => this.version; set => this.SetProperty(ref this.version, value); }
 
         /// <summary>
         /// Gets or sets the server's preview image.
         /// </summary>
-        public ServerImage Image { get => this.image; set => this.Set(ref this.image, value); }
+        public ServerImage Image { get => this.image; set => this.SetProperty(ref this.image, value); }
     }
 }

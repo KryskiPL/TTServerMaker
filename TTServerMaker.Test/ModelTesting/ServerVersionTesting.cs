@@ -41,8 +41,8 @@
                 [TestCase]
                 public void FirstNumberDifferent()
                 {
-                    VanillaOfficialVersion smaller = new VanillaOfficialVersion("1.2.4" );
-                    VanillaOfficialVersion bigger = new VanillaOfficialVersion("2.1" );
+                    VanillaOfficialVersion smaller = new VanillaOfficialVersion("1.2.4");
+                    VanillaOfficialVersion bigger = new VanillaOfficialVersion("2.1");
 
                     CompareBothWays(smaller, bigger);
 

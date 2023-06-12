@@ -5,9 +5,9 @@
 namespace TTServerMaker.WPF
 {
     using System.Windows;
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight.Ioc;
-    using GalaSoft.MvvmLight.Messaging;
+    using System.Windows.Navigation;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection;
     using TTServerMaker.Engine;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
@@ -72,19 +72,16 @@ namespace TTServerMaker.WPF
 
         private void RegisterIoC()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            SimpleIoc.Default
-                .Register<IBasicInfoManagerService, BasicInfoManagerService>();
-
-            SimpleIoc.Default
-                .Register<IFolderSelectorService, WindowsFolderSelectorService>();
-
-            SimpleIoc.Default
-                .Register<IServerSettingsManagerService, ServerSettingsManagerService>();
-
-            SimpleIoc.Default.Register
+            Ioc.Default.ConfigureServices(
+                  new ServiceCollection()
+                  .AddSingleton<IBasicInfoManagerService, BasicInfoManagerService>()
+                  .AddSingleton<IFolderSelectorService, WindowsFolderSelectorService>()
+                  .AddSingleton<IServerSettingsManagerService, ServerSettingsManagerService>()
+                  .BuildServiceProvider());
+            /*
+            Messenger.Register
                 <IMessenger>(() => Messenger.Default);
+             */
         }
     }
 }

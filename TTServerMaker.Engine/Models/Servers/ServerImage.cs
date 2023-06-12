@@ -10,8 +10,8 @@ namespace TTServerMaker.Engine.Models.Servers
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using GalaSoft.MvvmLight;
     using Newtonsoft.Json;
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     /// <summary>
     /// The information about the image associated with the server. Not to be confused with the server icon.
@@ -44,7 +44,7 @@ namespace TTServerMaker.Engine.Models.Servers
         /// <summary>
         /// Gets or sets the path of the server image.
         /// </summary>
-        public string Path { get => this.path; set => this.Set(ref this.path, value); }
+        public string Path { get => this.path; set => this.SetProperty(ref this.path, value); }
 
         /// <summary>
         /// Gets a value indicating whether the image exists.

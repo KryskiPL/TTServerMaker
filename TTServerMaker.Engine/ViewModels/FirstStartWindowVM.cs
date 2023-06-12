@@ -11,17 +11,16 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
     using TTServerMaker.Engine;
     using TTServerMaker.Engine.Services;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.Input;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
     /// <summary>
     /// The view model of the initial program setup.
     /// </summary>
-    public class FirstStartWindowVM : ViewModelBase
+    public class FirstStartWindowVM : ObservableRecipient
     {
         private bool shouldUseCustom;
         private string customServerFolderPath;
@@ -57,7 +56,7 @@ namespace TTServerMaker.Engine.ViewModels
         /// <summary>
         /// Gets or sets the view model about any possible errors.
         /// </summary>
-        public ErrorViewModel ErrorViewModel { get => this.errorViewModel; set => this.Set(ref this.errorViewModel, value); }
+        public ErrorViewModel ErrorViewModel { get => this.errorViewModel; set => this.SetProperty(ref this.errorViewModel, value); }
 
         /// <summary>
         /// Gets or sets a value indicating whether the setup has been completed.
@@ -65,7 +64,7 @@ namespace TTServerMaker.Engine.ViewModels
         public bool? IsDone
         {
             get { return this.isDone; }
-            set { this.Set(ref this.isDone, value); }
+            set { this.SetProperty(ref this.isDone, value); }
         }
 
         /// <summary>
@@ -81,8 +80,8 @@ namespace TTServerMaker.Engine.ViewModels
             get => this.customServerFolderPath;
             set
             {
-                this.Set(ref this.customServerFolderPath, value.Trim());
-                this.RootServerFolderConfirmCommand.RaiseCanExecuteChanged();
+                this.SetProperty(ref this.customServerFolderPath, value.Trim());
+                this.RootServerFolderConfirmCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -94,8 +93,8 @@ namespace TTServerMaker.Engine.ViewModels
             get => this.shouldUseCustom;
             set
             {
-                this.Set(ref this.shouldUseCustom, value);
-                this.RootServerFolderConfirmCommand.RaiseCanExecuteChanged();
+                this.SetProperty(ref this.shouldUseCustom, value);
+                this.RootServerFolderConfirmCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -113,7 +112,7 @@ namespace TTServerMaker.Engine.ViewModels
 
         private void SelectFolder()
         {
-            string selected = SimpleIoc.Default.GetInstance<IFolderSelectorService>().SelectFolder("Please select an empty folder to store your servers in");
+            string selected = Ioc.Default.GetService<IFolderSelectorService>().SelectFolder("Please select an empty folder to store your servers in");
 
             if (!string.IsNullOrEmpty(selected))
             {
@@ -130,7 +129,7 @@ namespace TTServerMaker.Engine.ViewModels
 
             try
             {
-                ServiceLocator.Current.GetInstance<IBasicInfoManagerService>().CreateRootServerFolder(folderPath);
+                Ioc.Default.GetService<IBasicInfoManagerService>().CreateRootServerFolder(folderPath);
             }
             catch (Exception e)
             {

@@ -9,12 +9,12 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using GalaSoft.MvvmLight;
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     /// <summary>
     /// The simple view model to use when a simple error alert should be shown.
     /// </summary>
-    public class ErrorViewModel : ViewModelBase
+    public class ErrorViewModel : ObservableRecipient
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorViewModel"/> class.

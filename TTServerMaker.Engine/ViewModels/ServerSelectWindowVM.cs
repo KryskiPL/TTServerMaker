@@ -4,6 +4,7 @@
 
 namespace TTServerMaker.Engine.ViewModels
 {
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -11,8 +12,6 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
     using TTServerMaker.Engine.Factories;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
@@ -27,7 +26,7 @@ namespace TTServerMaker.Engine.ViewModels
         /// </summary>
         public ServerSelectWindowVM()
         {
-            this.ServerInfoManager = SimpleIoc.Default.GetInstance<IBasicInfoManagerService>();
+            this.ServerInfoManager = Ioc.Default.GetService<IBasicInfoManagerService>();
 
             this.LoadServers();
         }

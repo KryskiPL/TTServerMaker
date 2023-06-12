@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "<Pending>", Scope = "type", Target = "~T:TTServerMaker.WPF.Tests.ModelTesting.ServerVersionTesting")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "No need to document", Scope = "type", Target = "~T:TTServerMaker.WPF.Tests.ModelTesting.ServerVersionTesting")]
