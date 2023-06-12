@@ -36,7 +36,7 @@ namespace TTServerMaker.WPF
             // Showing the server select dialog
             BasicInfo info = this.ShowServerSelectWindow();
 
-            //MainWindowVM mainWindowVM = new MainWindowVM(new VanillaServer(new BasicInfo() { Name ="My First Server"}));
+            MainWindowVM mainWindowVM = new MainWindowVM(new VanillaServer(new BasicInfo() { Name ="My First Server"}));
 
             //mainWindow.DataContext = mainWindowVM;
             //mainWindow.Show();
@@ -61,7 +61,7 @@ namespace TTServerMaker.WPF
             bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
             BasicInfo selectedServer = (serverSelectWindow.DataContext as ServerSelectWindowVM).SelectedServer;
-            if (!serverSelectDialogResult.HasValue || !serverSelectDialogResult.Value || selectedServer == null)
+            if (selectedServer == null)
             {
                 this.Shutdown();
                 return null;

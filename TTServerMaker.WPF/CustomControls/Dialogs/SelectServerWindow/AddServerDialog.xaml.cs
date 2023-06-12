@@ -13,8 +13,6 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
     /// </summary>
     public partial class AddServerDialog : UserControl
     {
-        private readonly ServerSelectWindowVM selectServerVM;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AddServerDialog"/> class.
         /// </summary>

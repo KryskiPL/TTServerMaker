@@ -11,6 +11,7 @@
     xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
     xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
     xmlns:Dialogs="clr-namespace:TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     d:DataContext="{d:DesignInstance viewModels:ServerSelectWindowVM}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
@@ -157,7 +158,6 @@
 
                                         <!-- Load button -->
                                         <Button
-                                            Click="LoadUpButton_Click"
                                             Grid.Row="0"
                                             ToolTip="Load up server"
                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
@@ -165,12 +165,22 @@
                                             VerticalAlignment="Bottom"
                                             BorderBrush="Transparent"
                                             Width="46"
+                                            Command="{Binding DataContext.LoadServerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                                            CommandParameter="{Binding}"
                                             materialDesign:ButtonProgressAssist.Value="-1"
                                             materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                                             Height="46"
                                             Margin="0,0,20,33"
                                             Grid.RowSpan="2"
                                             Grid.Column="1">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:CallMethodAction MethodName="Close"
+                           TargetObject="{Binding RelativeSource={RelativeSource
+                                                  Mode=FindAncestor,
+                                                  AncestorType=Window}}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
                                             <materialDesign:PackIcon
                                                 Width="18"
                                                 Height="18"

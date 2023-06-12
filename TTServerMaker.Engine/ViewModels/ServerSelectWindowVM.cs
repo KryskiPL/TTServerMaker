@@ -11,7 +11,9 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Input;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
     using TTServerMaker.Engine.Factories;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
@@ -21,12 +23,19 @@ namespace TTServerMaker.Engine.ViewModels
     /// </summary>
     public class ServerSelectWindowVM
     {
+        public ICommand LoadServerCommand { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerSelectWindowVM"/> class.
         /// </summary>
         public ServerSelectWindowVM()
         {
             this.ServerInfoManager = Ioc.Default.GetService<IBasicInfoManagerService>();
+
+            this.LoadServerCommand = new RelayCommand<BasicInfo>((parameter) =>
+            {
+                this.SelectedServer = parameter;
+            });
 
             this.LoadServers();
         }

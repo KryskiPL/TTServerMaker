@@ -30,9 +30,6 @@ namespace TTServerMaker.WPF.Views
         public ServerSelectWindow()
         {
             this.InitializeComponent();
-
-           // this.DataContext = this.SelectServerVM;
-           // this.addDialogContent = new AddServerDialog(this.SelectServerVM);
         }
 
         /// <summary>
@@ -44,18 +41,6 @@ namespace TTServerMaker.WPF.Views
         /// Gets or sets the currently selected server.
         /// </summary>
         public BasicInfo SelectedServer { get; set; }
-
-        private async void LoadUpButton_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            this.SelectedServer = (BasicInfo)(sender as FrameworkElement)?.DataContext;
-
-            await this.SelectServerVM.LoadSelectedServerAsync(this.SelectedServer);
-
-            this.DialogResult = true;
-            this.Close();
-            */
-        }
 
         private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
