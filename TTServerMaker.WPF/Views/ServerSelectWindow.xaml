@@ -63,20 +63,6 @@
             Identifier="dialogHost"
             Grid.Row="1"
             CloseOnClickAway="True">
-
-            <materialDesign:DialogHost.DialogContentTemplate>
-                <DataTemplate
-                    DataType="local:Person">
-                    <StackPanel
-                        Margin="20">
-                        <TextBlock
-                            Text="{Binding FirstName}" />
-                        <TextBlock
-                            Text="{Binding LastName}" />
-                    </StackPanel>
-                </DataTemplate>
-            </materialDesign:DialogHost.DialogContentTemplate>
-
             <!--#endregion-->
 
             <Grid
@@ -145,7 +131,7 @@
                                     Margin="0,0,0,20"
                                     UniformCornerRadius="25"
                                     Height="200"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                    materialDesign:ElevationAssist.Elevation="Dp3">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition
@@ -347,12 +333,14 @@
                     </Border.Background>
                 </Border>
                 <!-- Add server button -->
+                <!--Click="AddNewServerButton_Click"-->
                 <Button
                     Grid.Row="2"
                     FontSize="16"
                     Width="330"
                     Style="{StaticResource RoundPrimaryButton}"
-                    Click="AddNewServerButton_Click"
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                    CommandParameter="{StaticResource ResourceKey=AddDialogContent}"
                     VerticalAlignment="Bottom"
                     Height="42">
                     + Add new server

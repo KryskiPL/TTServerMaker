@@ -4,7 +4,6 @@
 
 namespace TTServerMaker.Engine.ViewModels
 {
-    using CommunityToolkit.Mvvm.DependencyInjection;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -12,6 +11,7 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using TTServerMaker.Engine.Factories;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;

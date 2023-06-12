@@ -26,7 +26,7 @@ namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO Validation
-            // this.selectServerVM.CreateNewServer(this.ServerNameTextBox.Text); // TODO Server type
+            //this.selectServerVM.CreateNewServer(this.ServerNameTextBox.Text); // TODO Server type
         }
     }
 }
