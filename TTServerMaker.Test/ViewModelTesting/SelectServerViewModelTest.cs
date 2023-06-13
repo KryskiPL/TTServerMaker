@@ -4,7 +4,7 @@
     using NUnit.Framework;
     using TTServerMaker.Engine.ViewModels;
 
-    public class SelectServerVMTest
+    public class SelectServerViewModelTest
     {
         [TestCase]
         public void TestMethod1()

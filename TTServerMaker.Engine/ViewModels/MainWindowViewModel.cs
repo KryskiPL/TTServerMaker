@@ -1,4 +1,4 @@
-﻿// <copyright file="MainWindowVM.cs" company="TThread">
+﻿// <copyright file="MainWindowViewModel.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
@@ -16,13 +16,13 @@ namespace TTServerMaker.Engine.ViewModels
     /// <summary>
     /// The view model controlling the main server settings window.
     /// </summary>
-    public class MainWindowVM
+    public class MainWindowViewModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindowVM"/> class.
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
         /// <param name="loadedServer">The currently loaded server.</param>
-        public MainWindowVM(ServerBase loadedServer)
+        public MainWindowViewModel(ServerBase loadedServer)
         {
             this.Server = loadedServer;
         }

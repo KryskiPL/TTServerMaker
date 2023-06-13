@@ -14,7 +14,7 @@
     FontFamily="{DynamicResource MaterialDesignFont}"
     FontSize="17"
     WindowStyle="None"
-    d:DataContext="{d:DesignInstance {x:Type viewModels:MainWindowVM}}"
+    d:DataContext="{d:DesignInstance {x:Type viewModels:MainWindowViewModel}}"
     Icon="pack://application:,,,/TTServerMaker.WPF;component/Img/icon.ico"
     Title="TT Server Maker" Height="596.75" Width="855"
     MinWidth="855"

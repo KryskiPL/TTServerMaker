@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTServerMaker.Engine", "TTS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTServerMaker.WPF", "TTServerMaker.WPF\TTServerMaker.WPF.csproj", "{B4B30B3F-C566-4F1D-9B70-757339ED0769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTServerMaker.Test", "TTServerMaker.Test\TTServerMaker.Test.csproj", "{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTServerMaker.Test", "TTServerMaker.Test\TTServerMaker.Test.csproj", "{3D9CF08C-1D56-4AFC-A568-A37F8F9E8EE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5AB12DF7-D62A-411A-8C2D-1364EDFBE2F9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
