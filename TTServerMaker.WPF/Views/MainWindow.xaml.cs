@@ -10,8 +10,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-using TTServerMaker.WPF.CustomControls;
-using TTServerMaker.WPF.CustomControls.Dialogs;
+using TTServerMaker.WPF.Views.CustomControls;
+using TTServerMaker.WPF.Views.CustomControls.Dialogs;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml.

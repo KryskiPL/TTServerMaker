@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
+namespace TTServerMaker.WPF.Views.CustomControls.Dialogs.SelectServerWindow;
 
 using System.Windows;
 using System.Windows.Controls;

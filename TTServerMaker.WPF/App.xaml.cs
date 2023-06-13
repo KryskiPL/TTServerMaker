@@ -48,7 +48,7 @@ public partial class App : Application
         // Showing the server select dialog
         BasicInfo info = this.ShowServerSelectWindow();
 
-        MainWindowViewModel mainWindowVM = new (new VanillaServer(new BasicInfo() { Name = "My First Server" }));
+        MainViewModel mainWindowVM = new (new VanillaServer(new BasicInfo() { Name = "My First Server" }));
 
         // mainWindow.DataContext = mainWindowVM;
         // mainWindow.Show();

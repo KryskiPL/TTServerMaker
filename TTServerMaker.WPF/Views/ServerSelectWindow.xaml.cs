@@ -12,7 +12,7 @@ using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using TTServerMaker.Engine.Models.Servers;
 using TTServerMaker.Engine.ViewModels.ServerSelect;
-using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
+using TTServerMaker.WPF.Views.CustomControls.Dialogs.SelectServerWindow;
 
 /// <summary>
 /// Interaction logic for ServerSelectWindow.xaml.

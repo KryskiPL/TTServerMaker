@@ -16,15 +16,15 @@ using TTServerMaker.Engine.Models.Servers;
 /// <summary>
 /// The view model controlling the main server settings window.
 /// </summary>
-public class MainWindowViewModel
+public class MainViewModel
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+    /// Initializes a new instance of the <see cref="MainViewModel"/> class.
     /// </summary>
     /// <param name="loadedServer">The currently loaded server.</param>
-    public MainWindowViewModel(ServerBase loadedServer)
+    public MainViewModel(ServerBase loadedServer)
     {
-        Server = loadedServer;
+        this.Server = loadedServer;
     }
 
     /// <summary>
