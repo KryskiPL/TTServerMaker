@@ -2,29 +2,28 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels.ServerSelect
+namespace TTServerMaker.Engine.ViewModels.ServerSelect;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+/// <summary>
+/// View model for adding servers.
+/// </summary>
+public class AddServerViewModel : ObservableObject
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using CommunityToolkit.Mvvm.ComponentModel;
+    private string name;
 
     /// <summary>
-    /// View model for adding servers.
+    /// Gets or sets the display name of the server.
     /// </summary>
-    public class AddServerViewModel : ObservableObject
+    public string Name
     {
-        private string name;
-
-        /// <summary>
-        /// Gets or sets the display name of the server.
-        /// </summary>
-        public string Name
-        {
-            get { return this.name; }
-            set { this.SetProperty(ref this.name, value); }
-        }
+        get { return this.name; }
+        set { this.SetProperty(ref this.name, value); }
     }
 }

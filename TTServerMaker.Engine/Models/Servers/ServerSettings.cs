@@ -4,19 +4,17 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace TTServerMaker.Engine.Models.Servers
+namespace TTServerMaker.Engine.Models.Servers;
+
+/// <summary>
+/// The basic information of the server.
+/// </summary>
+public class ServerSettings : ObservableObject
 {
+    private int ram;
 
     /// <summary>
-    /// The basic information of the server.
+    /// Gets or sets the amount of RAM allocated for the server.
     /// </summary>
-    public class ServerSettings : ObservableObject
-    {
-        private int ram;
-
-        /// <summary>
-        /// Gets or sets the amount of RAM allocated for the server.
-        /// </summary>
-        public int Ram { get => this.ram; set => this.SetProperty(ref this.ram, value); }
-    }
+    public int Ram { get => this.ram; set => this.SetProperty(ref this.ram, value); }
 }

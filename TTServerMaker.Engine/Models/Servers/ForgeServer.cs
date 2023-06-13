@@ -2,26 +2,25 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.Models.Servers
+namespace TTServerMaker.Engine.Models.Servers;
+
+/// <summary>
+/// A Forge server.
+/// </summary>
+public class ForgeServer : ServerBase
 {
     /// <summary>
-    /// A Forge server.
+    /// Initializes a new instance of the <see cref="ForgeServer"/> class.
     /// </summary>
-    public class ForgeServer : ServerBase
+    /// <param name="basicServerInfo">The basic server info.</param>
+    public ForgeServer(BasicInfo basicServerInfo)
+        : base(basicServerInfo)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForgeServer"/> class.
-        /// </summary>
-        /// <param name="basicServerInfo">The basic server info.</param>
-        public ForgeServer(BasicInfo basicServerInfo)
-            : base(basicServerInfo)
-        {
-        }
+    }
 
-        /// <inheritdoc/>
-        public override string ServerTypeStr
-        {
-            get { return "Forge"; }
-        }
+    /// <inheritdoc/>
+    public override string ServerTypeStr
+    {
+        get { return "Forge"; }
     }
 }

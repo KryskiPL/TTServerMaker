@@ -197,4 +197,10 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\torok\Source\Repos\torokt21\TTServerMaker\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\torok\Source\Repos\torokt21\TTServerMaker\.editorconfig" />
+  </ItemGroup>
 </Project>

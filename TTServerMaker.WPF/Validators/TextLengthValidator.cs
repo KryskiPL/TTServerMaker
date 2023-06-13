@@ -2,50 +2,49 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.WPF.Validators
+namespace TTServerMaker.WPF.Validators;
+
+using System.Globalization;
+using System.Windows.Controls;
+
+/// <summary>
+/// Validates the length of a string.
+/// </summary>
+public class TextLengthValidator : ValidationRule
 {
-    using System.Globalization;
-    using System.Windows.Controls;
+    /// <summary>
+    /// Gets or sets the minimum string length. Ignored if set to -1.
+    /// </summary>
+    public int MinLength { get; set; } = -1;
 
     /// <summary>
-    /// Validates the length of a string.
+    /// Gets or sets the maximum string length. Ignored if set to -1.
     /// </summary>
-    public class TextLengthValidator : ValidationRule
+    public int MaxLength { get; set; } = -1;
+
+    /// <inheritdoc/>
+    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
     {
-        /// <summary>
-        /// Gets or sets the minimum string length. Ignored if set to -1.
-        /// </summary>
-        public int MinLength { get; set; } = -1;
+        string text = value.ToString().Trim();
 
-        /// <summary>
-        /// Gets or sets the maximum string length. Ignored if set to -1.
-        /// </summary>
-        public int MaxLength { get; set; } = -1;
-
-        /// <inheritdoc/>
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        if (this.MinLength > -1 && this.MaxLength > -1)
         {
-            string text = value.ToString().Trim();
-
-            if (this.MinLength > -1 && this.MaxLength > -1)
+            if (text.Length < this.MinLength || text.Length > this.MaxLength)
             {
-                if (text.Length < this.MinLength || text.Length > this.MaxLength)
-                {
-                    return new ValidationResult(false, $"Should be between {this.MinLength} and {this.MaxLength} characters");
-                }
+                return new ValidationResult(false, $"Should be between {this.MinLength} and {this.MaxLength} characters");
             }
-
-            if (this.MinLength > -1 && this.MinLength > text.Length)
-            {
-                return new ValidationResult(false, $"Should be at least {this.MinLength} characters");
-            }
-
-            if (this.MaxLength > -1 && this.MaxLength < text.Length)
-            {
-                return new ValidationResult(false, $"Should be shorter {this.MinLength} characters");
-            }
-
-            return ValidationResult.ValidResult;
         }
+
+        if (this.MinLength > -1 && this.MinLength > text.Length)
+        {
+            return new ValidationResult(false, $"Should be at least {this.MinLength} characters");
+        }
+
+        if (this.MaxLength > -1 && this.MaxLength < text.Length)
+        {
+            return new ValidationResult(false, $"Should be shorter {this.MinLength} characters");
+        }
+
+        return ValidationResult.ValidResult;
     }
 }

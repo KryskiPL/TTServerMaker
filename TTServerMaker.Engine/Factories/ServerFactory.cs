@@ -2,132 +2,131 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.Factories
+namespace TTServerMaker.Engine.Factories;
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using TTServerMaker.Engine.Exceptions;
+using TTServerMaker.Engine.Models.Servers;
+
+/// <summary>
+/// Creates server objects.
+/// </summary>
+internal class ServerFactory
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using TTServerMaker.Engine.Exceptions;
-    using TTServerMaker.Engine.Models.Servers;
+    /*
+    /// <summary>
+    /// Creates a new server instance with the appropriate server based on the server settings.
+    /// </summary>
+    /// <param name="serverSettings">The server settings contatining the type of the new server.</param>
+    /// <returns>New server instance.</returns>
+    public static ServerBase CreateNewServerInstance(ServerSettings serverSettings)
+    {
+        Type serverType = default;
+        switch (serverSettings.ServerType)
+        {
+            case ServerType.Vanilla:
+                serverType = typeof(VanillaServer);
+                break;
+            case ServerType.Forge:
+                serverType = typeof(ForgeServer);
+                break;
+        }
+
+        ServerBase newServer = Activator.CreateInstance(serverType, serverSettings) as ServerBase;
+        return newServer;
+    }
 
     /// <summary>
-    /// Creates server objects.
+    /// Creates a brand new server folder.
     /// </summary>
-    internal class ServerFactory
+    /// <param name="serverName">The name of the server.</param>
+    /// <param name="typeString">The string representation of the server type.</param>
+    /// <returns>Returns the server settings stored in the new folder.</returns> // TODO weird?
+    internal static async Task<ServerSettings> CreateNewServerFolderAsync(string serverName, string typeString)
     {
-        /*
-        /// <summary>
-        /// Creates a new server instance with the appropriate server based on the server settings.
-        /// </summary>
-        /// <param name="serverSettings">The server settings contatining the type of the new server.</param>
-        /// <returns>New server instance.</returns>
-        public static ServerBase CreateNewServerInstance(ServerSettings serverSettings)
-        {
-            Type serverType = default;
-            switch (serverSettings.ServerType)
-            {
-                case ServerType.Vanilla:
-                    serverType = typeof(VanillaServer);
-                    break;
-                case ServerType.Forge:
-                    serverType = typeof(ForgeServer);
-                    break;
-            }
+        string folderName = MakeStringFoldernameFriendly(serverName);
 
-            ServerBase newServer = Activator.CreateInstance(serverType, serverSettings) as ServerBase;
-            return newServer;
+        // Making sure the folder doesn't exist yet
+        string newDir = AppSettings.GeneralSettings.ServerFoldersPath + folderName;
+
+        while (Directory.Exists(newDir))
+        {
+            newDir += "v2";
         }
 
-        /// <summary>
-        /// Creates a brand new server folder.
-        /// </summary>
-        /// <param name="serverName">The name of the server.</param>
-        /// <param name="typeString">The string representation of the server type.</param>
-        /// <returns>Returns the server settings stored in the new folder.</returns> // TODO weird?
-        internal static async Task<ServerSettings> CreateNewServerFolderAsync(string serverName, string typeString)
+        // Creating directory
+        Directory.CreateDirectory(newDir);
+
+        ServerSettings basicInfo = new ServerSettings
         {
-            string folderName = MakeStringFoldernameFriendly(serverName);
+            ServerFolderPath = newDir,
+            Name = serverName,
+            DateCreated = DateTime.Now,
+            DateLastLoaded = DateTime.Now,
+        };
 
-            // Making sure the folder doesn't exist yet
-            string newDir = AppSettings.GeneralSettings.ServerFoldersPath + folderName;
+        basicInfo.ServerImagePath = basicInfo.ServerImagePath;
 
-            while (Directory.Exists(newDir))
-            {
-                newDir += "v2";
-            }
+        // Saving the new basic server info to file
+        await basicInfo.SaveChangesAsync();
 
-            // Creating directory
-            Directory.CreateDirectory(newDir);
-
-            ServerSettings basicInfo = new ServerSettings
-            {
-                ServerFolderPath = newDir,
-                Name = serverName,
-                DateCreated = DateTime.Now,
-                DateLastLoaded = DateTime.Now,
-            };
-
-            basicInfo.ServerImagePath = basicInfo.ServerImagePath;
-
-            // Saving the new basic server info to file
-            await basicInfo.SaveChangesAsync();
-
-            return basicInfo;
-        }
-
-        /// <summary>
-        /// Makes any string foldername friendly by replacing/removing forbidden characters. (e.g: "#Árvíz néző" => "ArvizNezo").
-        /// </summary>
-        /// <param name="folderName">The string to convert.</param>
-        /// <returns>Directory name friendly string.</returns>
-        private static string MakeStringFoldernameFriendly(string folderName)
-        {
-            // Capitalizing letters after spaces, for better readability
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            folderName = textInfo.ToTitleCase(folderName);
-
-            // Removing forbidden characters from the server name
-            List<char> forbiddenCharacters = new List<char>(Path.GetInvalidPathChars());
-            forbiddenCharacters.Add(' ');
-            forbiddenCharacters.Add('\\');
-
-            foreach (char c in forbiddenCharacters)
-            {
-                folderName = folderName.Replace(c.ToString(), string.Empty);
-            }
-
-            // Credit goes to Julien Roncaglia
-            // https://stackoverflow.com/a/5459738/2154120
-            folderName = Regex.Replace(folderName, "[éèëêð]", "e");
-            folderName = Regex.Replace(folderName, "[ÉÈËÊ]", "E");
-            folderName = Regex.Replace(folderName, "[àâä]", "a");
-            folderName = Regex.Replace(folderName, "[ÀÁÂÃÄÅ]", "A");
-            folderName = Regex.Replace(folderName, "[àáâãäå]", "a");
-            folderName = Regex.Replace(folderName, "[ÙÚÛÜ]", "U");
-            folderName = Regex.Replace(folderName, "[ùúûüµ]", "u");
-            folderName = Regex.Replace(folderName, "[òóôõöø]", "o");
-            folderName = Regex.Replace(folderName, "[ÒÓÔÕÖØ]", "O");
-            folderName = Regex.Replace(folderName, "[ìíîï]", "i");
-            folderName = Regex.Replace(folderName, "[ÌÍÎÏ]", "I");
-            folderName = Regex.Replace(folderName, "[š]", "s");
-            folderName = Regex.Replace(folderName, "[Š]", "S");
-            folderName = Regex.Replace(folderName, "[ñ]", "n");
-            folderName = Regex.Replace(folderName, "[Ñ]", "N");
-            folderName = Regex.Replace(folderName, "[ç]", "c");
-            folderName = Regex.Replace(folderName, "[Ç]", "C");
-            folderName = Regex.Replace(folderName, "[ÿ]", "y");
-            folderName = Regex.Replace(folderName, "[Ÿ]", "Y");
-            folderName = Regex.Replace(folderName, "[ž]", "z");
-            folderName = Regex.Replace(folderName, "[Ž]", "Z");
-            folderName = Regex.Replace(folderName, "[Ð]", "D");
-            folderName = Regex.Replace(folderName, "[œ]", "oe");
-            folderName = Regex.Replace(folderName, "[Œ]", "Oe");
-
-            return folderName;
-        }
-        */
+        return basicInfo;
     }
+
+    /// <summary>
+    /// Makes any string foldername friendly by replacing/removing forbidden characters. (e.g: "#Árvíz néző" => "ArvizNezo").
+    /// </summary>
+    /// <param name="folderName">The string to convert.</param>
+    /// <returns>Directory name friendly string.</returns>
+    private static string MakeStringFoldernameFriendly(string folderName)
+    {
+        // Capitalizing letters after spaces, for better readability
+        TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+        folderName = textInfo.ToTitleCase(folderName);
+
+        // Removing forbidden characters from the server name
+        List<char> forbiddenCharacters = new List<char>(Path.GetInvalidPathChars());
+        forbiddenCharacters.Add(' ');
+        forbiddenCharacters.Add('\\');
+
+        foreach (char c in forbiddenCharacters)
+        {
+            folderName = folderName.Replace(c.ToString(), string.Empty);
+        }
+
+        // Credit goes to Julien Roncaglia
+        // https://stackoverflow.com/a/5459738/2154120
+        folderName = Regex.Replace(folderName, "[éèëêð]", "e");
+        folderName = Regex.Replace(folderName, "[ÉÈËÊ]", "E");
+        folderName = Regex.Replace(folderName, "[àâä]", "a");
+        folderName = Regex.Replace(folderName, "[ÀÁÂÃÄÅ]", "A");
+        folderName = Regex.Replace(folderName, "[àáâãäå]", "a");
+        folderName = Regex.Replace(folderName, "[ÙÚÛÜ]", "U");
+        folderName = Regex.Replace(folderName, "[ùúûüµ]", "u");
+        folderName = Regex.Replace(folderName, "[òóôõöø]", "o");
+        folderName = Regex.Replace(folderName, "[ÒÓÔÕÖØ]", "O");
+        folderName = Regex.Replace(folderName, "[ìíîï]", "i");
+        folderName = Regex.Replace(folderName, "[ÌÍÎÏ]", "I");
+        folderName = Regex.Replace(folderName, "[š]", "s");
+        folderName = Regex.Replace(folderName, "[Š]", "S");
+        folderName = Regex.Replace(folderName, "[ñ]", "n");
+        folderName = Regex.Replace(folderName, "[Ñ]", "N");
+        folderName = Regex.Replace(folderName, "[ç]", "c");
+        folderName = Regex.Replace(folderName, "[Ç]", "C");
+        folderName = Regex.Replace(folderName, "[ÿ]", "y");
+        folderName = Regex.Replace(folderName, "[Ÿ]", "Y");
+        folderName = Regex.Replace(folderName, "[ž]", "z");
+        folderName = Regex.Replace(folderName, "[Ž]", "Z");
+        folderName = Regex.Replace(folderName, "[Ð]", "D");
+        folderName = Regex.Replace(folderName, "[œ]", "oe");
+        folderName = Regex.Replace(folderName, "[Œ]", "Oe");
+
+        return folderName;
+    }
+    */
 }

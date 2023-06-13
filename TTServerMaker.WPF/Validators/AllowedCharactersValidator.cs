@@ -2,36 +2,35 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.WPF.Validators
+namespace TTServerMaker.WPF.Validators;
+
+using System.Globalization;
+using System.Linq;
+using System.Windows.Controls;
+
+/// <summary>
+/// Validates the characters in a string.
+/// </summary>
+internal class AllowedCharactersValidator : ValidationRule
 {
-    using System.Globalization;
-    using System.Linq;
-    using System.Windows.Controls;
-
     /// <summary>
-    /// Validates the characters in a string.
+    /// Gets or sets the string containing all the permitted characters.
     /// </summary>
-    internal class AllowedCharactersValidator : ValidationRule
+    public virtual string AllowedCharacters { get; set; }
+
+    /// <inheritdoc/>
+    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
     {
-        /// <summary>
-        /// Gets or sets the string containing all the permitted characters.
-        /// </summary>
-        public virtual string AllowedCharacters { get; set; }
+        string input = value.ToString();
 
-        /// <inheritdoc/>
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        foreach (char c in input)
         {
-            string input = value.ToString();
-
-            foreach (char c in input)
+            if (!this.AllowedCharacters.Contains(c))
             {
-                if (!this.AllowedCharacters.Contains(c))
-                {
-                    return new ValidationResult(false, "Invalid character: " + c);
-                }
+                return new ValidationResult(false, "Invalid character: " + c);
             }
-
-            return ValidationResult.ValidResult;
         }
+
+        return ValidationResult.ValidResult;
     }
 }

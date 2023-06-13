@@ -2,98 +2,97 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.WPF.Views
+namespace TTServerMaker.WPF.Views;
+
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
+using TTServerMaker.Engine.Models.Servers;
+using TTServerMaker.Engine.ViewModels.ServerSelect;
+using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
+
+/// <summary>
+/// Interaction logic for ServerSelectWindow.xaml.
+/// </summary>
+public partial class ServerSelectWindow : Window
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-    using MaterialDesignThemes.Wpf;
-    using TTServerMaker.Engine.Models.Servers;
-    using TTServerMaker.Engine.ViewModels.ServerSelect;
-    using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
+    // Fields for scrolling
+    private Point scrollMousePoint = default;
+    private double vOff = 1;
+    private bool dragScrolling = false;
 
     /// <summary>
-    /// Interaction logic for ServerSelectWindow.xaml.
+    /// Initializes a new instance of the <see cref="ServerSelectWindow"/> class.
     /// </summary>
-    public partial class ServerSelectWindow : Window
+    public ServerSelectWindow()
     {
-        // Fields for scrolling
-        private Point scrollMousePoint = default;
-        private double vOff = 1;
-        private bool dragScrolling = false;
+        this.InitializeComponent();
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ServerSelectWindow"/> class.
-        /// </summary>
-        public ServerSelectWindow()
+    /// <summary>
+    /// Gets or sets the view model.
+    /// </summary>
+    public ServerSelectViewModel SelectServerVM { get; set; } = new ServerSelectViewModel();
+
+    /// <summary>
+    /// Gets or sets the currently selected server.
+    /// </summary>
+    public BasicInfo SelectedServer { get; set; }
+
+    private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        this.scrollMousePoint = e.GetPosition(this.ScrollViewer);
+        this.vOff = this.ScrollViewer.VerticalOffset;
+        this.dragScrolling = true;
+    }
+
+    private void ScrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
+    {
+        if (this.dragScrolling)
         {
-            this.InitializeComponent();
+            ScrollViewer scrollViewer1 = this.ScrollViewer;
+            this.ScrollViewer.ScrollToVerticalOffset(this.vOff + (this.scrollMousePoint.Y - e.GetPosition(scrollViewer1).Y));
         }
+    }
 
-        /// <summary>
-        /// Gets or sets the view model.
-        /// </summary>
-        public ServerSelectViewModel SelectServerVM { get; set; } = new ServerSelectViewModel();
+    private void ScrollViewer_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        this.dragScrolling = false;
+    }
 
-        /// <summary>
-        /// Gets or sets the currently selected server.
-        /// </summary>
-        public BasicInfo SelectedServer { get; set; }
+    private async void EditButton_Click(object sender, RoutedEventArgs e)
+    {
+        /*
+        ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
 
-        private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        this.editDialogContent.NewEdit(server);
+        await DialogHost.Show(this.editDialogContent, this.DialogHost.Identifier);
+        */
+    }
+
+    private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
+    {
+        /*
+        this.editDialogContent.DataContext = null;
+        await EditServerDialog.ShowDialog(EditDialogContent);
+        ServerTypeCombobox.SelectedIndex = -1;
+        */
+    }
+
+    private void DeleteServerButton_Clicked(object sender, RoutedEventArgs e)
+    {
+        /*
+        try
         {
-            this.scrollMousePoint = e.GetPosition(this.ScrollViewer);
-            this.vOff = this.ScrollViewer.VerticalOffset;
-            this.dragScrolling = true;
+            this.SelectServerVM.DeleteServer((sender as FrameworkElement)?.DataContext as ServerSettings);
         }
-
-        private void ScrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
+        catch (Exception exception)
         {
-            if (this.dragScrolling)
-            {
-                ScrollViewer scrollViewer1 = this.ScrollViewer;
-                this.ScrollViewer.ScrollToVerticalOffset(this.vOff + (this.scrollMousePoint.Y - e.GetPosition(scrollViewer1).Y));
-            }
+            MessageBox.Show("Failed to delete server. " + exception.Message);
         }
-
-        private void ScrollViewer_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            this.dragScrolling = false;
-        }
-
-        private async void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            ServerBase server = (sender as FrameworkElement)?.DataContext as ServerBase;
-
-            this.editDialogContent.NewEdit(server);
-            await DialogHost.Show(this.editDialogContent, this.DialogHost.Identifier);
-            */
-        }
-
-        private async void AddNewServerButton_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            this.editDialogContent.DataContext = null;
-            await EditServerDialog.ShowDialog(EditDialogContent);
-            ServerTypeCombobox.SelectedIndex = -1;
-            */
-        }
-
-        private void DeleteServerButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            /*
-            try
-            {
-                this.SelectServerVM.DeleteServer((sender as FrameworkElement)?.DataContext as ServerSettings);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Failed to delete server. " + exception.Message);
-            }
-            */
-        }
+        */
     }
 }

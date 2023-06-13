@@ -2,23 +2,22 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.Models.Servers
+namespace TTServerMaker.Engine.Models.Servers;
+
+/// <summary>
+/// The vanillia minecraft server.
+/// </summary>
+public class VanillaServer : ServerBase
 {
     /// <summary>
-    /// The vanillia minecraft server.
+    /// Initializes a new instance of the <see cref="VanillaServer"/> class.
     /// </summary>
-    public class VanillaServer : ServerBase
+    /// <param name="basicServerInfo">The basic server info.</param>
+    public VanillaServer(BasicInfo basicServerInfo)
+        : base(basicServerInfo)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VanillaServer"/> class.
-        /// </summary>
-        /// <param name="basicServerInfo">The basic server info.</param>
-        public VanillaServer(BasicInfo basicServerInfo)
-            : base(basicServerInfo)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override string ServerTypeStr => "Vanilla";
     }
+
+    /// <inheritdoc/>
+    public override string ServerTypeStr => "Vanilla";
 }
