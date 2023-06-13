@@ -1,18 +1,17 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:TTServerMaker.WPF.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels.ServerSelect;assembly=ServerEngine"
+    xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
+    xmlns:Dialogs="clr-namespace:TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow"
     x:Class="TTServerMaker.WPF.Views.ServerSelectWindow"
     Icon="pack://application:,,,/TTServerMaker.WPF;component/Img/icon.ico"
     mc:Ignorable="d"
-    xmlns:viewModels="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
-    xmlns:customControls="clr-namespace:TTServerMaker.WPF.CustomControls"
-    xmlns:Dialogs="clr-namespace:TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    d:DataContext="{d:DesignInstance viewModels:ServerSelectWindowVM}"
+    d:DataContext="{d:DesignInstance viewModels:ServerSelectViewModel}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -27,7 +26,7 @@
     ResizeMode="NoResize"
     PreviewMouseUp="ScrollViewer_PreviewMouseLeftButtonUp">
     <Window.DataContext>
-        <viewModels:ServerSelectWindowVM />
+        <viewModels:ServerSelectViewModel />
     </Window.DataContext>
 
     <Window.Resources>

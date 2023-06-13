@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels.FirstStartWindow
+namespace TTServerMaker.Engine.ViewModels.FirstStart
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace TTServerMaker.Engine.ViewModels.FirstStartWindow
     /// <summary>
     /// The view model of the initial program setup.
     /// </summary>
-    public class FirstStartWindowViewModel : ObservableRecipient
+    public class FirstStartViewModel : ObservableRecipient
     {
         private bool shouldUseCustom;
         private string customServerFolderPath;
@@ -29,9 +29,9 @@ namespace TTServerMaker.Engine.ViewModels.FirstStartWindow
         private bool? isDone;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FirstStartWindowViewModel"/> class.
+        /// Initializes a new instance of the <see cref="FirstStartViewModel"/> class.
         /// </summary>
-        public FirstStartWindowViewModel()
+        public FirstStartViewModel()
         {
             // Commands
             this.RootServerFolderConfirmCommand = new RelayCommand(this.ConfirmRootServerFolder, () => !this.ShouldUseCustomPath || !string.IsNullOrEmpty(this.CustomServerFolderPath));

@@ -11,7 +11,7 @@ namespace TTServerMaker.WPF.Views
     using System.Windows.Input;
     using MaterialDesignThemes.Wpf;
     using TTServerMaker.Engine.Models.Servers;
-    using TTServerMaker.Engine.ViewModels.ServerSelectWindow;
+    using TTServerMaker.Engine.ViewModels.ServerSelect;
     using TTServerMaker.WPF.CustomControls.Dialogs.SelectServerWindow;
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace TTServerMaker.WPF.Views
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
-        public ServerSelectWindowViewModel SelectServerVM { get; set; } = new ServerSelectWindowViewModel();
+        public ServerSelectViewModel SelectServerVM { get; set; } = new ServerSelectViewModel();
 
         /// <summary>
         /// Gets or sets the currently selected server.

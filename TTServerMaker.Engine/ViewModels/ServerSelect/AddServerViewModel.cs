@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels.ServerSelectWindow
+namespace TTServerMaker.Engine.ViewModels.ServerSelect
 {
     using System;
     using System.Collections.Generic;

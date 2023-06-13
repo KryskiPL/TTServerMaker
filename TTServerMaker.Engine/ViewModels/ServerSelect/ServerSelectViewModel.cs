@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels.ServerSelectWindow
+namespace TTServerMaker.Engine.ViewModels.ServerSelect
 {
     using System;
     using System.Collections.Generic;
@@ -20,12 +20,12 @@ namespace TTServerMaker.Engine.ViewModels.ServerSelectWindow
     /// <summary>
     /// The view model of selecting a server.
     /// </summary>
-    public class ServerSelectWindowViewModel
+    public class ServerSelectViewModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServerSelectWindowViewModel"/> class.
+        /// Initializes a new instance of the <see cref="ServerSelectViewModel"/> class.
         /// </summary>
-        public ServerSelectWindowViewModel()
+        public ServerSelectViewModel()
         {
             this.ServerInfoManager = Ioc.Default.GetService<IBasicInfoManagerService>();
 

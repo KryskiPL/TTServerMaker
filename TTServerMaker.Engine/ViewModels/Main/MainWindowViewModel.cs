@@ -2,7 +2,7 @@
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels
+namespace TTServerMaker.Engine.ViewModels.Main
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace TTServerMaker.Engine.ViewModels
         /// <param name="loadedServer">The currently loaded server.</param>
         public MainWindowViewModel(ServerBase loadedServer)
         {
-            this.Server = loadedServer;
+            Server = loadedServer;
         }
 
         /// <summary>

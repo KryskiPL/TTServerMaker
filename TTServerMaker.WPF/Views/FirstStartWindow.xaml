@@ -14,10 +14,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:TTServerMaker.WPF.Views"
     local:DialogCloser.DialogResult="{Binding IsDone}"
-    xmlns:vm="clr-namespace:TTServerMaker.Engine.ViewModels;assembly=ServerEngine"
+    xmlns:vm="clr-namespace:TTServerMaker.Engine.ViewModels.FirstStart;assembly=ServerEngine"
     xmlns:CustomControls="clr-namespace:TTServerMaker.WPF.CustomControls"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance vm:FirstStartWindowVM, IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance vm:FirstStartWindowViewModel, IsDesignTimeCreatable=True}"
     Icon="/TTServerMaker.WPF;component/Img/icon.ico"
     Title="Welcome"
     Height="550"
@@ -33,7 +33,7 @@
             GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
     <Window.DataContext>
-        <vm:FirstStartWindowVM/>
+        <vm:FirstStartViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
