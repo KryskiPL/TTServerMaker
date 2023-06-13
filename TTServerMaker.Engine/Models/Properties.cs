@@ -9,12 +9,13 @@ namespace TTServerMaker.Engine.Models
     using System.IO;
     using System.Reflection;
     using System.Windows.Data;
+    using CommunityToolkit.Mvvm.ComponentModel;
     using TTServerMaker.Engine.Models.Servers;
 
     /// <summary>
     /// Handles the server.properties file.
     /// </summary>
-    public class Properties : BaseNotificationClass, IEnumerable<KeyValuePair<string, string>>, ICollection<string>
+    public class Properties : ObservableObject, IEnumerable<KeyValuePair<string, string>>, ICollection<string>
     {
         private const string Filename = "server.properties";
 

@@ -10,13 +10,14 @@ namespace TTServerMaker.Engine.Models.Servers
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using CommunityToolkit.Mvvm.ComponentModel;
     using TTServerMaker.Engine.Exceptions;
     using TTServerMaker.Engine.Models.Versions;
 
     /// <summary>
     /// The base information about a server.
     /// </summary>
-    public abstract class ServerBase : BaseNotificationClass
+    public abstract class ServerBase : ObservableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerBase"/> class.
