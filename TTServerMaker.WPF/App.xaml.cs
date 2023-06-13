@@ -12,6 +12,7 @@ namespace TTServerMaker.WPF
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
     using TTServerMaker.Engine.ViewModels;
+    using TTServerMaker.Engine.ViewModels.ServerSelectWindow;
     using TTServerMaker.WPF.Services;
 
     /// <summary>
@@ -60,7 +61,7 @@ namespace TTServerMaker.WPF
             Views.ServerSelectWindow serverSelectWindow = new Views.ServerSelectWindow();
             bool? serverSelectDialogResult = serverSelectWindow.ShowDialog();
 
-            BasicInfo selectedServer = (serverSelectWindow.DataContext as ServerSelectWindowVM).SelectedServer;
+            BasicInfo selectedServer = (serverSelectWindow.DataContext as ServerSelectWindowViewModel).SelectedServer;
             if (selectedServer == null)
             {
                 this.Shutdown();

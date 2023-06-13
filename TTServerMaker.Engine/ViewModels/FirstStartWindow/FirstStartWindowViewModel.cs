@@ -1,8 +1,8 @@
-﻿// <copyright file="FirstStartWindowVM.cs" company="TThread">
+﻿// <copyright file="FirstStartWindowViewModel.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels
+namespace TTServerMaker.Engine.ViewModels.FirstStartWindow
 {
     using System;
     using System.Collections.Generic;
@@ -11,16 +11,17 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
     using TTServerMaker.Engine;
     using TTServerMaker.Engine.Services;
-    using CommunityToolkit.Mvvm.ComponentModel;
-    using CommunityToolkit.Mvvm.Input;
-    using CommunityToolkit.Mvvm.DependencyInjection;
+    using TTServerMaker.Engine.ViewModels;
 
     /// <summary>
     /// The view model of the initial program setup.
     /// </summary>
-    public class FirstStartWindowVM : ObservableRecipient
+    public class FirstStartWindowViewModel : ObservableRecipient
     {
         private bool shouldUseCustom;
         private string customServerFolderPath;
@@ -28,9 +29,9 @@ namespace TTServerMaker.Engine.ViewModels
         private bool? isDone;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FirstStartWindowVM"/> class.
+        /// Initializes a new instance of the <see cref="FirstStartWindowViewModel"/> class.
         /// </summary>
-        public FirstStartWindowVM()
+        public FirstStartWindowViewModel()
         {
             // Commands
             this.RootServerFolderConfirmCommand = new RelayCommand(this.ConfirmRootServerFolder, () => !this.ShouldUseCustomPath || !string.IsNullOrEmpty(this.CustomServerFolderPath));
@@ -103,7 +104,7 @@ namespace TTServerMaker.Engine.ViewModels
         /// </summary>
         public void FinishUp()
         {
-            AppSettings.GeneralSettings = new Engine.GeneralSettings();
+            AppSettings.GeneralSettings = new GeneralSettings();
             AppSettings.GeneralSettings.ServerFoldersPath = this.ShouldUseCustomPath ? this.CustomServerFolderPath : this.DefaultServerFolderPath;
             AppSettings.GeneralSettings.Save();
 

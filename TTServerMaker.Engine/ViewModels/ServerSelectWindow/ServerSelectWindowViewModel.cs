@@ -1,8 +1,8 @@
-﻿// <copyright file="ServerSelectWindowVM.cs" company="TThread">
+﻿// <copyright file="ServerSelectWindowViewModel.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
-namespace TTServerMaker.Engine.ViewModels
+namespace TTServerMaker.Engine.ViewModels.ServerSelectWindow
 {
     using System;
     using System.Collections.Generic;
@@ -12,22 +12,20 @@ namespace TTServerMaker.Engine.ViewModels
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
-    using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using CommunityToolkit.Mvvm.Input;
-    using TTServerMaker.Engine.Factories;
     using TTServerMaker.Engine.Models.Servers;
     using TTServerMaker.Engine.Services;
 
     /// <summary>
     /// The view model of selecting a server.
     /// </summary>
-    public class ServerSelectWindowVM
+    public class ServerSelectWindowViewModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServerSelectWindowVM"/> class.
+        /// Initializes a new instance of the <see cref="ServerSelectWindowViewModel"/> class.
         /// </summary>
-        public ServerSelectWindowVM()
+        public ServerSelectWindowViewModel()
         {
             this.ServerInfoManager = Ioc.Default.GetService<IBasicInfoManagerService>();
 
@@ -40,9 +38,9 @@ namespace TTServerMaker.Engine.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Gets the view model for adding a server.
         /// </summary>
-        public AddServerVM AddServerVM { get; set; }
+        public AddServerViewModel AddServerVM { get; }
 
         /// <summary>
         /// Gets the command run when a server is about to loaded.
@@ -75,19 +73,5 @@ namespace TTServerMaker.Engine.ViewModels
             });
             task.Start();
         }
-    }
-
-    public class AddServerVM : ObservableRecipient
-    {
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { this.SetProperty(ref this.name, value); }
-        }
-
-
-
     }
 }
