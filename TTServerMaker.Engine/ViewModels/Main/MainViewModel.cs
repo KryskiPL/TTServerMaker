@@ -1,16 +1,8 @@
-﻿// <copyright file="MainWindowViewModel.cs" company="TThread">
+﻿// <copyright file="MainViewModel.cs" company="TThread">
 // Copyright (c) TThread. All rights reserved.
 // </copyright>
 
 namespace TTServerMaker.Engine.ViewModels.Main;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TTServerMaker.Engine.Factories;
-using TTServerMaker.Engine.Models;
 using TTServerMaker.Engine.Models.Servers;
 
 /// <summary>

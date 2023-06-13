@@ -4,8 +4,8 @@
 
 namespace TTServerMaker.Engine.Models.Versions;
 
-using System;
 using Newtonsoft.Json;
+using System;
 
 /// <summary>
 /// A server version.

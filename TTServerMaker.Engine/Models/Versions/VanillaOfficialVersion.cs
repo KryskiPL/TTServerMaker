@@ -4,8 +4,8 @@
 
 namespace TTServerMaker.Engine.Models.Versions;
 
-using System;
 using Newtonsoft.Json;
+using System;
 
 /// <summary>
 /// The official vanilla server type.
@@ -34,7 +34,7 @@ public class VanillaOfficialVersion : ServerVersion
          */
 
         // TODO regex
-        if (!(other is VanillaOfficialVersion))
+        if (other is not VanillaOfficialVersion)
         {
             return 0;
         }

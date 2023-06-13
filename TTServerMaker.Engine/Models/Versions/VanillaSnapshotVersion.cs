@@ -4,9 +4,9 @@
 
 namespace TTServerMaker.Engine.Models.Versions;
 
+using Newtonsoft.Json;
 using System;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 /// <summary>
 /// Snapshot version of the vanilla game.

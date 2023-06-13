@@ -89,12 +89,11 @@ public class ServerVersionTesting
                 CompareBothWays(some, another);
             }
 
-            [TestCase]
             /// <summary>
-            /// Compare two versions both ways using the .CompareTo function. Only works if the first is smaller
+            /// Compare two versions both ways using the .CompareTo function. Asserts that the first is smaller.
             /// </summary>
-            /// <param name="smaller"></param>
-            /// <param name="bigger"></param>
+            /// <param name="smaller">The smaller version.</param>
+            /// <param name="bigger">The bigger version.</param>
             private static void CompareBothWays(ServerVersion smaller, ServerVersion bigger)
             {
                 Assert.That(smaller, Is.LessThan(bigger));

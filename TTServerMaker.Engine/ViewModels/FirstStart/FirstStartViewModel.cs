@@ -4,16 +4,10 @@
 
 namespace TTServerMaker.Engine.ViewModels.FirstStart;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using TTServerMaker.Engine;
 using TTServerMaker.Engine.Services;
 using TTServerMaker.Engine.ViewModels;

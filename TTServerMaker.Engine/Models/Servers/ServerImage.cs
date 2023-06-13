@@ -4,14 +4,11 @@
 
 namespace TTServerMaker.Engine.Models.Servers;
 
+using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 /// <summary>
 /// The information about the image associated with the server. Not to be confused with the server icon.
